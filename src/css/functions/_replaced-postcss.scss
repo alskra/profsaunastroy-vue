@@ -1,0 +1,7 @@
+@function env($variable) {
+	@error "\"env()\" function was not provided by PostCSS or dollar-variable was used as passed argument";
+}
+
+@function media($query...) {
+	@error "\"media()\" function was not provided by PostCSS or was called without arguments";
+}

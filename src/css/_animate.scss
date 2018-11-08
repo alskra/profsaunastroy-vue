@@ -1,0 +1,20 @@
+.animate {
+	&:not(&--started):not(&--completed) {
+		visibility: hidden;
+
+		* {
+			visibility: inherit;
+		}
+	}
+
+	&__word {
+		display: inline-block;
+		vertical-align: top;
+		overflow: hidden;
+		max-width: 100%;
+	}
+
+	&__letter {
+		display: inline-block;
+	}
+}

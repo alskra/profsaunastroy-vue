@@ -1,0 +1,37 @@
+// stylelint-disable at-rule-blacklist
+
+@import "~css-initials/inherited.css";
+@import "~css-initials/all.css";
+
+@mixin initials-inherited-custom {
+	quotes: env(--quotes);
+	font-family: env(--font-family);
+	text-align: env(--text-align);
+	color: env(--color);
+}
+
+@mixin initials-not-inherited-custom {
+	display: block;
+	outline-color: env(--outline-color);
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+// initials-inherited
+.initials-inherited {
+	@include initials-inherited-custom;
+}
+
+@mixin initials-inherited {
+	@extend .initials-inherited;
+}
+
+// initials-all
+.initials-all {
+	@include initials-inherited-custom;
+	@include initials-not-inherited-custom;
+}
+
+@mixin initials-all {
+	@extend .initials-all;
+}

@@ -1,0 +1,38 @@
+.project-sect {
+	@include initials-all;
+
+	padding: 6rem 0;
+	background: url("../images/bg-1.jpg") no-repeat 50% 50%;
+	background-size: cover;
+	background-color: var(--color-default);
+
+	@media (--lt-md) {
+		padding: 4rem 0;
+	}
+
+	&__row {
+		@include initials-all;
+
+		margin-bottom: -2rem;
+	}
+
+	&__col {
+		@include initials-all;
+
+		margin-bottom: 2rem;
+	}
+
+	&__content {
+		@include initials-all;
+
+		&--heading {
+			.h1 {
+				margin-bottom: 1em;
+			}
+		}
+
+		&--main {
+			margin-bottom: 3rem;
+		}
+	}
+}

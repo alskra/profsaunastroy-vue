@@ -1,0 +1,57 @@
+@import "~slick-carousel/slick/slick";
+
+.start-sect {
+	@include initials-all;
+
+	background-color: var(--color-default);
+
+	&__item {
+		@include initials-all;
+
+		position: relative;
+		padding-top: 4.5rem;
+		padding-bottom: 4.5rem;
+		height: 100vh;
+		background: none no-repeat 50% 50%/cover;
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(2, 2, 2, 0.43);
+		}
+	}
+
+	&__container {
+		@include initials-all;
+
+		position: relative;
+		padding-top: 20vh;
+		height: 100%;
+	}
+
+	&__title {
+		@include initials-all;
+
+		overflow: hidden;
+		margin-bottom: 0.5em;
+		max-height: 3 * 1.25em;
+		font-weight: 500;
+		font-size: 72px / 1080px * 100vh;
+		line-height: 1.25;
+		color: var(--color-alabaster);
+	}
+
+	&__goto {
+		@include initials-all;
+
+		display: inline;
+		font-size: 14px;
+		line-height: 1.25;
+		color: var(--color-alabaster);
+		cursor: pointer;
+	}
+}

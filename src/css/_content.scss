@@ -1,0 +1,144 @@
+// stylelint-disable selector-list-comma-newline-after
+
+$content-font-size: 16;
+$content-headings-font-size: 34;
+
+@custom-selector :--headings h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6;
+
+:root {
+	--content-font-family: var(--font-family-roboto);
+	--content-font-weight: 400;
+	--content-font-size: #{$content-font-size}px;
+	--content-line-height: 1.5;
+	--content-color: var(--color-boulder);
+	--content-space: 1em;
+
+	// Headings
+	--content-headings-font-family: var(--font-family-roboto);
+	--content-headings-font-weight: 700;
+	--content-headings-font-size: #{$content-headings-font-size}px;
+	--content-headings-line-height: 1.25;
+	--content-headings-color: var(--color-cod-gray);
+
+	@media (--lt-md) {
+		--content-font-size: 15px;
+		--content-headings-font-size: 30px;
+	}
+}
+
+.content {
+	@include initials-all;
+
+	font-family: var(--content-font-family);
+	font-weight: var(--content-font-weight);
+	font-size: var(--content-font-size);
+	line-height: var(--content-line-height);
+	word-wrap: break-word;
+	color: var(--content-color);
+
+	p, blockquote {
+		// page-break-inside: avoid;
+	}
+
+	p, blockquote, ul, ol, dl, table, pre {
+		margin-top: 0;
+		margin-bottom: var(--content-space);
+	}
+
+	:--headings {
+		margin-top: calc(var(--content-space) * 1.5);
+		margin-bottom: var(--content-space);
+		font-weight: var(--content-headings-font-weight);
+		line-height: var(--content-headings-line-height);
+		color: var(--content-headings-color);
+	}
+
+	h1, .h1 {
+		font-size: var(--content-headings-font-size);
+	}
+
+	h2, .h2 {
+		font-size: calc(var(--content-headings-font-size) * 28 / #{$content-headings-font-size});
+	}
+
+	h3, .h3 {
+		font-size: calc(var(--content-headings-font-size) * 26 / #{$content-headings-font-size});
+	}
+
+	h4, .h4 {
+		font-size: calc(var(--content-headings-font-size) * 24 / #{$content-headings-font-size});
+	}
+
+	h5, .h5 {
+		font-size: calc(var(--content-headings-font-size) * 22 / #{$content-headings-font-size});
+	}
+
+	h6, .h6 {
+		font-size: calc(var(--content-headings-font-size) * 20 / #{$content-headings-font-size});
+	}
+
+	ul,
+	ol {
+		padding-left: calc(var(--content-space) * 2);
+	}
+
+	li + li {
+		margin-top: calc(var(--content-space) * 0.25);
+	}
+
+	ul ul,
+	ul ol,
+	ol ol,
+	ol ul {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	dl {
+		padding: 0;
+
+		dt {
+			margin-top: var(--content-space);
+			padding: 0;
+			font-weight: 700;
+			font-style: italic;
+			font-size: 1em;
+		}
+
+		dd {
+			margin-bottom: var(--content-space);
+			margin-left: 0;
+			padding: 0 1em;
+		}
+	}
+
+	pre {
+		overflow: auto;
+		padding: 1em;
+		font-size: 85%;
+		line-height: 1.45;
+		word-wrap: normal;
+	}
+
+	code {
+		margin: 0;
+		padding: 0.2em 0.4em;
+		font-size: 85%;
+	}
+
+	> :first-child {
+		margin-top: 0;
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+
+	&--invert {
+		color: var(--color-bg-default);
+
+		:--headings {
+			color: var(--color-bg-default);
+		}
+	}
+}

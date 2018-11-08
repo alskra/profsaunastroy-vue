@@ -1,0 +1,40 @@
+.btn-primary {
+	@include initials-all;
+
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	border: 1px solid #141414;
+	padding: (46px - 2px - 14px * 1.25) / 2 2.5rem;
+	width: 260px;
+	max-width: 100%;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 1.25;
+	white-space: nowrap;
+	text-align: center;
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+	color: #141414;
+	transition: $btn-transition;
+	cursor: pointer;
+
+	&:not(:disabled) {
+		&:hover {
+			color: var(--color-alabaster);
+			background-color: #141414;
+		}
+	}
+
+	&--invert {
+		border-color: var(--color-alabaster);
+		color: var(--color-alabaster);
+
+		&:not(:disabled) {
+			&:hover {
+				color: #141414;
+				background-color: var(--color-alabaster);
+			}
+		}
+	}
+}

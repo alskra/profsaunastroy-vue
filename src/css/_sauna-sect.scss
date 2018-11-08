@@ -1,0 +1,37 @@
+.sauna-sect {
+	@include initials-all;
+
+	&.request-sect {
+		background-image: none;
+	}
+
+	&__title {
+		@include initials-all;
+
+		margin-bottom: var(--content-space);
+		font-family: var(--content-headings-font-family);
+		font-weight: var(--content-headings-font-weight);
+		font-size: var(--content-headings-font-size);
+		line-height: var(--content-headings-line-height);
+		color: var(--content-headings-color);
+	}
+
+	&__content {
+		@include initials-all;
+
+		@media (--gte-md) {
+			column-count: 2;
+			column-gap: $grid-gutter-width;
+		}
+
+		.content {
+			p {
+				page-break-inside: avoid;
+			}
+		}
+	}
+
+	&__running-string {
+		margin-top: 2rem;
+	}
+}

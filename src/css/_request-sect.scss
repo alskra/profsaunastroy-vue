@@ -1,0 +1,99 @@
+.request-sect {
+	@include initials-all;
+
+	position: relative;
+	overflow: hidden;
+	padding: 12rem 0;
+	background: url("../images/leafs.png") no-repeat left percentage(170px / 1920px) bottom 6rem var(--color-bg-default);
+
+	@media (--lt-md) {
+		padding: 4rem 0;
+		background-image: none;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 0;
+		width: 1px;
+		height: 0;
+		background-color: #e0e0e0;
+		transform: translate(0, 3rem);
+		transition: height 1500ms ease-out;
+
+		@media (--lt-md) {
+			content: normal;
+		}
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 100%;
+		width: 1px;
+		height: 0;
+		background-color: #e0e0e0;
+		transform: translate(0, -6rem) translate(0, -3rem);
+		transition: height 1500ms ease-out;
+
+		@media (--lt-md) {
+			content: normal;
+		}
+	}
+
+	&.animate--started,
+	&.animate--completed {
+		&::before,
+		&::after {
+			height: 6rem;
+		}
+	}
+
+	&__bg-text {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 12rem;
+		overflow: hidden;
+		margin-top: -0.26em;
+		font-weight: 700;
+		font-size: 200px / 1920px * 100vw;
+		line-height: 1.25;
+		letter-spacing: 0.35em;
+		white-space: nowrap;
+		text-align: center;
+		text-indent: 0.35em;
+		text-transform: uppercase;
+		color: #f2f2f2;
+		pointer-events: none;
+		user-select: none;
+
+		@media (--lt-md) {
+			top: 4rem;
+		}
+
+		.animate__word {
+			transform: translateX(-0.35em);
+		}
+	}
+
+	&__container {
+		@include initials-all;
+
+		position: relative;
+	}
+
+	&__content {
+		@include initials-all;
+
+		margin-bottom: 3rem;
+	}
+
+	&__nav {
+		@include initials-all;
+
+		margin-bottom: 3rem;
+	}
+}

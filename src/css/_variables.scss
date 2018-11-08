@@ -1,0 +1,38 @@
+// Mobile first
+@custom-media --gte-sm (width >= env(--sm));
+@custom-media --gte-md (width >= env(--md));
+@custom-media --gte-lg (width >= env(--lg));
+@custom-media --gte-xl (width >= env(--xl));
+
+// Desktop first
+@custom-media --lt-xl (width < env(--xl));
+@custom-media --lt-lg (width < env(--lg));
+@custom-media --lt-md (width < env(--md));
+@custom-media --lt-sm (width < env(--sm));
+
+:root {
+	// Colors
+	--color-black: #000;
+	--color-white: #fff;
+	--color-boulder: #7c7c7c;
+	--color-cod-gray: #0a0a0a;
+	--color-alabaster: #f7f7f7;
+	--color-default: var(--color-boulder);
+	--color-bg-default: var(--color-alabaster);
+
+	// Fonts
+	--font-family-roboto: "Roboto", sans-serif;
+}
+
+// Grid
+$grid-breakpoints: (
+	xs: env(--xs),
+	sm: env(--sm),
+	md: env(--md),
+	lg: env(--lg),
+	xl: env(--xl)
+);
+$container-max-widths: (
+	lg: env(--lg)
+);
+$grid-gutter-width: 2rem;
