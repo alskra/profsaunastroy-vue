@@ -35,10 +35,13 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: $color;
-    margin-top: 60px;
+    margin-top: 90px;
 
     @media (--lt-md) {
       content: env(--lg);
+      display: flex;
+      flex-grow: 1;
+      color: red;
     }
   }
 </style>
