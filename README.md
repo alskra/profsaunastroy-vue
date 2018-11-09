@@ -1,5 +1,8 @@
 # profsaunastroy-vue
 
+## Pages list
+* [index](https://alskra.github.io/profsaunastroy-vue/stage/index.html)
+
 ## Project setup
 ```
 npm install
