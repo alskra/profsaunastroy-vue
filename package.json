@@ -5,6 +5,7 @@
 	"scripts": {
 		"serve": "vue-cli-service serve --open",
 		"build": "vue-cli-service build --modern",
+		"dev-build": "vue-cli-service build --modern --mode development",
 		"staging": "vue-cli-service build --modern --mode staging --dest stage",
 		"lint": "vue-cli-service lint",
 		"svgo": "svgo -f src/img/icons"
