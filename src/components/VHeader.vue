@@ -1,8 +1,8 @@
 <template lang="pug">
-	header.header
+	header.v-header
 		.__container.container-fluid
 			a.__logo(
-			href="/"
+			href=""
 			title="ProfSaunaStroy"
 			)
 				v-icon.__logo-img(
@@ -42,7 +42,7 @@
 		--header-transition: 0.15s ease-in-out;
 	}
 
-	.header {
+	.v-header {
 		position: fixed;
 		left: 0;
 		top: 0;

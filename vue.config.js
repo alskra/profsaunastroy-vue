@@ -1,4 +1,3 @@
-const pkg = require('./package');
 const pugBem = require('pug-bem');
 
 const pages = {
@@ -10,7 +9,7 @@ const pages = {
 };
 
 module.exports = {
-	baseUrl: '',
+	baseUrl: process.env.VUE_APP_STAGE ? process.env.VUE_APP_STAGE : '/',
 	pages,
 	runtimeCompiler: true,
 
@@ -34,7 +33,7 @@ module.exports = {
 		Object.keys(pages).forEach(page => {
 			config.plugin(`html-${page}`).tap(options => {
 				options[0].minify = false;
-				options[0].title = `${pages[page].title} - ${pkg.name}`;
+				options[0].title = `${pages[page].title} - ${process.env.VUE_APP_TITLE}`;
 
 				return options;
 			});

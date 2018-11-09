@@ -3,8 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build",
+		"serve": "vue-cli-service serve --open",
+		"build": "vue-cli-service build --modern",
+		"staging": "vue-cli-service build --modern --mode staging --dest stage",
 		"lint": "vue-cli-service lint",
 		"svgo": "svgo -f src/img/icons"
 	},

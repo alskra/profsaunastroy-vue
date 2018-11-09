@@ -1,5 +1,5 @@
 <template lang="pug">
-	nav.menu
+	nav.v-menu
 		button.__toggle(data-toggle="menu")
 			//+sprite-svg('menu').__toggle-icon
 		.__inner
@@ -47,7 +47,7 @@
 </script>
 
 <style lang="scss">
-	.menu {
+	.v-menu {
 		&__toggle {
 			display: none;
 			align-items: center;
