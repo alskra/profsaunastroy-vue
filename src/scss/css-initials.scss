@@ -35,3 +35,7 @@
 @mixin initials-all {
 	@extend .initials-all;
 }
+
+:not(.not-initials-all) * {
+	@extend .initials-all;
+}

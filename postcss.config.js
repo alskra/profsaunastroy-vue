@@ -29,11 +29,9 @@ module.exports = {
 		postcssStripInlineComments,
 		postcssOmitImportTilde,
 		postcssPrependImports({
-			path: 'src/css',
+			path: 'src/scss',
 			files: [
-				'variables.scss',
-				'functions.scss',
-				'mixins.scss',
+				'imports',
 			],
 		}),
 		postcssEasyImport({

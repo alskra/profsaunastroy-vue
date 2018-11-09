@@ -1,4 +1,16 @@
-// stylelint-disable selector-pseudo-class-no-unknown
+:root {
+	// Colors
+	--color-black: #000;
+	--color-white: #fff;
+	--color-boulder: #7c7c7c;
+	--color-cod-gray: #0a0a0a;
+	--color-alabaster: #f7f7f7;
+	--color-default: var(--color-boulder);
+	--color-bg-default: var(--color-alabaster);
+
+	// Fonts
+	--font-family-roboto: "Roboto", sans-serif;
+}
 
 *,
 *::before,

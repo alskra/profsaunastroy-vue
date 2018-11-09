@@ -1,0 +1,49 @@
+header.header.--fixed
+	.__container.container-fluid
+		a.__logo(href=`${BASE_URL}index.html` title="ProfSaunaStroy")
+			+sprite-svg('logo').__logo-img
+
+		nav.menu.__menu
+			button.__toggle(data-toggle="menu")
+				+sprite-svg('menu').__toggle-icon
+			.__inner
+				.__item
+					button.__item-inner(data-toggle="menu__submenu")
+						+sprite-svg('menu').__icon
+						span.__label Услуги
+					.__submenu
+						.__submenu-item
+							a.__submenu-label(href="") All
+						.__submenu-item
+							a.__submenu-label(href="") Item one
+						.__submenu-item
+							a.__submenu-label(href="") Item two very long very long very long
+						.__submenu-item
+							a.__submenu-label(href="") Item three
+				.__item
+					button.__item-inner(data-toggle="menu__submenu")
+						+sprite-svg('menu').__icon
+						span.__label Каталог
+					.__submenu
+						.__submenu-item
+							a.__submenu-label(href="") All
+						.__submenu-item
+							a.__submenu-label(href="") Item one
+						.__submenu-item
+							a.__submenu-label(href="") Item two
+						.__submenu-item
+							a.__submenu-label(href="") Item three
+				.__item
+					.__item-inner
+						a.__label(href="") Наши работы
+				.__item
+					.__item-inner
+						a.__label(href="") О компании
+				.__item
+					.__item-inner
+						a.__label(href="") Контакты
+
+		form.__search(action=BASE_URL)
+			input.__search-input(type="text" name="search")
+			button.__search-toggle(type="button" data-toggle="header__search")
+				+sprite-svg('search').__search-toggle-icon

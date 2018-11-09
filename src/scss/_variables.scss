@@ -10,20 +10,6 @@
 @custom-media --lt-md (width < env(--md));
 @custom-media --lt-sm (width < env(--sm));
 
-:root {
-	// Colors
-	--color-black: #000;
-	--color-white: #fff;
-	--color-boulder: #7c7c7c;
-	--color-cod-gray: #0a0a0a;
-	--color-alabaster: #f7f7f7;
-	--color-default: var(--color-boulder);
-	--color-bg-default: var(--color-alabaster);
-
-	// Fonts
-	--font-family-roboto: "Roboto", sans-serif;
-}
-
 // Grid
 $grid-breakpoints: (
 	xs: env(--xs),
@@ -32,7 +18,9 @@ $grid-breakpoints: (
 	lg: env(--lg),
 	xl: env(--xl)
 );
+
 $container-max-widths: (
 	lg: env(--lg)
 );
+
 $grid-gutter-width: 2rem;

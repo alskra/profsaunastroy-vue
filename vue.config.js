@@ -26,22 +26,28 @@ module.exports = {
 		config.module.rule('pug').oneOf('normal')
 			.use('pug-loader')
 			.loader('pug-loader')
-			.options({pretty: true, plugins: [pugBem]});
+			.options({
+				pretty: true,
+				plugins: [pugBem],
+			});
 
-		for (let page in pages) {
-			if (pages.hasOwnProperty(page)) {
-				config.plugin(`html-${page}`).tap(options => {
-					options[0].minify = false;
-					options[0].title = `${pages[page].title} - ${pkg.name}`;
+		Object.keys(pages).forEach(page => {
+			config.plugin(`html-${page}`).tap(options => {
+				options[0].minify = false;
+				options[0].title = `${pages[page].title} - ${pkg.name}`;
 
-					return options;
-				});
-			}
-		}
+				return options;
+			});
+		});
 
-		// remove `sass-loader`
+
+		// load `scss`
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
 
 		types.forEach(type => config.module.rule('scss').oneOf(type).uses.delete('sass-loader'));
+	},
+
+	css: {
+		sourceMap: true,
 	},
 };
