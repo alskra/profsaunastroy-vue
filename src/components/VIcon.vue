@@ -7,12 +7,6 @@
 	:aria-labelledby="iconName"
 	role="presentation"
 	)
-		title(
-		:id="iconName"
-		lang="en"
-		)
-			| {{ iconName }} icon
-
 		g(
 		v-html="icons[iconName].content"
 		:fill="iconColor"

@@ -1,3 +1,16 @@
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/print";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/print";
+
+.container-fluid {
+	padding-left: 50px;
+	padding-right: 50px;
+
+	@media (--lt-xl) {
+		padding-left: $grid-gutter-width / 2;
+		padding-right: $grid-gutter-width / 2;
+	}
+}

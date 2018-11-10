@@ -1,0 +1,14 @@
+%reset {
+	all: initial;
+	quotes: env(--quotes);
+	font-family: env(--font-family);
+	text-align: env(--text-align);
+	color: env(--color);
+	outline-color: env(--outline-color);
+	display: block;
+	box-sizing: border-box;
+}
+
+@mixin reset {
+	@extend %reset;
+}

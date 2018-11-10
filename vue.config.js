@@ -1,10 +1,11 @@
+const path = require('path');
 const pugBem = require('pug-bem');
 
 const pages = {
 	index: {
 		entry: 'src/index/main.js',
 		template: 'src/index/index.pug',
-		title: 'Главная'
+		title: 'Index'
 	}
 };
 
@@ -40,10 +41,23 @@ module.exports = {
 		});
 
 
-		// load `scss`
+		// loaders `scss`
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
 
-		types.forEach(type => config.module.rule('scss').oneOf(type).uses.delete('sass-loader'));
+		types.forEach(type => {
+			config.module.rule('scss').oneOf(type).uses.delete('sass-loader');
+
+			config.module.rule('scss').oneOf(type)
+				.use('style-resources-loader')
+				.loader('style-resources-loader')
+				.options({
+					patterns: [
+						path.resolve(__dirname, 'src/scss/variables.scss'),
+						path.resolve(__dirname, 'src/scss/functions/*.scss'),
+						path.resolve(__dirname, 'src/scss/mixins/*.scss'),
+					],
+				});
+		});
 	},
 
 	css: {

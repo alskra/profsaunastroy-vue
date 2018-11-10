@@ -1,11 +1,9 @@
 .page {
-	@include initials-all;
-
+	@include reset;
 	overflow-x: hidden;
 
 	&__body {
-		@include initials-all;
-
+		@include reset;
 		display: flex;
 		flex-flow: column;
 		overflow-x: hidden;

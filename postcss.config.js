@@ -26,22 +26,22 @@ const environmentVariables = {
 module.exports = {
 	syntax: 'postcss-scss',
 	plugins: [
-		postcssStripInlineComments,
-		postcssOmitImportTilde,
-		postcssPrependImports({
-			path: 'src/scss',
-			files: [
-				'imports',
-			],
-		}),
-		postcssEasyImport({
-			plugins: [
-				postcssStripInlineComments,
-				postcssOmitImportTilde,
-			],
-			prefix: '_',
-			extensions: ['.css', '.scss'],
-		}),
+		// postcssStripInlineComments,
+		// postcssOmitImportTilde,
+		// postcssPrependImports({
+		// 	path: 'src/scss',
+		// 	files: [
+		// 		'imports',
+		// 	],
+		// }),
+		// postcssEasyImport({
+		// 	plugins: [
+		// 		postcssStripInlineComments,
+		// 		postcssOmitImportTilde,
+		// 	],
+		// 	prefix: '_',
+		// 	extensions: ['.css', '.scss'],
+		// }),
 		postcssFunctions({
 			functions: {
 				env: (variable) => {
@@ -89,6 +89,10 @@ module.exports = {
 		postcssPresetEnv({
 			stage: false,
 			features: {
+				'all-property': {
+					reset: 'all',
+					replace: true,
+				},
 				'any-link-pseudo-class': {
 					preserve: false,
 				},
@@ -116,9 +120,9 @@ module.exports = {
 		cssMqpacker({
 			sort: sortCssMediaQueries,
 		}),
-		postcssCombineDuplicatedSelectors({
-			removeDuplicatedProperties: true,
-		}),
+		// postcssCombineDuplicatedSelectors({
+		// 	removeDuplicatedProperties: true,
+		// }),
 		postcssPxtorem({
 			rootValue: 16,
 			unitPrecision: 5,

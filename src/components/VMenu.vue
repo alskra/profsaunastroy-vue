@@ -46,7 +46,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.v-menu {
 		&__toggle {
 			display: none;
