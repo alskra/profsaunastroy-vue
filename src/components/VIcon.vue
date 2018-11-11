@@ -8,10 +8,8 @@
 	v-html="icons[name].content"
 	:aria-labelledby="`${name}-icon`"
 	role="presentation"
-	:style=`{
-		pointerEvents: 'none',
-		fill: color
-	}`
+	:fill="color"
+	pointer-events="none"
 	)
 </template>
 

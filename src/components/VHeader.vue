@@ -48,11 +48,11 @@
 			};
 		},
 		methods: {
-			documentClick(event) {
-				let elem = this.$refs.searchForm;
-				let target = event.target;
+			documentClick(evt) {
+				let el = this.$refs.searchForm;
+				let target = evt.target;
 
-				if (elem !== target && !elem.contains(target)) {
+				if (el !== target && !el.contains(target)) {
 					this.isOpenSearch = false;
 				}
 			}
