@@ -1,28 +1,35 @@
 <template lang="pug">
-	header.v-header
+	header.v-header(
+	:class="{'is-open-search': isOpenSearch}"
+	)
 		.container-fluid
 			a.logo(
 			:href="baseUrl"
 			title="ProfSaunaStroy"
 			)
-				v-icon.logo-img(
-				iconName="logo"
+				v-icon(
+				name="logo"
+				width="100%"
+				height="100%"
 				)
 
-			v-menu.menu
+			v-menu
 
-			form.search(
+			form.search-form(
 			:action="baseUrl"
+			ref="searchForm"
 			)
 				input.search-input(
 				type="text"
 				name="search"
+				v-if="isOpenSearch"
 				)
+
 				button.search-toggle(
 				type="button"
-				data-toggle="header__search"
+				@click="isOpenSearch = !isOpenSearch"
 				)
-					//+sprite-svg('search').__search-toggle-icon
+					v-icon(name="search")
 
 </template>
 
@@ -34,10 +41,27 @@
 		components: {
 			VMenu,
 		},
-		data () {
+		data() {
 			return {
 				baseUrl: process.env.BASE_URL,
+				isOpenSearch: false,
 			};
+		},
+		methods: {
+			documentClick(event) {
+				let elem = this.$refs.searchForm;
+				let target = event.target;
+
+				if (elem !== target && !elem.contains(target)) {
+					this.isOpenSearch = false;
+				}
+			}
+		},
+		created() {
+			document.addEventListener('click', this.documentClick);
+		},
+		destroyed() {
+			document.removeEventListener('click', this.documentClick);
 		},
 	}
 </script>
@@ -115,17 +139,9 @@
 		@media (--lt-md) {
 			margin: 0 auto;
 		}
-
-		&-img {
-			width: 100%;
-			height: 100%;
-			color: inherit;
-			fill: currentColor;
-			cursor: inherit;
-		}
 	}
 
-	.menu {
+	.v-menu {
 		margin-left: auto;
 
 		@media (--lt-md) {
@@ -135,7 +151,8 @@
 		}
 	}
 
-	.search {
+	.search-form {
+		@include reset;
 		display: flex;
 		flex-shrink: 0;
 		align-items: center;
@@ -148,46 +165,44 @@
 		@media (--lt-md) {
 			margin-left: 0;
 		}
+	}
 
-		&-input {
-			display: none;
-			margin-right: 5px;
-			border-bottom: 1px solid var(--header-color);
-			width: 200px;
-			height: 24px;
-			color: var(--header-color);
+	.search-input {
+		@include reset;
+		margin-right: 5px;
+		border-bottom: 1px solid var(--header-color);
+		width: 200px;
+		height: 24px;
+		color: var(--header-color);
 
-			@media (--lt-md) {
-				margin-left: 5px;
-			}
-
-			&:focus-visible {
-				outline: 0;
-			}
+		@media (--lt-md) {
+			margin-left: 5px;
 		}
 
-		&-toggle {
-			display: flex;
-			flex-shrink: 0;
-			align-items: center;
-			justify-content: center;
-			width: 40px;
-			height: 40px;
-			color: var(--header-color);
-			transition: all var(--header-transition);
-			cursor: pointer;
-
-			&:hover {
-				color: var(--color-default);
-			}
-
-			&-icon {
-				width: 24px;
-				height: 24px;
-				color: inherit;
-				fill: currentColor;
-				cursor: inherit;
-			}
+		&:focus-visible {
+			outline: 0;
 		}
+	}
+
+	.search-toggle {
+		@include reset;
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		color: var(--header-color);
+		transition: all var(--header-transition);
+		cursor: pointer;
+
+		&:hover {
+			color: var(--color-default);
+		}
+	}
+
+	.search-icon {
+		width: 24px;
+		height: 24px;
 	}
 </style>

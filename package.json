@@ -60,8 +60,9 @@
 		}
 	},
 	"browserslist": [
-		"> 1%",
+		"> 0.5%",
 		"last 2 versions",
-		"not ie <= 10"
+		"Firefox ESR",
+		"not dead"
 	]
 }
