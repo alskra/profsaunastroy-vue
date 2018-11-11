@@ -2,48 +2,57 @@
 	nav.v-menu
 		button.__toggle(data-toggle="menu")
 			//+sprite-svg('menu').__toggle-icon
-		.__inner
-			.__item
-				button.__item-inner(data-toggle="menu__submenu")
-					//+sprite-svg('menu').__icon
-					span.__label Услуги
-				.__submenu
-					.__submenu-item
-						a.__submenu-label(href="") All
-					.__submenu-item
-						a.__submenu-label(href="") Item one
-					.__submenu-item
-						a.__submenu-label(href="") Item two very long very long very long
-					.__submenu-item
-						a.__submenu-label(href="") Item three
-			.__item
-				button.__item-inner(data-toggle="menu__submenu")
-					//+sprite-svg('menu').__icon
-					span.__label Каталог
-				.__submenu
-					.__submenu-item
-						a.__submenu-label(href="") All
-					.__submenu-item
-						a.__submenu-label(href="") Item one
-					.__submenu-item
-						a.__submenu-label(href="") Item two
-					.__submenu-item
-						a.__submenu-label(href="") Item three
-			.__item
-				.__item-inner
-					a.__label(href="") Наши работы
-			.__item
-				.__item-inner
-					a.__label(href="") О компании
-			.__item
-				.__item-inner
-					a.__label(href="") Контакты
+		.items
+			slot
+			<!--.__item-->
+				<!--button.__item-inner(data-toggle="menu__submenu")-->
+					<!--//+sprite-svg('menu').__icon-->
+					<!--span.__label Услуги-->
+				<!--.__submenu-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") All-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item one-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item two very long very long very long-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item three-->
+			<!--.__item-->
+				<!--button.__item-inner(data-toggle="menu__submenu")-->
+					<!--//+sprite-svg('menu').__icon-->
+					<!--span.__label Каталог-->
+				<!--.__submenu-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") All-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item one-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item two-->
+					<!--.__submenu-item-->
+						<!--a.__submenu-label(href="") Item three-->
+			<!--.__item-->
+				<!--.__item-inner-->
+					<!--a.__label(href="") Наши работы-->
+			<!--.__item-->
+				<!--.__item-inner-->
+					<!--a.__label(href="") О компании-->
+			<!--.__item-->
+				<!--.__item-inner-->
+					<!--a.__label(href="") Контакты-->
 </template>
 
 <script>
-  export default {
-    name: "VMenu"
-  }
+	import VMenuItem from './VMenuItem';
+
+	export default {
+		name: "VMenu",
+		components: {
+			VMenuItem,
+		},
+		props: {
+			menuItems: Object,
+		},
+	}
 </script>
 
 <style lang="scss" scoped>

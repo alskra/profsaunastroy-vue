@@ -1,45 +1,53 @@
 <template lang="pug">
-	header.v-header(
-	:class="{'is-open-search': isOpenSearch}"
-	)
+	header.v-header(:class="{'is-open-search': isOpenSearch}")
 		.container-fluid
 			a.logo(
-			:href="baseUrl"
-			title="ProfSaunaStroy"
+				:href="baseUrl"
+				title="ProfSaunaStroy"
 			)
 				v-icon(
-				name="logo"
-				width="100%"
-				height="100%"
+					name="logo"
+					width="100%"
+					height="100%"
 				)
 
-			v-menu
+			nav.menu
+				button.menu-toggle
+					v-icon(name="menu")
+				.menu-items
+					v-menu-item(
+						v-for="(menuItem, index) in menuItems"
+						:key="index"
+						:menu-item="menuItem"
+					)
 
 			form.search-form(
-			:action="baseUrl"
-			ref="searchForm"
+				:action="baseUrl"
+				ref="searchForm"
 			)
 				input.search-input(
-				type="text"
-				name="search"
-				v-if="isOpenSearch"
+					type="text"
+					name="search"
+					v-if="isOpenSearch"
 				)
 
 				button.search-toggle(
-				type="button"
-				@click="isOpenSearch = !isOpenSearch"
+					type="button"
+					@click="isOpenSearch = !isOpenSearch"
 				)
 					v-icon(name="search")
-
 </template>
 
 <script>
-	import VMenu from './VMenu';
+	import VMenuItem from './VMenuItem';
 
 	export default {
 		name: "VHeader",
 		components: {
-			VMenu,
+			VMenuItem,
+		},
+		props: {
+			menuItems: Array,
 		},
 		data() {
 			return {
@@ -141,13 +149,52 @@
 		}
 	}
 
-	.v-menu {
+	.menu {
 		margin-left: auto;
 
 		@media (--lt-md) {
 			flex-shrink: 0;
 			order: -1;
 			margin-left: 0;
+		}
+	}
+
+	.menu-toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		color: var(--header-color);
+		transition: all var(--header-transition);
+		cursor: pointer;
+
+		@media (--lt-md) {
+			display: flex;
+		}
+	}
+
+	.menu-icon {
+		width: 24px;
+		height: 24px;
+	}
+
+	.menu-items {
+		display: flex;
+
+		@media (--lt-md) {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			flex-direction: column;
+			overflow-y: auto;
+			padding: 15px 0;
+			width: 300px;
+			height: calc(100% - 60px);
+			box-shadow: 0 3px 3px rgba(#000, 0.15);
+			background-color: var(--color-bg-default);
+			transform: translate(-300px, 0);
+			transition: transform var(--header-transition);
 		}
 	}
 
