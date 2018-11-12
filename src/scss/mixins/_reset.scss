@@ -1,17 +1,21 @@
 %reset {
 	all: initial;
-	quotes: env(--quotes);
-	font-family: env(--font-family);
-	text-align: env(--text-align);
-	color: env(--color);
-	outline-color: env(--outline-color);
-	display: block;
-	box-sizing: border-box;
+
+	// Properties dependent of browser
+	quotes: "“" "”" "‘" "’";
+	font-family: var(--content-font-family);
+	text-align: left;
+	color: var(--content-color);
+	outline-color: var(--content-color);
 
 	&:focus-visible {
-		outline: 1px dotted;
+		outline: 1px dotted currentColor;
 		outline: 5px auto -webkit-focus-ring-color;
 	}
+
+	// Overwrite some properties
+	display: block;
+	box-sizing: border-box;
 }
 
 @mixin reset {

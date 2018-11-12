@@ -1,12 +1,12 @@
 <template lang="pug">
 	svg.icon(
 	xmlns="http://www.w3.org/2000/svg"
-	:class="`${name}-icon`"
+	:class="`icon-${name}`"
 	:width="width"
 	:height="height"
 	:viewBox="icons[name].viewBox"
 	v-html="icons[name].content"
-	:aria-labelledby="`${name}-icon`"
+	:aria-labelledby="`icon-${name}`"
 	role="presentation"
 	:fill="color"
 	pointer-events="none"
@@ -23,11 +23,11 @@
 			},
 			width: {
 				type: [Number, String],
-				default: 32,
+				default: '2rem',
 			},
 			height: {
 				type: [Number, String],
-				default: 32,
+				default: '2rem',
 			},
 			color: {
 				type: String,

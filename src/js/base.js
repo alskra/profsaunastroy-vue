@@ -1,16 +1,21 @@
+// Import Styles
 import '../scss/variables.scss';
 import '../scss/setup.scss';
 import 'normalize.css';
 import '../scss/fonts.scss';
 import '../scss/bootstrap.scss';
 import '../scss/page.scss';
+import '../scss/content.scss';
 
+// Import Polyfills
 import cssVars from 'css-vars-ponyfill';
 import 'focus-visible';
 import focusWithin from 'focus-within';
 
+// Import Vue
 import Vue from 'vue';
 
+// Polyfills
 cssVars();
 
 focusWithin(document, {
@@ -19,6 +24,7 @@ focusWithin(document, {
 	force: true,
 });
 
+// Vue
 Vue.config.productionTip = false;
 
 const requireComponent = require.context('../components', true, /Base[A-Z]\w+\.(vue|js)$/);

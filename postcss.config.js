@@ -11,11 +11,7 @@ const postcssCombineDuplicatedSelectors = require('postcss-combine-duplicated-se
 const postcssPxtorem = require('postcss-pxtorem');
 
 const environmentVariables = {
-	'--quotes': '"“" "”" "‘" "’"',
-	'--font-family': '"Roboto", sans-serif',
-	'--text-align': 'left',
-	'--color': '#000',
-	'--outline-color': '#000',
+	// Breakpoints
 	'--xs': '0',
 	'--sm': '640px',
 	'--md': '960px',

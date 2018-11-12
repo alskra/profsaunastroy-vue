@@ -1,22 +1,28 @@
 <template lang="pug">
-	div.menu-item
+	div.menu-item(ref="menuItem")
 		a.button(
 			:href="!menuItem.submenu ? menuItem.url : null"
 			tabindex="0"
+			@click="isSubmenuOpened = !isSubmenuOpened"
+			@keyup.enter="isSubmenuOpened = !isSubmenuOpened"
 		)
-			base-icon.icon(
+			base-icon(
 				name="menu"
 				v-if="menuItem.submenu"
 			)
 			.title
 				| {{ menuItem.title }}
-		.submenu(v-if="menuItem.submenu")
-			.submenu-item(
-				v-for="(submenuItem, index) in menuItem.submenu"
-				:key="index"
+		transition(name="fade-up" v-if="menuItem.submenu")
+			.submenu(
+				v-show="isSubmenuOpened"
 			)
-				a.submenu-title(:href="submenuItem.url")
-					| {{ submenuItem.title }}
+				a.submenu-item(
+					v-for="submenuItem in menuItem.submenu"
+					:key="submenuItem.id"
+					:href="submenuItem.url"
+				)
+					.submenu-title
+						| {{ submenuItem.title }}
 
 </template>
 
@@ -26,16 +32,39 @@
 		props: {
 			menuItem: Object,
 		},
+		data() {
+			return {
+				isSubmenuOpened: false,
+			};
+		},
+		methods: {
+			closeSubmenu(evt) {
+				const el = this.$refs.menuItem;
+				const target = evt.target;
+
+				if (el !== target && !el.contains(target)) {
+					this.isSubmenuOpened = false;
+				}
+			}
+		},
+		created() {
+			document.addEventListener('click', this.closeSubmenu);
+			document.addEventListener('keyup', this.closeSubmenu);
+		},
+		destroyed() {
+			document.removeEventListener('click', this.closeSubmenu);
+			document.removeEventListener('keyup', this.closeSubmenu);
+		},
 	}
 </script>
 
 <style lang="scss" scoped>
 	.menu-item {
-		position: relative;
-		margin-left: 50px;
+		@include reset;
+		margin-left: 3rem;
 
 		@media (--lt-lg) {
-			margin-left: 30px;
+			margin-left: 2rem;
 		}
 
 		@media (--lt-md) {
@@ -45,28 +74,26 @@
 	}
 
 	.button {
+		@include reset;
 		display: flex;
 		align-items: flex-start;
 		width: 100%;
-		color: var(--header-color);
-		transition: all var(--header-transition);
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 		cursor: pointer;
 
 		&:hover {
-			color: var(--color-default);
+			color: var(--content-color);
 		}
 	}
 
-	.icon {
+	.icon-menu {
 		position: relative;
 		flex-shrink: 0;
-		margin-right: 10px;
+		margin-right: 0.5rem;
 		padding: 2px;
-		width: 24px;
-		height: 24px;
-		color: inherit;
-		fill: currentColor;
-		cursor: inherit;
+		width: 1.5rem;
+		height: 1.5rem;
 
 		@media (--lt-md) {
 			margin-right: -45px;
@@ -76,7 +103,7 @@
 			height: 40px;
 		}
 
-		+ .menu__label {
+		+ .title {
 			@media (--lt-md) {
 				padding-left: 45px;
 			}
@@ -91,8 +118,6 @@
 		line-height: 1.25;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		color: inherit;
-		cursor: inherit;
 
 		@media (--lt-md) {
 			padding: (40px - 18px * 1.25) / 2 15px;
@@ -101,51 +126,60 @@
 
 	.submenu {
 		position: absolute;
-		left: 0;
-		top: 100%;
-		display: none;
-		border: 1px solid var(--header-box-shadow-color);
-		border-top: 0;
+		margin-top: 16px;
+		border: 1px solid var(--page-header-border-color);
+		border-top-color: var(--page-header-background-color);
 		max-width: 200px;
-		background-color: var(--header-background-color);
-		transform: translate(24px, 18px);
-		transform-origin: 0 0;
-		transition: all var(--header-transition);
+		background-color: var(--page-header-background-color);
+		transition: border-color var(--page-header-transition),
+		background-color var(--page-header-transition);
 
 		@media (--lt-md) {
 			position: relative;
-			left: auto;
-			top: auto;
+			margin-top: 0;
 			max-width: none;
-			transform: none;
 		}
 	}
 
 	.submenu-item {
+		@include reset;
 		display: flex;
 		align-items: flex-start;
-		color: var(--header-color);
-		transition: all var(--header-transition);
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 		cursor: pointer;
 
 		&:hover {
-			color: var(--color-default);
+			color: var(--content-color);
 		}
 	}
 
 	.submenu-title {
 		flex-grow: 1;
 		overflow: hidden;
-		padding: 5px 10px;
+		padding: (32px - 18px * 1.25) / 2 1rem (32px - 18px * 1.25) / 2 31px;
 		font-size: 18px;
 		line-height: 1.25;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		color: inherit;
-		cursor: inherit;
 
 		@media (--lt-md) {
 			padding: (40px - 18px * 1.25) / 2 15px (40px - 18px * 1.25) / 2 45px;
+		}
+	}
+
+	.fade-up {
+		&-enter-active,
+		&-leave-active {
+			transform-origin: 0 0;
+			transition: opacity 0.15s ease-in-out,
+			transform 0.15s ease-in-out;
+		}
+
+		&-enter,
+		&-leave-to {
+			opacity: 0;
+			transform: scaleY(0);
 		}
 	}
 </style>

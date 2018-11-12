@@ -1,39 +1,35 @@
 <template lang="pug">
-	header.page-header(:class="{'is-open-search': isOpenSearch}")
+	header.page-header(:class="{'is-search-opened': isSearchOpened}")
 		.container-fluid
 			a.logo(
 				:href="baseUrl"
 				title="ProfSaunaStroy"
 			)
-				base-icon(
-					name="logo"
-					width="100%"
-					height="100%"
-				)
+				base-icon(name="logo")
 
 			nav.menu
 				button.menu-toggle
 					base-icon(name="menu")
 				.menu-items
 					menu-item(
-						v-for="(menuItem, index) in menuItems"
-						:key="index"
+						v-for="menuItem in menuItems"
+						:key="menuItem.id"
 						:menu-item="menuItem"
 					)
 
-			form.search-form(
+			form.search(
 				:action="baseUrl"
-				ref="searchForm"
+				ref="search"
 			)
 				input.search-input(
 					type="text"
 					name="search"
-					v-if="isOpenSearch"
+					v-if="isSearchOpened"
 				)
 
 				button.search-toggle(
 					type="button"
-					@click="isOpenSearch = !isOpenSearch"
+					@click="isSearchOpened = !isSearchOpened"
 				)
 					base-icon(name="search")
 </template>
@@ -51,7 +47,6 @@
 		data() {
 			return {
 				baseUrl,
-				isOpenSearch: false,
 				menuItems: [
 					{
 						id: 1,
@@ -60,22 +55,22 @@
 						submenu: [
 							{
 								id: 1,
-								title: 'All',
+								title: 'Все услуги',
 								url: baseUrl
 							},
 							{
 								id: 2,
-								title: 'Item 2',
+								title: 'Услуга 1',
 								url: baseUrl
 							},
 							{
 								id: 3,
-								title: 'Item 3 very long very long very long',
+								title: 'Услуга 2 very long very long very long',
 								url: baseUrl
 							},
 							{
 								id: 4,
-								title: 'Item 4',
+								title: 'Услуга 3',
 								url: baseUrl
 							}
 						]
@@ -87,17 +82,17 @@
 						submenu: [
 							{
 								id: 1,
-								title: 'All',
+								title: 'Все категории',
 								url: baseUrl
 							},
 							{
 								id: 2,
-								title: 'Item 2',
+								title: 'Категория 1',
 								url: baseUrl
 							},
 							{
 								id: 3,
-								title: 'Item 3',
+								title: 'Категория 2',
 								url: baseUrl
 							}
 						]
@@ -120,16 +115,17 @@
 						url: baseUrl,
 						submenu: null
 					}
-				]
+				],
+				isSearchOpened: false,
 			};
 		},
 		methods: {
 			documentClick(evt) {
-				let el = this.$refs.searchForm;
-				let target = evt.target;
+				const el = this.$refs.search;
+				const target = evt.target;
 
 				if (el !== target && !el.contains(target)) {
-					this.isOpenSearch = false;
+					this.isSearchOpened = false;
 				}
 			}
 		},
@@ -144,10 +140,10 @@
 
 <style>
 	:root {
-		--header-color: var(--color-cod-gray);
-		--header-background-color: var(--color-bg-default);
-		--header-border-color: rgba(var(--color-bg-default), 0.15);
-		--header-transition: 0.15s ease-in-out;
+		--page-header-color: var(--content-headings-color);
+		--page-header-background-color: var(--page-background-color);
+		--page-header-border-color: #{rgba(black, 0.1)};
+		--page-header-transition: 0.15s ease-in-out;
 	}
 </style>
 
@@ -160,38 +156,33 @@
 		z-index: 1000;
 		width: 100%;
 		height: 3.5rem;
-		box-shadow: 0 1px var(--header-box-shadow-color);
-		background-color: var(--header-background-color);
-		transition: all var(--header-transition);
+		box-shadow: 0 1px var(--page-header-border-color);
+		background-color: var(--page-header-background-color);
+		transition: box-shadow var(--header-transition),
+		background-color var(--header-transition);
 
-		&--search-opened {
+		&.is-search-opened {
 			.menu {
 				@media (--gte-md) {
-				// display: none;
+					// display: none;
 				}
 			}
 
-			.header {
-				&__logo {
-					@media (--lt-md) {
-						display: none;
-					}
+			.logo {
+				@media (--lt-md) {
+					display: none;
 				}
+			}
 
-				&__search {
-				// margin-left: auto;
+			.search {
+				@media (--lt-md) {
+					flex-grow: 1;
+				}
+			}
 
-					@media (--lt-md) {
-						flex-grow: 1;
-					}
-
-					&-input {
-						display: block;
-
-						@media (--lt-md) {
-							flex-grow: 1;
-						}
-					}
+			.search-input {
+				@media (--lt-md) {
+					flex-grow: 1;
 				}
 			}
 		}
@@ -206,10 +197,10 @@
 	.logo {
 		@include reset;
 		flex-shrink: 0;
-		width: 141px;
-		height: 50px;
-		color: var(--header-color);
-		transition: all var(--header-transition);
+		width: 134px;
+		height: 3rem;
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 		cursor: pointer;
 
 		@media (--lt-md) {
@@ -217,8 +208,14 @@
 		}
 	}
 
+	.icon-logo {
+		width: 100%;
+		height: 100%;
+	}
+
 	.menu {
 		margin-left: auto;
+		min-width: 0;
 
 		@media (--lt-md) {
 			flex-shrink: 0;
@@ -228,13 +225,14 @@
 	}
 
 	.menu-toggle {
+		@include reset;
 		display: none;
 		align-items: center;
 		justify-content: center;
-		width: 40px;
-		height: 40px;
-		color: var(--header-color);
-		transition: all var(--header-transition);
+		width: 2.5rem;
+		height: 2.5rem;
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 		cursor: pointer;
 
 		@media (--lt-md) {
@@ -242,9 +240,9 @@
 		}
 	}
 
-	.menu-icon {
-		width: 24px;
-		height: 24px;
+	.icon-menu {
+		width: 1.5rem;
+		height: 1.5rem;
 	}
 
 	.menu-items {
@@ -260,21 +258,20 @@
 			width: 300px;
 			height: calc(100% - 60px);
 			box-shadow: 0 3px 3px rgba(#000, 0.15);
-			background-color: var(--color-bg-default);
+			background-color: var(--page-header-background-color);
 			transform: translate(-300px, 0);
-			transition: transform var(--header-transition);
+			transition: transform var(--page-header-transition);
 		}
 	}
 
-	.search-form {
-		@include reset;
+	.search {
 		display: flex;
 		flex-shrink: 0;
 		align-items: center;
-		margin-left: 50px;
+		margin-left: 3rem;
 
 		@media (--lt-lg) {
-			margin-left: 30px;
+			margin-left: 2rem;
 		}
 
 		@media (--lt-md) {
@@ -284,14 +281,15 @@
 
 	.search-input {
 		@include reset;
-		margin-right: 5px;
-		border-bottom: 1px solid var(--header-color);
+		margin-right: 0.25rem;
+		border-bottom: 1px solid var(--page-header-color);
 		width: 200px;
-		height: 24px;
-		color: var(--header-color);
+		height: 1.5rem;
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 
 		@media (--lt-md) {
-			margin-left: 5px;
+			margin-left: 0.25rem;
 		}
 
 		&:focus-visible {
@@ -305,19 +303,19 @@
 		flex-shrink: 0;
 		align-items: center;
 		justify-content: center;
-		width: 40px;
-		height: 40px;
-		color: var(--header-color);
-		transition: all var(--header-transition);
+		width: 2.5rem;
+		height: 2.5rem;
+		color: var(--page-header-color);
+		transition: color var(--page-header-transition);
 		cursor: pointer;
 
 		&:hover {
-			color: var(--color-default);
+			color: var(--content-color);
 		}
 	}
 
-	.search-icon {
-		width: 24px;
-		height: 24px;
+	.icon-search {
+		width: 1.5rem;
+		height: 1.5rem;
 	}
 </style>

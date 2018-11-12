@@ -1,24 +1,24 @@
-// stylelint-disable selector-list-comma-newline-after
-
 $content-font-size: 16;
 $content-headings-font-size: 34;
 
-@custom-selector :--headings h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6;
+@custom-selector :--headings
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6;
 
 :root {
-	--content-font-family: var(--font-family-roboto);
+	--content-font-family: "Roboto", sans-serif;
 	--content-font-weight: 400;
 	--content-font-size: #{$content-font-size}px;
 	--content-line-height: 1.5;
-	--content-color: var(--color-boulder);
+	--content-color: #7c7c7c;
 	--content-space: 1em;
 
 	// Headings
-	--content-headings-font-family: var(--font-family-roboto);
+	--content-headings-font-family: "Roboto", sans-serif;
 	--content-headings-font-weight: 700;
 	--content-headings-font-size: #{$content-headings-font-size}px;
 	--content-headings-line-height: 1.25;
-	--content-headings-color: var(--color-cod-gray);
+	--content-headings-color: #0a0a0a;
 
 	@media (--lt-md) {
 		--content-font-size: 15px;
@@ -27,7 +27,7 @@ $content-headings-font-size: 34;
 }
 
 .content {
-	@include initials-all;
+	@include reset;
 
 	font-family: var(--content-font-family);
 	font-weight: var(--content-font-weight);

@@ -1,3 +1,7 @@
+:root {
+	--page-background-color: #f7f7f7;
+}
+
 .page {
 	@include reset;
 	overflow-x: hidden;
@@ -21,7 +25,9 @@
 					background-color: rgba(#000, 0.2);
 				}
 			}
+		}
 
+		#app {
 			> :not(.page-header) {
 				@media (--lt-md) {
 					transform: translate(300px, 0);
@@ -33,21 +39,24 @@
 
 .page-body {
 	@include reset;
-	display: flex;
-	flex-flow: column;
 	overflow-x: hidden;
-	min-width: 320px;
-	min-height: 100vh;
-	background-color: var(--color-bg-default);
 
 	&::before {
 		content: "";
-		transition: background-color var(--header-transition);
+		transition: background-color var(--page-header-transition);
 	}
+}
 
-	> :not(.header) {
+#app {
+	display: flex;
+	flex-flow: column;
+	min-width: 320px;
+	min-height: 100vh;
+	background-color: var(--page-background-color);
+
+	> :not(.page-header) {
 		@media (--lt-md) {
-			transition: transform var(--header-transition);
+			transition: transform var(--page-header-transition);
 		}
 	}
 }
