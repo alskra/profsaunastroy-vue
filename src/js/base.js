@@ -10,7 +10,6 @@ import 'focus-visible';
 import focusWithin from 'focus-within';
 
 import Vue from 'vue';
-import VIcon from '../components/VIcon';
 
 cssVars();
 
@@ -21,4 +20,17 @@ focusWithin(document, {
 });
 
 Vue.config.productionTip = false;
-Vue.component(VIcon.name, VIcon);
+
+const requireComponent = require.context('../components', true, /Base[A-Z]\w+\.(vue|js)$/);
+
+requireComponent.keys().forEach(fileName => {
+	const componentConfig = requireComponent(fileName).default || requireComponent(fileName);
+
+	const componentName = componentConfig.name || (
+		fileName
+			.replace(/^.+\//, '')
+			.replace(/\.\w+$/, '')
+	);
+
+	Vue.component(componentName, componentConfig);
+});

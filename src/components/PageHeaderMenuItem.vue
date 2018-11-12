@@ -1,10 +1,10 @@
 <template lang="pug">
-	div.v-menu-item
+	div.menu-item
 		a.button(
 			:href="!menuItem.submenu ? menuItem.url : null"
 			tabindex="0"
 		)
-			v-icon.icon(
+			base-icon.icon(
 				name="menu"
 				v-if="menuItem.submenu"
 			)
@@ -22,7 +22,7 @@
 
 <script>
 	export default {
-		name: "VMenuItem",
+		name: "PageHeaderMenuItem",
 		props: {
 			menuItem: Object,
 		},
@@ -30,7 +30,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.v-menu-item {
+	.menu-item {
 		position: relative;
 		margin-left: 50px;
 

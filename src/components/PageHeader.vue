@@ -1,11 +1,11 @@
 <template lang="pug">
-	header.v-header(:class="{'is-open-search': isOpenSearch}")
+	header.page-header(:class="{'is-open-search': isOpenSearch}")
 		.container-fluid
 			a.logo(
 				:href="baseUrl"
 				title="ProfSaunaStroy"
 			)
-				v-icon(
+				base-icon(
 					name="logo"
 					width="100%"
 					height="100%"
@@ -13,9 +13,9 @@
 
 			nav.menu
 				button.menu-toggle
-					v-icon(name="menu")
+					base-icon(name="menu")
 				.menu-items
-					v-menu-item(
+					menu-item(
 						v-for="(menuItem, index) in menuItems"
 						:key="index"
 						:menu-item="menuItem"
@@ -35,24 +35,92 @@
 					type="button"
 					@click="isOpenSearch = !isOpenSearch"
 				)
-					v-icon(name="search")
+					base-icon(name="search")
 </template>
 
 <script>
-	import VMenuItem from './VMenuItem';
+	import MenuItem from './PageHeaderMenuItem';
+
+	const baseUrl = process.env.BASE_URL;
 
 	export default {
-		name: "VHeader",
+		name: "PageHeader",
 		components: {
-			VMenuItem,
-		},
-		props: {
-			menuItems: Array,
+			MenuItem,
 		},
 		data() {
 			return {
-				baseUrl: process.env.BASE_URL,
+				baseUrl,
 				isOpenSearch: false,
+				menuItems: [
+					{
+						id: 1,
+						title: 'Услуги',
+						url: baseUrl,
+						submenu: [
+							{
+								id: 1,
+								title: 'All',
+								url: baseUrl
+							},
+							{
+								id: 2,
+								title: 'Item 2',
+								url: baseUrl
+							},
+							{
+								id: 3,
+								title: 'Item 3 very long very long very long',
+								url: baseUrl
+							},
+							{
+								id: 4,
+								title: 'Item 4',
+								url: baseUrl
+							}
+						]
+					},
+					{
+						id: 2,
+						title: 'Каталог',
+						url: baseUrl,
+						submenu: [
+							{
+								id: 1,
+								title: 'All',
+								url: baseUrl
+							},
+							{
+								id: 2,
+								title: 'Item 2',
+								url: baseUrl
+							},
+							{
+								id: 3,
+								title: 'Item 3',
+								url: baseUrl
+							}
+						]
+					},
+					{
+						id: 3,
+						title: 'Наши работы',
+						url: baseUrl,
+						submenu: null
+					},
+					{
+						id: 4,
+						title: 'О компании',
+						url: baseUrl,
+						submenu: null
+					},
+					{
+						id: 5,
+						title: 'Контакты',
+						url: baseUrl,
+						submenu: null
+					}
+				]
 			};
 		},
 		methods: {
@@ -84,7 +152,7 @@
 </style>
 
 <style lang="scss" scoped>
-	.v-header {
+	.page-header {
 		@include reset;
 		position: fixed;
 		left: 0;

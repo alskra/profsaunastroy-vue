@@ -1,10 +1,10 @@
-import '../js/common';
+import '../js/base';
 import Vue from 'vue';
-import VHeader from '../components/VHeader';
+import App from './App';
 
 new Vue({
 	el: '#app',
-	components: {
-		VHeader,
+	render(h) {
+		return h(App);
 	}
 });

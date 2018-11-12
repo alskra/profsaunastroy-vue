@@ -6,8 +6,7 @@ html.page(lang="ru")
 		meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
 		title= htmlWebpackPlugin.options.title
 		link(rel="icon" href=`${BASE_URL}favicon.ico`)
-	body.__body
+	body.page-body
 		noscript
 			strong We're sorry but profsaunastroy-vue doesn't work properly without JavaScript enabled. Please enable it to continue.
-		div#app
-			block app
+		#app

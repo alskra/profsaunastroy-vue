@@ -1,5 +1,5 @@
 <template lang="pug">
-	svg.v-icon(
+	svg.icon(
 	xmlns="http://www.w3.org/2000/svg"
 	:class="`${name}-icon`"
 	:width="width"
@@ -15,7 +15,7 @@
 
 <script>
 	export default {
-		name: "VIcon",
+		name: "BaseIcon",
 		props: {
 			name: {
 				type: String,
