@@ -1,5 +1,10 @@
 <template lang="pug">
-	header.page-header(:class="{'is-search-opened': isSearchOpened}")
+	header.page-header(
+		:class=`[
+			{'is-menu-opened': isMenuOpened},
+			{'is-search-opened': isSearchOpened}
+		]`
+	)
 		.container-fluid
 			a.logo(
 				:href="baseUrl"
@@ -7,8 +12,8 @@
 			)
 				base-icon(name="logo")
 
-			nav.menu
-				button.menu-toggle
+			nav.menu(ref="menu")
+				button.menu-toggle(@click="onMenuToggleClick")
 					base-icon(name="menu")
 				.menu-items
 					menu-item(
@@ -47,6 +52,8 @@
 		data() {
 			return {
 				baseUrl,
+				isMenuOpened: false,
+				isSearchOpened: false,
 				menuItems: [
 					{
 						id: 1,
@@ -116,24 +123,33 @@
 						submenu: null
 					}
 				],
-				isSearchOpened: false,
 			};
 		},
 		methods: {
-			documentClick(evt) {
-				const el = this.$refs.search;
+			onMenuToggleClick() {
+				this.isMenuOpened = !this.isMenuOpened;
+				document.documentElement.classList.toggle('is-menu-opened', this.isMenuOpened);
+			},
+			onDocumentClick(evt) {
 				const target = evt.target;
+				const menuEl = this.$refs.menu;
+				const searchEl = this.$refs.search;
 
-				if (el !== target && !el.contains(target)) {
+				if (menuEl !== target && !menuEl.contains(target)) {
+					this.isMenuOpened = false;
+					document.documentElement.classList.remove('is-menu-opened');
+				}
+
+				if (searchEl !== target && !searchEl.contains(target)) {
 					this.isSearchOpened = false;
 				}
 			}
 		},
 		created() {
-			document.addEventListener('click', this.documentClick);
+			document.addEventListener('click', this.onDocumentClick);
 		},
 		destroyed() {
-			document.removeEventListener('click', this.documentClick);
+			document.removeEventListener('click', this.onDocumentClick);
 		},
 	}
 </script>
@@ -156,10 +172,16 @@
 		z-index: 1000;
 		width: 100%;
 		height: 3.5rem;
-		box-shadow: 0 1px var(--page-header-border-color);
+		border-bottom: 1px solid var(--page-header-border-color);
 		background-color: var(--page-header-background-color);
 		transition: box-shadow var(--header-transition),
 		background-color var(--header-transition);
+
+		&.is-menu-opened {
+			.menu-items {
+				transform: translateX(0);
+			}
+		}
 
 		&.is-search-opened {
 			.menu {
@@ -192,6 +214,11 @@
 		display: flex;
 		align-items: center;
 		height: 100%;
+
+		@media (--lt-md) {
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+		}
 	}
 
 	.logo {
@@ -254,12 +281,12 @@
 			bottom: 0;
 			flex-direction: column;
 			overflow-y: auto;
-			padding: 15px 0;
+			padding: 1rem 0;
 			width: 300px;
-			height: calc(100% - 60px);
-			box-shadow: 0 3px 3px rgba(#000, 0.15);
+			height: calc(100% - 3.5rem);
+			border-right: 1px solid var(--page-header-border-color);
 			background-color: var(--page-header-background-color);
-			transform: translate(-300px, 0);
+			transform: translateX(-100%);
 			transition: transform var(--page-header-transition);
 		}
 	}

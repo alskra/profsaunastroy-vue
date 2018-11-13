@@ -1,15 +1,14 @@
 <template lang="pug">
 	svg.icon(
-	xmlns="http://www.w3.org/2000/svg"
-	:class="`icon-${name}`"
-	:width="width"
-	:height="height"
-	:viewBox="icons[name].viewBox"
-	v-html="icons[name].content"
-	:aria-labelledby="`icon-${name}`"
-	role="presentation"
-	:fill="color"
-	pointer-events="none"
+		xmlns="http://www.w3.org/2000/svg"
+		:class="`icon-${name}`"
+		:width="width"
+		:height="height"
+		:viewBox="icons[name].viewBox"
+		v-html="icons[name].content"
+		:aria-labelledby="`icon-${name}`"
+		role="presentation"
+		:fill="color"
 	)
 </template>
 
@@ -58,3 +57,11 @@
 		},
 	}
 </script>
+
+<style>
+	.icon {
+		* {
+			pointer-events: none;
+		}
+	}
+</style>

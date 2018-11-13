@@ -12,7 +12,10 @@
 			)
 			.title
 				| {{ menuItem.title }}
-		transition(name="fade-up" v-if="menuItem.submenu")
+		transition(
+			name="submenu-transition"
+			v-if="menuItem.submenu"
+		)
 			.submenu(
 				v-show="isSubmenuOpened"
 			)
@@ -38,7 +41,7 @@
 			};
 		},
 		methods: {
-			closeSubmenu(evt) {
+			onDocumentClick(evt) {
 				const el = this.$refs.menuItem;
 				const target = evt.target;
 
@@ -48,12 +51,12 @@
 			}
 		},
 		created() {
-			document.addEventListener('click', this.closeSubmenu);
-			document.addEventListener('keyup', this.closeSubmenu);
+			document.addEventListener('click', this.onDocumentClick);
+			document.addEventListener('keyup', this.onDocumentClick);
 		},
 		destroyed() {
-			document.removeEventListener('click', this.closeSubmenu);
-			document.removeEventListener('keyup', this.closeSubmenu);
+			document.removeEventListener('click', this.onDocumentClick);
+			document.removeEventListener('keyup', this.onDocumentClick);
 		},
 	}
 </script>
@@ -91,21 +94,21 @@
 		position: relative;
 		flex-shrink: 0;
 		margin-right: 0.5rem;
-		padding: 2px;
+		padding: 0.125rem;
 		width: 1.5rem;
 		height: 1.5rem;
 
 		@media (--lt-md) {
-			margin-right: -45px;
-			margin-left: 5px;
-			padding: 10px;
-			width: 40px;
-			height: 40px;
+			margin-right: -2.75rem;
+			margin-left: 0.25rem;
+			padding: 0.625rem;
+			width: 2.5rem;
+			height: 2.5rem;
 		}
 
 		+ .title {
 			@media (--lt-md) {
-				padding-left: 45px;
+				padding-left: 2.75rem;
 			}
 		}
 	}
@@ -113,22 +116,23 @@
 	.title {
 		flex-grow: 1;
 		overflow: hidden;
-		padding: (24px - 18px * 1.25) / 2 0;
-		font-size: 18px;
+		padding: (1.5rem - 1.125rem * 1.25) / 2 0;
+		font-size: 1.125rem;
 		line-height: 1.25;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 
 		@media (--lt-md) {
-			padding: (40px - 18px * 1.25) / 2 15px;
+			padding: (2.5rem - 1.125rem * 1.25) / 2 1rem;
 		}
 	}
 
 	.submenu {
 		position: absolute;
-		margin-top: 16px;
+		margin: 15px 0 0 -1px;
 		border: 1px solid var(--page-header-border-color);
 		border-top-color: var(--page-header-background-color);
+		padding: 0.75rem 0;
 		max-width: 200px;
 		background-color: var(--page-header-background-color);
 		transition: border-color var(--page-header-transition),
@@ -136,7 +140,14 @@
 
 		@media (--lt-md) {
 			position: relative;
-			margin-top: 0;
+			margin: 0;
+			//box-shadow: inset 0 3px 3px -3px var(--page-header-border-color),
+			//inset 0 -3px 3px -3px var(--page-header-border-color);
+			//border-top-color: var(--page-header-border-color);
+			//border-left: 0;
+			//border-right: 0;
+			border: 0;
+			padding: 0;
 			max-width: none;
 		}
 	}
@@ -157,29 +168,38 @@
 	.submenu-title {
 		flex-grow: 1;
 		overflow: hidden;
-		padding: (32px - 18px * 1.25) / 2 1rem (32px - 18px * 1.25) / 2 31px;
-		font-size: 18px;
+		padding: (2rem - 1.125rem * 1.25) / 2 1rem (2rem - 1.125rem * 1.25) / 2 2rem;
+		font-size: 1.125rem;
 		line-height: 1.25;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 
 		@media (--lt-md) {
-			padding: (40px - 18px * 1.25) / 2 15px (40px - 18px * 1.25) / 2 45px;
+			padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 2.75rem;
 		}
 	}
 
-	.fade-up {
+	.submenu-transition {
 		&-enter-active,
 		&-leave-active {
 			transform-origin: 0 0;
-			transition: opacity 0.15s ease-in-out,
-			transform 0.15s ease-in-out;
+			transition: opacity var(--page-header-transition),
+			transform var(--page-header-transition);
+
+			@media (--lt-md) {
+				transition: none;
+			}
 		}
 
 		&-enter,
 		&-leave-to {
 			opacity: 0;
 			transform: scaleY(0);
+
+			/*@media (--lt-md) {*/
+				/*opacity: 1;*/
+				/*transform: none;*/
+			/*}*/
 		}
 	}
 </style>
