@@ -14,3 +14,9 @@
 		padding-right: $grid-gutter-width / 2;
 	}
 }
+
+.col,
+[class^="col-"],
+[class*=" col-"] {
+	min-width: 0;
+}

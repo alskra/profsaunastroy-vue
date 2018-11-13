@@ -42,10 +42,10 @@
 		},
 		methods: {
 			onDocumentClick(evt) {
-				const el = this.$refs.menuItem;
+				const menuItemEl = this.$refs.menuItem;
 				const target = evt.target;
 
-				if (el !== target && !el.contains(target)) {
+				if (menuItemEl !== target && !menuItemEl.contains(target)) {
 					this.isSubmenuOpened = false;
 				}
 			}

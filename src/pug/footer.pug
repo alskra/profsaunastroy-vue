@@ -1,0 +1,167 @@
+footer.footer.page__footer
+	.__top.animate(
+		data-animate={
+			start: 'scroll'
+		}
+	)
+		.__container.--mb-3.container
+			.__contacts
+				.__contacts-title.animate.animate-text(
+					data-animate={
+						start: 'scroll',
+						name: 'lettersFadeInUp'
+					}
+				) Контакты
+
+				.__row.row.align-items-center.animate(
+					data-animate={
+						start: 'scroll',
+						name: 'fadeInUp',
+						targets: '.footer__col'
+					}
+				)
+					.__col.col-auto.mw-100.col-sm-6.col-md-3
+						dl
+							dt Телефон:
+							dd
+								a(href="tel:+74955327695") +7 #[no-typography (495)] 532-76-95
+
+					.__col.col-auto.mw-100.col-sm-6.col-md-3
+						dl
+							dt E-mail:
+							dd
+								a(href="mailto:info@profsaunastroy.ru") info@profsaunastroy.ru
+
+					.__col.col-12.col-md-6
+						.__networks
+							.__networks-row
+								a.__networks-item(href="" target="_blank" title="VK")
+									+sprite-svg('vk').__networks-icon.--vk
+
+								a.__networks-item(href="" target="_blank" title="Facebook")
+									+sprite-svg('fb').__networks-icon.--fb
+
+								a.__networks-item(href="" target="_blank" title="Twitter")
+									+sprite-svg('tw').__networks-icon.--tw
+
+								a.__networks-item(href="" target="_blank" title="Google+")
+									+sprite-svg('gp').__networks-icon.--gp
+
+								a.__networks-item(href="" target="_blank" title="Instagram")
+									+sprite-svg('inst').__networks-icon.--inst
+		.__container.container
+			.__row.row.flex-lg-nowrap.justify-content-lg-between.animate(
+				data-animate={
+					start: 'scroll',
+					name: 'fadeIn',
+					targets: '.footer__col'
+				}
+			)
+				.__col.--max-w-lg-20.col-12.col-lg-auto.flex-lg-shrink-1
+					nav.__menu
+						.__menu-items
+							.__menu-item
+								a.__menu-link(href="") О компании
+
+							.__menu-item
+								a.__menu-link(href="") Наши работы
+
+							.__menu-item
+								a.__menu-link(href="") Контакты
+
+							.__menu-item
+								a.__menu-link(href="") Статьи
+
+				.__col.--max-w-lg-20.col-12.col-md-3.col-lg-auto.flex-lg-shrink-1
+					nav.__sect-menu
+						.__sect-menu-title Услуги
+
+						.__sect-menu-items
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Отделка парилок, саун и бань
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Мебель в стиле лофт на заказ
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Соляная комната
+
+				.__col.--max-w-lg-20.col-12.col-md-3.col-lg-auto.flex-lg-shrink-1
+					nav.__sect-menu
+						.__sect-menu-title Материалы
+
+						.__sect-menu-items
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Электрические печи
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Пульты управления
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Дровяные печи
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Стеклянные перегородки
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Стеклянные двери
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Деревянные купели
+
+				.__col.--max-w-lg-20.col-12.col-md-3.col-lg-auto.flex-lg-shrink-1
+					nav.__sect-menu
+						.__sect-menu-title Отделка парилок, саун и бань
+
+						.__sect-menu-items
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Внутренняя отделка сауны
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Освещение и подсветка
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Отделка сауны гималайской солью
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Полки, лежаки копия
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Установка дверей в сауну
+
+				.__col.--max-w-lg-20.col-12.col-md-3.col-lg-auto.flex-lg-shrink-1
+					nav.__sect-menu
+						.__sect-menu-title Проекты саун и бань
+
+						.__sect-menu-items
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты бань из бруса
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты бань из блоков
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты бань из кирпича
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты саун из липы
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты саун из ольхи
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты саун из кедра
+
+							.__sect-menu-item
+								a.__sect-menu-link(href="") Проекты саун из абаши
+
+	.__bottom
+		.__container.container-fluid
+			.__row.row.align-items-sm-center
+				.__col.col-12.d-flex.justify-content-center.col-sm-6.justify-content-sm-start
+					p.__copyright &copy; 2008-2018. Все права защищены
+
+				.__col.col-12.d-flex.justify-content-center.col-sm-6.justify-content-sm-end
+					.__developer
+						.__developer-label Developed by
+						a.__developer-logo(href="https://zingy-projects.com/" target="_blank" title="Digital agency ZINGY PROJECTS")
