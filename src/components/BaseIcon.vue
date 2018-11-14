@@ -1,12 +1,12 @@
 <template lang="pug">
 	svg.icon(
 		xmlns="http://www.w3.org/2000/svg"
-		:class="`icon-${name}`"
+		:class="`icon--${name}`"
 		:width="width"
 		:height="height"
 		:viewBox="icons[name].viewBox"
 		v-html="icons[name].content"
-		:aria-labelledby="`icon-${name}`"
+		:aria-labelledby="`${name} icon`"
 		role="presentation"
 		:fill="color"
 	)

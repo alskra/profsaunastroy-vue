@@ -13,47 +13,47 @@ const animate = {
 
 	// Split text for `.animate-text` type animation
 	splitText() {
-		document.querySelectorAll('.animate-text:not(.is-split)').forEach((elem) => {
+		document.querySelectorAll('.animate-text:not(.animate-text--split)').forEach((elem) => {
 			elem.innerHTML = elem.textContent.replace(/[\S\u00A0]+/g, (match) => {
-				match = match.replace(/\S/g, '<span class="animate-letter">$&</span>');
+				match = match.replace(/\S/g, '<span class="animate__letter">$&</span>');
 
-				return `<span class="animate-word">${match}</span>`;
+				return `<span class="animate__word">${match}</span>`;
 			});
 
-			elem.classList.add('is-split');
+			elem.classList.add('animate-text--split');
 		});
 	},
 
 	// Start animation
 	start(elem, options) {
-		if (!elem.classList.contains('is-started')) {
+		if (!elem.classList.contains('animate--started')) {
 			options = options || {};
 
 			Object.assign(options, animate.getDataOptions(elem));
 
-			elem.classList.remove('is-completed');
+			elem.classList.remove('animate--completed');
 
 			if (animate[options.name]) {
 				const targets = options.targets ? elem.querySelectorAll(options.targets) : [elem];
 				const animeInstance = animate[options.name](targets, options);
 
 				animeInstance.begin = () => {
-					elem.classList.add('is-started');
+					elem.classList.add('animate--started');
 				};
 
 				animeInstance.complete = () => {
-					elem.classList.remove('is-started');
-					elem.classList.add('is-completed');
+					elem.classList.remove('animate--started');
+					elem.classList.add('animate--completed');
 				};
 			} else {
-				elem.classList.add('is-completed');
+				elem.classList.add('animate--completed');
 			}
 		}
 	},
 
 	// Events to start
 	onScroll() {
-		document.querySelectorAll('.animate:not(.is-completed)').forEach((elem) => {
+		document.querySelectorAll('.animate:not(.animate--completed)').forEach((elem) => {
 			if (animate.getDataOptions(elem).start === 'scroll'
 				&& elem.getBoundingClientRect().bottom >= 100
 				&& elem.getBoundingClientRect().top <= window.innerHeight - 100) {
@@ -62,7 +62,7 @@ const animate = {
 		});
 	},
 	onLoaded() {
-		document.querySelectorAll('.animate:not(.is-completed)').forEach((elem) => {
+		document.querySelectorAll('.animate:not(.animate--completed)').forEach((elem) => {
 			if (animate.getDataOptions(elem).start === 'load' && elem.complete) {
 				animate.start(elem);
 			}
@@ -76,14 +76,18 @@ const animate = {
 		}
 	},
 
+	// Update
+	update() {
+		animate.splitText();
+		animate.onScroll();
+		animate.onLoaded();
+	},
+
 	// Initialize
 	init() {
-		animate.splitText();
+		animate.update();
 
-		animate.onScroll();
 		window.addEventListener('scroll', animate.onScroll);
-
-		animate.onLoaded();
 		document.addEventListener('load', animate.onLoad, true);
 	},
 
@@ -146,11 +150,11 @@ const animate = {
 		let animeInstance;
 
 		targets.forEach((target) => {
-			target.querySelectorAll('.animate-word').forEach((word) => {
+			target.querySelectorAll('.animate__word').forEach((word) => {
 				animeInstance = anime({
 					opacity: [0, 1],
 					translateY: ['100%', 0],
-					targets: word.querySelectorAll('.animate-letter'),
+					targets: word.querySelectorAll('.animate__letter'),
 					duration,
 					delay: (target, i) => {
 						return delayStart + i * delayStep;

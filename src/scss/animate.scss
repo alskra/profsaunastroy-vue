@@ -1,5 +1,5 @@
 .animate {
-	&:not(.is-started):not(.is-completed) {
+	&:not(&--started):not(&--completed) {
 		visibility: hidden;
 
 		* {
@@ -7,14 +7,14 @@
 		}
 	}
 
-	&-word {
+	&__word {
 		display: inline-block;
 		vertical-align: top;
 		overflow: hidden;
 		max-width: 100%;
 	}
 
-	&-letter {
+	&__letter {
 		display: inline-block;
 	}
 }

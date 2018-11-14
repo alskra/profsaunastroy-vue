@@ -1,30 +1,30 @@
 <template lang="pug">
-	div.menu-item(ref="menuItem")
+	.menu-item(ref="menuItem")
 		a.button(
 			:href="!menuItem.submenu ? menuItem.url : null"
 			tabindex="0"
-			@click="isSubmenuOpened = !isSubmenuOpened"
-			@keyup.enter="isSubmenuOpened = !isSubmenuOpened"
+			@click="submenuOpened = !submenuOpened"
+			@keyup.enter="submenuOpened = !submenuOpened"
 		)
-			base-icon(
+			base-icon.__icon(
 				name="menu"
 				v-if="menuItem.submenu"
 			)
-			.title
+			.__title
 				| {{ menuItem.title }}
 		transition(
-			name="submenu-transition"
+			name="submenu--transition"
 			v-if="menuItem.submenu"
 		)
 			.submenu(
-				v-show="isSubmenuOpened"
+				v-show="submenuOpened"
 			)
-				a.submenu-item(
+				a.__item(
 					v-for="submenuItem in menuItem.submenu"
 					:key="submenuItem.id"
 					:href="submenuItem.url"
 				)
-					.submenu-title
+					.__item-title
 						| {{ submenuItem.title }}
 
 </template>
@@ -37,26 +37,29 @@
 		},
 		data() {
 			return {
-				isSubmenuOpened: false,
+				submenuOpened: false,
 			};
 		},
 		methods: {
 			onDocumentClick(evt) {
-				const menuItemEl = this.$refs.menuItem;
 				const target = evt.target;
+				const menuItemElem = this.$refs.menuItem;
 
-				if (menuItemEl !== target && !menuItemEl.contains(target)) {
-					this.isSubmenuOpened = false;
+				if (menuItemElem !== target && !menuItemElem.contains(target)) {
+					this.submenuOpened = false;
 				}
-			}
+			},
+			onDocumentKeyup(evt) {
+				this.onDocumentClick(evt);
+			},
 		},
 		created() {
 			document.addEventListener('click', this.onDocumentClick);
-			document.addEventListener('keyup', this.onDocumentClick);
+			document.addEventListener('keyup', this.onDocumentKeyup);
 		},
 		destroyed() {
 			document.removeEventListener('click', this.onDocumentClick);
-			document.removeEventListener('keyup', this.onDocumentClick);
+			document.removeEventListener('keyup', this.onDocumentKeyup);
 		},
 	}
 </script>
@@ -64,6 +67,7 @@
 <style lang="scss" scoped>
 	.menu-item {
 		@include reset;
+
 		margin-left: 3rem;
 
 		@media (--lt-lg) {
@@ -78,6 +82,7 @@
 
 	.button {
 		@include reset;
+
 		display: flex;
 		align-items: flex-start;
 		width: 100%;
@@ -88,42 +93,42 @@
 		&:hover {
 			color: var(--content-color);
 		}
-	}
 
-	.icon-menu {
-		position: relative;
-		flex-shrink: 0;
-		margin-right: 0.5rem;
-		padding: 0.125rem;
-		width: 1.5rem;
-		height: 1.5rem;
+		&__icon {
+			position: relative;
+			flex-shrink: 0;
+			margin-right: 0.5rem;
+			padding: 0.125rem;
+			width: 1.5rem;
+			height: 1.5rem;
 
-		@media (--lt-md) {
-			margin-right: -2.75rem;
-			margin-left: 0.25rem;
-			padding: 0.625rem;
-			width: 2.5rem;
-			height: 2.5rem;
-		}
-
-		+ .title {
 			@media (--lt-md) {
-				padding-left: 2.75rem;
+				margin-right: -2.875rem;
+				margin-left: 0.375rem;
+				padding: 0.625rem;
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+
+			+ .button__title {
+				@media (--lt-md) {
+					padding-left: 2.875rem;
+				}
 			}
 		}
-	}
 
-	.title {
-		flex-grow: 1;
-		overflow: hidden;
-		padding: (1.5rem - 1.125rem * 1.25) / 2 0;
-		font-size: 1.125rem;
-		line-height: 1.25;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		&__title {
+			flex-grow: 1;
+			overflow: hidden;
+			padding: (1.5rem - 1.125rem * 1.25) / 2 0;
+			font-size: 1.125rem;
+			line-height: 1.25;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 
-		@media (--lt-md) {
-			padding: (2.5rem - 1.125rem * 1.25) / 2 1rem;
+			@media (--lt-md) {
+				padding: (2.5rem - 1.125rem * 1.25) / 2 1rem;
+			}
 		}
 	}
 
@@ -150,56 +155,52 @@
 			padding: 0;
 			max-width: none;
 		}
-	}
 
-	.submenu-item {
-		@include reset;
-		display: flex;
-		align-items: flex-start;
-		color: var(--page-header-color);
-		transition: color var(--page-header-transition);
-		cursor: pointer;
+		&__item {
+			@include reset;
 
-		&:hover {
-			color: var(--content-color);
-		}
-	}
+			display: flex;
+			align-items: flex-start;
+			color: var(--page-header-color);
+			transition: color var(--page-header-transition);
+			cursor: pointer;
 
-	.submenu-title {
-		flex-grow: 1;
-		overflow: hidden;
-		padding: (2rem - 1.125rem * 1.25) / 2 1rem (2rem - 1.125rem * 1.25) / 2 2rem;
-		font-size: 1.125rem;
-		line-height: 1.25;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+			&:hover {
+				color: var(--content-color);
+			}
 
-		@media (--lt-md) {
-			padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 2.75rem;
-		}
-	}
+			&-title {
+				flex-grow: 1;
+				overflow: hidden;
+				padding: (2rem - 1.125rem * 1.25) / 2 1rem (2rem - 1.125rem * 1.25) / 2 2rem;
+				font-size: 1.125rem;
+				line-height: 1.25;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 
-	.submenu-transition {
-		&-enter-active,
-		&-leave-active {
-			transform-origin: 0 0;
-			transition: opacity var(--page-header-transition),
-			transform var(--page-header-transition);
-
-			@media (--lt-md) {
-				transition: none;
+				@media (--lt-md) {
+					padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 2.875rem;
+				}
 			}
 		}
 
-		&-enter,
-		&-leave-to {
-			opacity: 0;
-			transform: scaleY(0);
+		&--transition {
+			&-enter-active,
+			&-leave-active {
+				transform-origin: 0 0;
+				transition: opacity var(--page-header-transition),
+				transform var(--page-header-transition);
 
-			/*@media (--lt-md) {*/
-				/*opacity: 1;*/
-				/*transform: none;*/
-			/*}*/
+				@media (--lt-md) {
+					transition: none;
+				}
+			}
+
+			&-enter,
+			&-leave-to {
+				opacity: 0;
+				transform: scaleY(0);
+			}
 		}
 	}
 </style>
