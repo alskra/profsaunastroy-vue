@@ -28,8 +28,6 @@
 	import animate from '../js/animate';
 	import CatalogueItem from './CatalogueItem';
 
-	const baseUrl = process.env.BASE_URL;
-
 	export default {
 		name: "CatalogueSect",
 		components: {
@@ -74,12 +72,12 @@
 						images: [
 							{
 								id: 1,
-								src: `${baseUrl}upload/catalogue/pechi-dlya-bani-varvara-obzor-modelej.jpg`,
+								src: 'upload/catalogue/pechi-dlya-bani-varvara-obzor-modelej.jpg',
 								title: 'Дровяная печь HARVIA',
 							},
 							{
 								id: 2,
-								src: `${baseUrl}upload/catalogue/helo.jpg`,
+								src: 'upload/catalogue/helo.jpg',
 								title: 'Электрическая печь helo',
 							},
 						],
@@ -111,7 +109,7 @@
 						images: [
 							{
 								id: 1,
-								src: `${baseUrl}upload/catalogue/kupel.jpg`,
+								src: 'upload/catalogue/kupel.jpg',
 								title: 'Купель',
 							},
 						],
@@ -139,12 +137,12 @@
 						images: [
 							{
 								id: 1,
-								src: `${baseUrl}upload/catalogue/door.jpg`,
+								src: 'upload/catalogue/door.jpg',
 								title: 'Стеклянная дверь для сауны TYLO',
 							},
 							{
 								id: 2,
-								src: `${baseUrl}upload/catalogue/door-1.jpg`,
+								src: 'upload/catalogue/door-1.jpg',
 								title: 'Стеклянная дверь HARVIA',
 							},
 						],

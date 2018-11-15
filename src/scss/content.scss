@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6,
 :root {
 	--content-font-family: "Roboto", sans-serif;
 	--content-font-weight: 400;
-	--content-font-size: #{$content-font-size}px;
+	--content-font-size: 16px;
 	--content-line-height: 1.5;
 	--content-color: #7c7c7c;
 	--content-space: 1em;
@@ -16,9 +16,16 @@ h1, h2, h3, h4, h5, h6,
 	// Headings
 	--content-headings-font-family: "Roboto", sans-serif;
 	--content-headings-font-weight: 700;
-	--content-headings-font-size: #{$content-headings-font-size}px;
+	--content-headings-font-size: 34px;
 	--content-headings-line-height: 1.25;
 	--content-headings-color: #0a0a0a;
+
+	--content-h1-font-size: var(--content-headings-font-size);
+	--content-h2-font-size: calc(var(--content-headings-font-size) * 28 / 34);
+	--content-h3-font-size: calc(var(--content-headings-font-size) * 26 / 34);
+	--content-h4-font-size: calc(var(--content-headings-font-size) * 24 / 34);
+	--content-h5-font-size: calc(var(--content-headings-font-size) * 22 / 34);
+	--content-h6-font-size: calc(var(--content-headings-font-size) * 20 / 34);
 
 	@media (--lt-md) {
 		--content-font-size: 15px;
@@ -54,27 +61,27 @@ h1, h2, h3, h4, h5, h6,
 	}
 
 	h1, .h1 {
-		font-size: var(--content-headings-font-size);
+		font-size: var(--content-h1-font-size);
 	}
 
 	h2, .h2 {
-		font-size: calc(var(--content-headings-font-size) * 28 / #{$content-headings-font-size});
+		font-size: var(--content-h2-font-size);
 	}
 
 	h3, .h3 {
-		font-size: calc(var(--content-headings-font-size) * 26 / #{$content-headings-font-size});
+		font-size: var(--content-h3-font-size);
 	}
 
 	h4, .h4 {
-		font-size: calc(var(--content-headings-font-size) * 24 / #{$content-headings-font-size});
+		font-size: var(--content-h4-font-size);
 	}
 
 	h5, .h5 {
-		font-size: calc(var(--content-headings-font-size) * 22 / #{$content-headings-font-size});
+		font-size: var(--content-h5-font-size);
 	}
 
 	h6, .h6 {
-		font-size: calc(var(--content-headings-font-size) * 20 / #{$content-headings-font-size});
+		font-size: var(--content-h6-font-size);
 	}
 
 	ul,

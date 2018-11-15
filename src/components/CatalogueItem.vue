@@ -47,7 +47,7 @@
 						:class="{'img-item--single': catalogueItem.images.length === 1}"
 					)
 						img.__elem.animate(
-							:src="imgItem.src"
+							:src="`${baseUrl}${imgItem.src}`"
 							:alt="imgItem.title"
 							:title="imgItem.title"
 							data-animate={
@@ -63,6 +63,8 @@
 	import animate from '../js/animate';
 	import SectNav from './SectNav';
 	import BtnPrimary from './BtnPrimary';
+
+	const baseUrl = process.env.BASE_URL;
 
 	export default {
 		name: "CatalogueItem",
@@ -84,6 +86,11 @@
 				},
 			},
 			index: Number,
+		},
+		data() {
+			return {
+				baseUrl,
+			};
 		},
 		mounted() {
 			animate.update();
