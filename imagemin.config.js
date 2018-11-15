@@ -20,7 +20,7 @@ const {join} = require('path');
  * Output directory
  * Where all the compressed images will go
  */
-const OUTPUT_DIR = /*'static/compressed'*/ 'src/img';
+const OUTPUT_DIR = /*'static/compressed'*/ '.';
 
 /**
  * List of input directories
@@ -30,7 +30,8 @@ const INPUT_DIRS = [
 	// 'static/images'
 	// ADD NEW FOLDERS HERE
 	// ...
-	'src/img'
+	'src/img',
+	'public'
 ];
 
 /**
