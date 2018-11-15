@@ -7,7 +7,7 @@
 	)
 		.container-fluid
 			a.logo(
-				:href="baseUrl"
+				href=""
 				title="ProfSaunaStroy"
 			)
 				base-icon.__icon(name="logo")
@@ -23,7 +23,7 @@
 					)
 
 			form.search(
-				:action="baseUrl"
+				action=""
 				ref="search"
 			)
 				input.__input(
@@ -43,10 +43,6 @@
 <script>
 	import MenuItem from './PageHeaderMenuItem';
 
-	const baseUrl = process.env.BASE_URL;
-
-	let setThemeTimer;
-
 	export default {
 		name: "PageHeader",
 		components: {
@@ -54,7 +50,7 @@
 		},
 		data() {
 			return {
-				baseUrl,
+				baseUrl: process.env.BASE_URL,
 				menuOpened: false,
 				searchOpened: false,
 				menu: [
@@ -143,17 +139,15 @@
 				}
 			},
 			onWindowScroll() {
-				const pageHeaderElem = this.$el;
+				clearTimeout(this.setThemeTimer);
 
-				clearTimeout(setThemeTimer);
-
-				setThemeTimer = setTimeout(() => {
+				this.setThemeTimer = setTimeout(() => {
 					delete this.$el.dataset.theme;
 
 					document.querySelectorAll('[data-page-header-theme]').forEach((elem) => {
-						if (elem.getBoundingClientRect().top <= pageHeaderElem.offsetHeight
-							&& elem.getBoundingClientRect().bottom > pageHeaderElem.offsetHeight) {
-							pageHeaderElem.dataset.theme = elem.dataset.pageHeaderTheme;
+						if (elem.getBoundingClientRect().top <= this.$el.offsetHeight
+							&& elem.getBoundingClientRect().bottom > this.$el.offsetHeight) {
+							this.$el.dataset.theme = elem.dataset.pageHeaderTheme;
 						}
 					});
 				}, 20);
