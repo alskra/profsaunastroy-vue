@@ -8,7 +8,7 @@
 		"dev-build": "vue-cli-service build --modern --mode development",
 		"staging": "vue-cli-service build --modern --mode staging --dest stage",
 		"lint": "vue-cli-service lint",
-		"svgo": "svgo -f src/img/icons/svg"
+		"imagemin": "node imagemin.config.js"
 	},
 	"dependencies": {
 		"animejs": "^2.2.0",
@@ -28,6 +28,11 @@
 		"css-mqpacker": "^7.0.0",
 		"eslint": "^5.8.0",
 		"eslint-plugin-vue": "^5.0.0-0",
+		"imagemin": "^6.0.0",
+		"imagemin-gifsicle": "^6.0.1",
+		"imagemin-mozjpeg": "^8.0.0",
+		"imagemin-pngquant": "^6.0.0",
+		"imagemin-svgo": "^7.0.0",
 		"postcss-combine-duplicated-selectors": "^6.1.0",
 		"postcss-easy-import": "^3.0.0",
 		"postcss-functions": "^3.0.0",
