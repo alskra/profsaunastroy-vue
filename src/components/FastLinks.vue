@@ -9,10 +9,11 @@
 
 				.__content(:class="`item__content--${index + 1}`")
 					.__scope.animate(
-						data-animate={
+						:data-animate=`JSON.stringify({
 							start: 'scroll',
-							name: 'fadeInUp'
-						}
+							name: 'fadeInUp',
+							delayStart: index * 200
+						})`
 					)
 						h2.__content-title {{ fastLinkItem.title }}
 						p.__content-desc {{ fastLinkItem.desc }}

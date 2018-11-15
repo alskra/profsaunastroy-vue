@@ -1,6 +1,7 @@
 <template lang="pug">
 	#app
 		page-header
+		sauna-sect
 		fast-links
 		catalogue-sect
 		project-sect
@@ -10,23 +11,23 @@
 
 <script>
 	import PageHeader from '../components/PageHeader';
-	import PageFooter from '../components/PageFooter';
-
+	import SaunaSect from '../components/SaunaSect';
 	import FastLinks from '../components/FastLinks';
 	import CatalogueSect from '../components/CatalogueSect';
 	import ProjectSect from '../components/ProjectSect';
 	import RequestSect from '../components/RequestSect';
+	import PageFooter from '../components/PageFooter';
 
 	export default {
 		name: "App",
 		components: {
 			PageHeader,
-			PageFooter,
-
+			SaunaSect,
 			FastLinks,
 			CatalogueSect,
 			ProjectSect,
 			RequestSect,
+			PageFooter,
 		}
 	}
 </script>
