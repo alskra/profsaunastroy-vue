@@ -11,8 +11,8 @@
 				)
 
 				sect-nav.animate(
-					v-if="catalogueItem.sectNavItems"
-					:items="catalogueItem.sectNavItems"
+					v-if="catalogueItem.categories"
+					:items="catalogueItem.categories"
 					data-animate={
 						start: 'scroll',
 						name: 'fadeInUp',
@@ -40,11 +40,11 @@
 						) Нужна консультация
 
 			.col.col-12.col-md-6
-				.img-items(v-if="catalogueItem.imgItems")
+				.img-items(v-if="catalogueItem.images")
 					figure.img-item(
-						v-for="imgItem in catalogueItem.imgItems"
+						v-for="imgItem in catalogueItem.images"
 						:key="imgItem.id"
-						:class="{'img-item--single': catalogueItem.imgItems.length === 1}"
+						:class="{'img-item--single': catalogueItem.images.length === 1}"
 					)
 						img.__elem.animate(
 							:src="imgItem.src"
@@ -56,7 +56,7 @@
 							}
 						)
 
-						figcaption.__caption(v-if="catalogueItem.imgItems.length > 1") {{ imgItem.title }}
+						figcaption.__caption(v-if="catalogueItem.images.length > 1") {{ imgItem.title }}
 </template>
 
 <script>
@@ -78,8 +78,8 @@
 						id: 0,
 						title: '',
 						content: '',
-						sectNavItems: null,
-						imgItems: null,
+						categories: null,
+						images: null,
 					};
 				},
 			},

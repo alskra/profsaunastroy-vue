@@ -28,6 +28,8 @@
 	import animate from '../js/animate';
 	import CatalogueItem from './CatalogueItem';
 
+	const baseUrl = process.env.BASE_URL;
+
 	export default {
 		name: "CatalogueSect",
 		components: {
@@ -47,7 +49,7 @@
 								и чем они друг от друга отличаются?
 								Мы также принимаем заказы на изготовление обкладов для печей.</p>
 						`,
-						sectNavItems: [
+						categories: [
 							{
 								id: 1,
 								title: 'Электрические печи',
@@ -69,15 +71,15 @@
 								url: '',
 							},
 						],
-						imgItems: [
+						images: [
 							{
 								id: 1,
-								src: '/upload/catalogue/pechi-dlya-bani-varvara-obzor-modelej.jpg',
+								src: `${baseUrl}upload/catalogue/pechi-dlya-bani-varvara-obzor-modelej.jpg`,
 								title: 'Дровяная печь HARVIA',
 							},
 							{
 								id: 2,
-								src: '/upload/catalogue/helo.jpg',
+								src: `${baseUrl}upload/catalogue/helo.jpg`,
 								title: 'Электрическая печь helo',
 							},
 						],
@@ -89,7 +91,7 @@
 							<p>Купель – это большая бочка (емкость) из металла, пластика, дерева или бетона.
 								Часто представлена в виде овальной или круглой емкости разной глубины.</p>
 						`,
-						sectNavItems: [
+						categories: [
 							{
 								id: 1,
 								title: 'Деревянные купели',
@@ -106,10 +108,10 @@
 								url: '',
 							},
 						],
-						imgItems: [
+						images: [
 							{
 								id: 1,
-								src: '/upload/catalogue/kupel.jpg',
+								src: `${baseUrl}upload/catalogue/kupel.jpg`,
 								title: 'Купель',
 							},
 						],
@@ -122,7 +124,7 @@
 								брендов из Швеции и Финляндии.
 								Мы поможем подобрать, доставим и установим дверь в кратчайшие сроки!</p>
 						`,
-						sectNavItems: [
+						categories: [
 							{
 								id: 1,
 								title: 'Стеклянные перегородки',
@@ -134,15 +136,15 @@
 								url: '',
 							},
 						],
-						imgItems: [
+						images: [
 							{
 								id: 1,
-								src: '/upload/catalogue/door.jpg',
+								src: `${baseUrl}upload/catalogue/door.jpg`,
 								title: 'Стеклянная дверь для сауны TYLO',
 							},
 							{
 								id: 2,
-								src: '/upload/catalogue/door-1.jpg',
+								src: `${baseUrl}upload/catalogue/door-1.jpg`,
 								title: 'Стеклянная дверь HARVIA',
 							},
 						],
