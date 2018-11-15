@@ -135,10 +135,10 @@ h1, h2, h3, h4, h5, h6,
 	}
 
 	&--invert {
-		color: var(--color-bg-default);
+		color: var(--page-background-color);
 
 		:--headings {
-			color: var(--color-bg-default);
+			color: var(--page-background-color);
 		}
 	}
 }

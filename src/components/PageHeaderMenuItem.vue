@@ -137,7 +137,7 @@
 		margin: 15px 0 0 -1px;
 		border: 1px solid var(--page-header-border-color);
 		border-top-color: var(--page-header-background-color);
-		padding: 0.75rem 0;
+		padding: 0 0 0.5rem;
 		max-width: 200px;
 		background-color: var(--page-header-background-color);
 		transition: border-color var(--page-header-transition),
