@@ -14,7 +14,9 @@
 		props: {
 			items: {
 				type: Array,
-				default: [],
+				default() {
+					return [];
+				},
 			},
 		},
 	}

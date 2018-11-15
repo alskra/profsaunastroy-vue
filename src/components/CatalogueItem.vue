@@ -73,12 +73,14 @@
 		props: {
 			catalogueItem: {
 				type: Object,
-				default: {
-					id: 0,
-					title: '',
-					content: '',
-					sectNavItems: [],
-					imgItems: [],
+				default() {
+					return {
+						id: 0,
+						title: '',
+						content: '',
+						sectNavItems: null,
+						imgItems: null,
+					};
 				},
 			},
 			index: Number,
