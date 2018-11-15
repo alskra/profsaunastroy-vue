@@ -114,7 +114,7 @@
 		left percentage(170px / 1920px) bottom 6rem var(--page-background-color);
 
 		@media (--lt-md) {
-			padding: 4rem 0;
+			padding: 3rem 0;
 			background-image: none;
 		}
 
@@ -179,7 +179,7 @@
 		user-select: none;
 
 		@media (--lt-md) {
-			top: 4rem;
+			top: 3rem;
 		}
 
 		/deep/ .animate__word {

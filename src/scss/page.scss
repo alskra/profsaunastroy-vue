@@ -50,6 +50,7 @@
 #app {
 	display: flex;
 	flex-flow: column;
+	padding-top: 3.5rem;
 	min-width: 320px;
 	min-height: 100vh;
 	background-color: var(--page-background-color);

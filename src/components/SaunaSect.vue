@@ -87,7 +87,7 @@
 		background-color: var(--page-background-color);
 
 		@media (--lt-md) {
-			padding: 4rem 0;
+			padding: 3rem 0;
 		}
 
 		&::before {
@@ -151,7 +151,7 @@
 		user-select: none;
 
 		@media (--lt-md) {
-			top: 4rem;
+			top: 3rem;
 		}
 
 		/deep/ .animate__word {

@@ -45,6 +45,8 @@
 
 	const baseUrl = process.env.BASE_URL;
 
+	let setThemeTimer;
+
 	export default {
 		name: "PageHeader",
 		components: {
@@ -139,15 +141,38 @@
 				if (searchElem !== target && !searchElem.contains(target)) {
 					this.searchOpened = false;
 				}
-			}
+			},
+			onWindowScroll() {
+				const pageHeaderElem = this.$el;
+
+				clearTimeout(setThemeTimer);
+
+				setThemeTimer = setTimeout(() => {
+					delete this.$el.dataset.theme;
+
+					document.querySelectorAll('[data-page-header-theme]').forEach((elem) => {
+						if (elem.getBoundingClientRect().top <= pageHeaderElem.offsetHeight
+							&& elem.getBoundingClientRect().bottom > pageHeaderElem.offsetHeight) {
+							pageHeaderElem.dataset.theme = elem.dataset.pageHeaderTheme;
+						}
+					});
+				}, 20);
+			},
 		},
 		created() {
 			document.addEventListener('click', this.onDocumentClick);
+			window.addEventListener('scroll', this.onWindowScroll);
 		},
 		destroyed() {
 			document.removeEventListener('click', this.onDocumentClick);
+			window.removeEventListener('scroll', this.onWindowScroll);
+		},
+		mounted() {
+			this.onWindowScroll();
 		},
 		updated() {
+			this.onWindowScroll();
+
 			document.documentElement.classList.toggle('page--has-open-menu', this.menuOpened);
 
 			if (this.searchOpened) {
@@ -161,7 +186,8 @@
 
 <style>
 	:root {
-		--page-header-color: var(--content-headings-color);
+		--page-header-color: #2b2b2b;
+		--page-header-hover-color: #999;
 		--page-header-background-color: var(--page-background-color);
 		--page-header-border-color: #{rgba(black, 0.1)};
 		--page-header-transition: 0.15s ease-in-out;
@@ -180,8 +206,8 @@
 		height: 3.5rem;
 		border-bottom: 1px solid var(--page-header-border-color);
 		background-color: var(--page-header-background-color);
-		transition: box-shadow var(--header-transition),
-		background-color var(--header-transition);
+		transition: border-color var(--page-header-transition),
+		background-color var(--page-header-transition);
 
 		&--has-open-menu {
 			.menu__items {
@@ -215,6 +241,18 @@
 					}
 				}
 			}
+		}
+
+		&[data-theme="dark"] {
+			--page-header-color: var(--page-background-color);
+			--page-header-background-color: #2b2b2b;
+			--page-header-border-color: #{rgba(white, 0.1)};
+		}
+
+		&[data-theme="transparent"]:not(&--has-open-menu) {
+			--page-header-color: var(--page-background-color);
+			--page-header-background-color: transparent;
+			--page-header-border-color: #{rgba(white, 0.1)};
 		}
 	}
 
@@ -273,6 +311,10 @@
 
 			@media (--lt-md) {
 				display: flex;
+			}
+
+			&:hover {
+				color: var(--page-header-hover-color);
 			}
 
 			&-icon {
@@ -348,7 +390,7 @@
 			cursor: pointer;
 
 			&:hover {
-				color: var(--content-color);
+				color: var(--page-header-hover-color);
 			}
 
 			&-icon {

@@ -91,7 +91,7 @@
 		cursor: pointer;
 
 		&:hover {
-			color: var(--content-color);
+			color: var(--page-header-hover-color);
 		}
 
 		&__icon {
@@ -166,7 +166,7 @@
 			cursor: pointer;
 
 			&:hover {
-				color: var(--content-color);
+				color: var(--page-header-hover-color);
 			}
 
 			&-title {

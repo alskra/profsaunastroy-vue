@@ -169,7 +169,7 @@
 		background-color: var(--page-background-color);
 
 		@media (--lt-md) {
-			padding: 4rem 0;
+			padding: 3rem 0;
 		}
 
 		&::before {
@@ -241,7 +241,7 @@
 			margin-top: 6rem;
 
 			@media (--lt-md) {
-				margin-top: 4rem;
+				margin-top: 3rem;
 			}
 		}
 	}

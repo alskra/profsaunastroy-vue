@@ -2,11 +2,11 @@
 	#app
 		page-header
 		sauna-sect
-		fast-links
+		fast-links(data-page-header-theme="dark")
 		catalogue-sect
-		project-sect
+		project-sect(data-page-header-theme="dark")
 		request-sect
-		page-footer
+		page-footer(data-page-header-theme="dark")
 </template>
 
 <script>
