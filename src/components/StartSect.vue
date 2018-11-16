@@ -1,11 +1,6 @@
 <template lang="pug">
 	section.start-sect
-		.slides(
-			ref="slickCarousel"
-			data-slick={
-				fade: true
-			}
-		)
+		.slides(ref="slickCarousel")
 			article.slide-item(
 				v-for="slideItem in slides"
 				:key="slideItem.id"
@@ -16,6 +11,11 @@
 						.__col.col-lg-8
 							h1.__title {{ slideItem.title }}
 							a.__url(:href="slideItem.url") Перейти к услуге >
+
+		.container-fluid
+			.slides-counter
+				.__current(ref="currentSlide")
+				.__total {{ slides.length < 10 ? '0' + slides.length : slides.length }}
 </template>
 
 <script>
@@ -34,11 +34,45 @@
 						title: 'Отделка парилок, саун и бань',
 						url: '',
 					},
+					{
+						id: 2,
+						imageUrl: 'upload/slides/bois-metal-pattes-x.jpg',
+						title: 'Мебель в стиле лофт на заказ',
+						url: '',
+					},
+					{
+						id: 3,
+						imageUrl: 'upload/slides/01-himalayan-salt-room-o-Credit-Art-of-Sauna-one-time-use-only-1024.jpg',
+						title: 'Соляная комната',
+						url: '',
+					},
 				],
 			};
 		},
 		mounted() {
-			$(this.$refs.slickCarousel).slick();
+			const $slickCarousel = $(this.$refs.slickCarousel);
+
+			const slickCarouselOptions = {
+				arrows: false,
+				fade: true,
+				speed: 300,
+				autoplay: false,
+				autoplaySpeed: 3000,
+				infinite: true,
+				initialSlide: 0,
+			};
+
+			$slickCarousel
+				.on('init', () => {
+					const currentSlide = ++slickCarouselOptions.initialSlide;
+
+					currentSlide < 10 ? this.$refs.currentSlide.textContent = '0' + currentSlide : currentSlide;
+				})
+				.slick(slickCarouselOptions)
+				.on('beforeChange', (evt, slick, currentSlide, nextSlide) => {
+					nextSlide++;
+					nextSlide < 10 ? this.$refs.currentSlide.textContent = '0' + nextSlide : nextSlide;
+				});
 		},
 	}
 </script>
@@ -47,7 +81,40 @@
 	.start-sect {
 		@include reset;
 
+		position: relative;
 		background-color: var(--content-color);
+	}
+
+	.container-fluid {
+		@media (--lt-xl) {
+			max-width: env(--lg);
+		}
+	}
+
+	.slides-counter {
+		position: absolute;
+		top: calc(3.5rem + 20vh);
+		display: flex;
+		font-weight: 300;
+		line-height: 1.25;
+		color: var(--page-background-color);
+
+		@media (--lt-xl) {
+			top: 20vh;
+		}
+
+		&__current {
+			font-size: 18px;
+			transform: translateY(0.18em);
+
+			&::after {
+				content: "/";
+			}
+		}
+
+		&__total {
+			font-size: 34px;
+		}
 	}
 
 	.slides {
@@ -56,8 +123,7 @@
 
 	.slide-item {
 		position: relative;
-		padding-top: 4.5rem;
-		padding-bottom: 4.5rem;
+		padding: 3.5rem 0;
 		height: 100vh;
 		background: none no-repeat 50% 50%/cover;
 
@@ -96,6 +162,7 @@
 			font-size: 14px;
 			line-height: 1.25;
 			color: var(--page-background-color);
+			transition: color 0.15s ease-in-out;
 			cursor: pointer;
 		}
 	}
