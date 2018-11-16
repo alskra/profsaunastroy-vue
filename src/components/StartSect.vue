@@ -56,7 +56,7 @@
 					arrows: false,
 					fade: true,
 					speed: 300,
-					autoplay: false,
+					autoplay: true,
 					autoplaySpeed: 3000,
 					infinite: true,
 					initialSlide: 0,
