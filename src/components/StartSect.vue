@@ -58,6 +58,7 @@
 					speed: 300,
 					autoplay: true,
 					autoplaySpeed: 3000,
+					pauseOnHover: false,
 					infinite: true,
 					initialSlide: 0,
 				},
