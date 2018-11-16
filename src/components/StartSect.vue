@@ -84,7 +84,7 @@
 						: currentSlide + 1;
 
 					for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
-						animate.start(elem);
+						animate.start(elem, {delayStart: 500});
 					}
 				})
 				.slick(slickCarouselOptions)
