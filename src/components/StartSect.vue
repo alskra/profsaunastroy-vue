@@ -23,10 +23,23 @@
 								}
 							) Перейти к услуге >
 
-		.container-fluid
+		.container-fluid.--lt-xl-fix
 			.slides-counter
 				.__current(ref="currentSlide")
 				.__total {{ slides.length < 10 ? '0' + slides.length : slides.length }}
+
+		.slides-nav.container-fluid
+			.__items
+				.__item(
+					v-for="(slideItem, index) in slides"
+					:key="slideItem.id"
+					@click="slickGoTo(index)"
+					ref="navItem"
+					:style="{maxWidth: 100 / slides.length + '%'}"
+				)
+					.__item-num {{ index + 1 < 10 ? '0' + (index + 1) : index + 1 }}
+					.__item-title {{ slideItem.title }}
+
 </template>
 
 <script>
@@ -39,7 +52,67 @@
 		name: "StartSect",
 		data() {
 			return {
-				slides: [
+				slickCarouselOptions: {
+					arrows: false,
+					fade: true,
+					speed: 300,
+					autoplay: false,
+					autoplaySpeed: 3000,
+					infinite: true,
+					initialSlide: 0,
+				},
+				slides: [],
+			};
+		},
+		methods: {
+			updateRenderedDOM() {
+				animate.update();
+
+				$(this.$refs.slickCarousel)
+					.on('init', () => {
+						const currentSlide = this.slickCarouselOptions.initialSlide;
+
+						if (currentSlide < this.slides.length) {
+							currentSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (currentSlide + 1)
+								: currentSlide + 1;
+
+							this.$refs.navItem[currentSlide].classList.add('slides-nav__item--current');
+
+							for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
+								animate.start(elem, {delayStart: 500});
+							}
+						}
+					})
+					.on('beforeChange', (evt, slick, currentSlide, nextSlide) => {
+						nextSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (nextSlide + 1) : nextSlide + 1;
+
+						this.$refs.navItem.forEach((elem, index) => {
+							if (index === nextSlide) {
+								elem.classList.add('slides-nav__item--current');
+							} else {
+								elem.classList.remove('slides-nav__item--current');
+							}
+						});
+					})
+					.on('afterChange', (evt, slick, currentSlide) => {
+						for (let elem of this.$el.querySelectorAll('.animate--completed')) {
+							elem.classList.remove('animate--completed');
+						}
+
+						for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
+							animate.start(elem);
+						}
+					})
+					.slick(this.slickCarouselOptions);
+			},
+			slickGoTo(index) {
+				$(this.$refs.slickCarousel).slick('slickGoTo', index);
+			},
+		},
+		created() {
+			// Get data async
+			setTimeout(() => {
+				this.slides = [
 					{
 						id: 1,
 						imageUrl: 'upload/slides/h-17.jpg',
@@ -58,51 +131,17 @@
 						title: 'Соляная комната',
 						url: '',
 					},
-				],
-			};
+				];
+			}, 100);
 		},
 		mounted() {
-			animate.update();
-
-			const $slickCarousel = $(this.$refs.slickCarousel);
-
-			const slickCarouselOptions = {
-				arrows: false,
-				fade: true,
-				speed: 300,
-				autoplay: false,
-				autoplaySpeed: 3000,
-				infinite: true,
-				initialSlide: 0,
-			};
-
-			$slickCarousel
-				.on('init', () => {
-					const currentSlide = slickCarouselOptions.initialSlide;
-
-					currentSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (currentSlide + 1)
-						: currentSlide + 1;
-
-					for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
-						animate.start(elem, {delayStart: 500});
-					}
-				})
-				.slick(slickCarouselOptions)
-				.on('beforeChange', (evt, slick, currentSlide, nextSlide) => {
-					nextSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (nextSlide + 1) : nextSlide + 1;
-				})
-				.on('afterChange', (evt, slick, currentSlide) => {
-					for (let elem of this.$el.querySelectorAll('.animate--completed')) {
-						elem.classList.remove('animate--completed');
-					}
-
-					for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
-						animate.start(elem);
-					}
-				});
+			this.updateRenderedDOM();
+		},
+		beforeUpdate() {
+			$(this.$refs.slickCarousel).slick('unslick');
 		},
 		updated() {
-			animate.update();
+			this.updateRenderedDOM();
 		},
 	}
 </script>
@@ -116,8 +155,10 @@
 	}
 
 	.container-fluid {
-		@media (--lt-xl) {
-			max-width: env(--lg);
+		&--lt-xl-fix {
+			@media (--lt-xl) {
+				max-width: env(--lg);
+			}
 		}
 	}
 
@@ -126,16 +167,21 @@
 		top: calc(3.5rem + 20vh);
 		display: flex;
 		font-weight: 300;
+		font-size: 18px;
 		line-height: 1.25;
-		color: var(--page-background-color);
+		color: white;
+		user-select: none;
 
 		@media (--lt-xl) {
 			top: 20vh;
 		}
 
+		@media (--lt-md) {
+			font-size: 16px;
+		}
+
 		&__current {
-			font-size: 18px;
-			transform: translateY(0.18em);
+			transform: translateY(0.22em);
 
 			&::after {
 				content: "/";
@@ -143,12 +189,73 @@
 		}
 
 		&__total {
-			font-size: 34px;
+			font-size: 34px / 18px * 1em;
+		}
+	}
+
+	.slides-nav {
+		position: absolute;
+		bottom: 2rem;
+		user-select: none;
+		pointer-events: none;
+
+		&__items {
+			margin: -1rem;
+			display: flex;
+			justify-content: flex-end;
+
+			@media (--lt-md) {
+				margin: -0.5rem;
+			}
+		}
+
+		&__item {
+			padding: 1rem;
+			display: flex;
+			flex-flow: column;
+			font-weight: 300;
+			font-size: 14px;
+			line-height: 1.25;
+			color: white;
+			cursor: pointer;
+			pointer-events: auto;
+
+			@media (--lt-md) {
+				padding: 0.5rem;
+				font-size: 12px;
+			}
+
+			&::after {
+				content: "";
+				margin-top: auto;
+				display: block;
+				width: 0;
+				height: 1px;
+				background-color: currentColor;
+			}
+
+			&--current {
+				&::after {
+					width: 26px;
+					transition: width 0.3s ease;
+				}
+			}
+
+			&-num {
+				font-size: 18px / 14px * 1em;
+				margin-bottom: 0.5rem;
+			}
+
+			&-title {
+				margin-bottom: 0.75rem;
+				overflow: hidden;
+				max-height: 2 * 1.25em;
+			}
 		}
 	}
 
 	.slides {
-
+		height: 100vh;
 	}
 
 	.slide-item {
@@ -182,7 +289,7 @@
 			font-weight: 500;
 			font-size: 72px / 1080px * 100vh;
 			line-height: 1.25;
-			color: var(--page-background-color);
+			color: white;
 		}
 
 		&__url {
@@ -191,7 +298,7 @@
 			display: inline;
 			font-size: 14px;
 			line-height: 1.25;
-			color: var(--page-background-color);
+			color: white;
 			transition: color 0.15s ease-in-out;
 			cursor: pointer;
 		}

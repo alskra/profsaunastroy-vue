@@ -183,7 +183,7 @@
 <style>
 	:root {
 		--page-header-color: #2b2b2b;
-		--page-header-hover-color: #999;
+		--page-header-hover-color: #8b8b8b;
 		--page-header-background-color: var(--page-background-color);
 		--page-header-border-color: #{rgba(black, 0.1)};
 		--page-header-transition: 0.15s ease-in-out;
@@ -246,7 +246,8 @@
 		}
 
 		&[data-theme="transparent"]:not(&--has-open-menu) {
-			--page-header-color: var(--page-background-color);
+			--page-header-color: white;
+			--page-header-hover-color: #c7c7c7;
 			--page-header-background-color: transparent;
 			--page-header-border-color: #{rgba(white, 0.1)};
 		}
