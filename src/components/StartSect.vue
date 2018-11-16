@@ -55,9 +55,10 @@
 				slickCarouselOptions: {
 					arrows: false,
 					fade: true,
-					speed: 300,
+					cssEase: 'ease-in-out',
+					speed: 500,
 					autoplay: true,
-					autoplaySpeed: 3000,
+					autoplaySpeed: 7000,
 					pauseOnHover: false,
 					infinite: true,
 					initialSlide: 0,
@@ -238,7 +239,7 @@
 			&--current {
 				&::after {
 					width: 26px;
-					transition: width 0.3s ease;
+					transition: width 0.5s ease-in-out;
 				}
 			}
 
