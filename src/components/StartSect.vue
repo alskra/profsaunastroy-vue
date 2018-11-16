@@ -5,12 +5,23 @@
 				v-for="slideItem in slides"
 				:key="slideItem.id"
 				:style="{backgroundImage: `url(${slideItem.imageUrl})`}"
+				ref="slideItem"
 			)
 				.__container.container
 					.__row.row
 						.__col.col-lg-8
-							h1.__title {{ slideItem.title }}
-							a.__url(:href="slideItem.url") Перейти к услуге >
+							h1.__title.animate.animate-text(
+								data-animate={
+									name: 'lettersFadeInUp'
+								}
+							) {{ slideItem.title }}
+							a.__url.animate(
+								:href="slideItem.url"
+								data-animate={
+									name: 'fadeInUp',
+									delayStart: 200
+								}
+							) Перейти к услуге >
 
 		.container-fluid
 			.slides-counter
@@ -22,6 +33,7 @@
 	import $ from 'jquery';
 	import 'slick-carousel/slick/slick.scss';
 	import 'slick-carousel';
+	import animate from '../js/animate';
 
 	export default {
 		name: "StartSect",
@@ -50,6 +62,8 @@
 			};
 		},
 		mounted() {
+			animate.update();
+
 			const $slickCarousel = $(this.$refs.slickCarousel);
 
 			const slickCarouselOptions = {
@@ -64,15 +78,31 @@
 
 			$slickCarousel
 				.on('init', () => {
-					const currentSlide = ++slickCarouselOptions.initialSlide;
+					const currentSlide = slickCarouselOptions.initialSlide;
 
-					currentSlide < 10 ? this.$refs.currentSlide.textContent = '0' + currentSlide : currentSlide;
+					currentSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (currentSlide + 1)
+						: currentSlide + 1;
+
+					for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
+						animate.start(elem);
+					}
 				})
 				.slick(slickCarouselOptions)
 				.on('beforeChange', (evt, slick, currentSlide, nextSlide) => {
-					nextSlide++;
-					nextSlide < 10 ? this.$refs.currentSlide.textContent = '0' + nextSlide : nextSlide;
+					nextSlide + 1 < 10 ? this.$refs.currentSlide.textContent = '0' + (nextSlide + 1) : nextSlide + 1;
+				})
+				.on('afterChange', (evt, slick, currentSlide) => {
+					for (let elem of this.$el.querySelectorAll('.animate--completed')) {
+						elem.classList.remove('animate--completed');
+					}
+
+					for (let elem of this.$refs.slideItem[currentSlide].querySelectorAll('.animate')) {
+						animate.start(elem);
+					}
 				});
+		},
+		updated() {
+			animate.update();
 		},
 	}
 </script>

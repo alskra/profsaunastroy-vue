@@ -175,7 +175,7 @@ const animate = {
 			delayStep = 200,
 			easing = 'linear',
 			direction = 'normal',
-			loop = 3,
+			loop = true,
 		} = options;
 
 		return anime({
