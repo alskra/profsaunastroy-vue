@@ -120,6 +120,7 @@
 		&__title {
 			flex-grow: 1;
 			overflow: hidden;
+			margin: 0.02rem 0 -0.02rem;
 			padding: (1.5rem - 1.125rem * 1.25) / 2 0;
 			font-size: 1.125rem;
 			line-height: 1.25;

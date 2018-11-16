@@ -12,7 +12,7 @@ const pages = {
 module.exports = {
 	baseUrl: process.env.VUE_APP_STAGE ? process.env.VUE_APP_STAGE : '/',
 	pages,
-	runtimeCompiler: true,
+	runtimeCompiler: false,
 
 	chainWebpack: config => {
 		// `html-webpack-plugin`

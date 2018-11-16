@@ -142,14 +142,16 @@
 				clearTimeout(this.setThemeTimer);
 
 				this.setThemeTimer = setTimeout(() => {
-					delete this.$el.dataset.theme;
-
-					document.querySelectorAll('[data-page-header-theme]').forEach((elem) => {
+					for (let elem of document.querySelectorAll('[data-page-header-theme]')) {
 						if (elem.getBoundingClientRect().top <= this.$el.offsetHeight
 							&& elem.getBoundingClientRect().bottom > this.$el.offsetHeight) {
 							this.$el.dataset.theme = elem.dataset.pageHeaderTheme;
+
+							return;
 						}
-					});
+					}
+
+					delete this.$el.dataset.theme;
 				}, 20);
 			},
 		},

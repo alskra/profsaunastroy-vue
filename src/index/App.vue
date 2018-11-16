@@ -1,6 +1,7 @@
 <template lang="pug">
-	#app
+	#app(:style="{paddingTop: 0}")
 		page-header
+		start-sect(data-page-header-theme="transparent")
 		sauna-sect
 		fast-links(data-page-header-theme="dark")
 		catalogue-sect
@@ -11,6 +12,7 @@
 
 <script>
 	import PageHeader from '../components/PageHeader';
+	import StartSect from '../components/StartSect';
 	import SaunaSect from '../components/SaunaSect';
 	import FastLinks from '../components/FastLinks';
 	import CatalogueSect from '../components/CatalogueSect';
@@ -22,13 +24,17 @@
 		name: "App",
 		components: {
 			PageHeader,
+			StartSect,
 			SaunaSect,
 			FastLinks,
 			CatalogueSect,
 			ProjectSect,
 			RequestSect,
 			PageFooter,
-		}
+		},
+		mounted() {
+
+		},
 	}
 </script>
 
