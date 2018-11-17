@@ -3,10 +3,15 @@ const pugBem = require('pug-bem');
 
 const pages = {
 	index: {
-		entry: 'src/index/main.js',
-		template: 'src/index/index.pug',
-		title: 'Index'
-	}
+		entry: 'src/pages/index/main.js',
+		template: 'src/pages/index/index.pug',
+		title: 'Index',
+	},
+	['article-view']: {
+		entry: 'src/pages/article-view/main.js',
+		template: 'src/pages/article-view/index.pug',
+		title: 'Article View',
+	},
 };
 
 module.exports = {

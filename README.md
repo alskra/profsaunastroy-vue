@@ -2,6 +2,7 @@
 
 ## Pages list
 * [index](https://alskra.github.io/profsaunastroy-vue/stage/index.html)
+* [article-view](https://alskra.github.io/profsaunastroy-vue/stage/article-view.html)
 
 ## Project setup
 ```

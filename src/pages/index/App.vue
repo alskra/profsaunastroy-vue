@@ -1,5 +1,5 @@
 <template lang="pug">
-	#app(:style="{paddingTop: 0}")
+	#app.index(:style="{paddingTop: 0}")
 		page-header
 		start-sect(data-page-header-theme="transparent")
 		sauna-sect
@@ -11,14 +11,14 @@
 </template>
 
 <script>
-	import PageHeader from '../components/PageHeader';
-	import StartSect from '../components/StartSect';
-	import SaunaSect from '../components/SaunaSect';
-	import FastLinks from '../components/FastLinks';
-	import CatalogueSect from '../components/CatalogueSect';
-	import ProjectSect from '../components/ProjectSect';
-	import RequestSect from '../components/RequestSect';
-	import PageFooter from '../components/PageFooter';
+	import PageHeader from '../../components/PageHeader';
+	import StartSect from '../../components/StartSect';
+	import SaunaSect from '../../components/SaunaSect';
+	import FastLinks from '../../components/FastLinks';
+	import CatalogueSect from '../../components/CatalogueSect';
+	import ProjectSect from '../../components/ProjectSect';
+	import RequestSect from '../../components/RequestSect';
+	import PageFooter from '../../components/PageFooter';
 
 	export default {
 		name: "App",
@@ -31,9 +31,6 @@
 			ProjectSect,
 			RequestSect,
 			PageFooter,
-		},
-		mounted() {
-
 		},
 	}
 </script>
