@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<title>404 Redirect GitHub</title>
 	<script>
-		location.replace('/profsaunastroy-vue/stage/')
+		var href = location.href;
+		location.replace('/profsaunastroy-vue/stage/');
+		history.replaceState(null, null, href);
 	</script>
 </head>
 <body>
