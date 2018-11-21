@@ -17,6 +17,9 @@ const routes = [
 	{
 		path: '',
 		name: 'home',
+		meta: {
+			title: 'Главная',
+		},
 		components: {
 			StartSect,
 			SaunaSect,
@@ -38,12 +41,24 @@ NProgress.configure({showSpinner: false});
 
 router.beforeEach((to, from, next) => {
 	NProgress.start();
+
+	to.matched.slice().reverse().some((routeRecord) => {
+		if (routeRecord.meta.title) {
+			document.title = `${routeRecord.meta.title} - ${process.env.VUE_APP_TITLE}`;
+		}
+
+		return false;
+	});
+
 	next();
 });
 
-router.beforeResolve((to, from, next) => {
+router.afterEach(() => {
 	NProgress.done();
-	next();
+});
+
+router.onError((err) => {
+	alert(err);
 });
 
 new Vue({

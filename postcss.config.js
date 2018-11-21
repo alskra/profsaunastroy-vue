@@ -1,13 +1,8 @@
-const postcssStripInlineComments = require('postcss-strip-inline-comments');
-const postcssOmitImportTilde = require('postcss-omit-import-tilde');
-const postcssPrependImports = require('postcss-prepend-imports');
-const postcssEasyImport = require('postcss-easy-import');
 const postcssFunctions = require('postcss-functions');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssSassCompile = require('@csstools/postcss-sass');
 const cssMqpacker = require('css-mqpacker');
 const sortCssMediaQueries = require('sort-css-media-queries');
-const postcssCombineDuplicatedSelectors = require('postcss-combine-duplicated-selectors');
 const postcssPxtorem = require('postcss-pxtorem');
 
 const environmentVariables = {
@@ -22,22 +17,6 @@ const environmentVariables = {
 module.exports = {
 	syntax: 'postcss-scss',
 	plugins: [
-		// postcssStripInlineComments,
-		// postcssOmitImportTilde,
-		// postcssPrependImports({
-		// 	path: 'src/scss',
-		// 	files: [
-		// 		'imports',
-		// 	],
-		// }),
-		// postcssEasyImport({
-		// 	plugins: [
-		// 		postcssStripInlineComments,
-		// 		postcssOmitImportTilde,
-		// 	],
-		// 	prefix: '_',
-		// 	extensions: ['.css', '.scss'],
-		// }),
 		postcssFunctions({
 			functions: {
 				env: (variable) => {
@@ -116,9 +95,6 @@ module.exports = {
 		cssMqpacker({
 			sort: sortCssMediaQueries,
 		}),
-		// postcssCombineDuplicatedSelectors({
-		// 	removeDuplicatedProperties: true,
-		// }),
 		postcssPxtorem({
 			rootValue: 16,
 			unitPrecision: 5,

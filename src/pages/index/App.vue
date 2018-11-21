@@ -1,6 +1,7 @@
 <template lang="pug">
 	.page-app
 		page-header
+
 		//- home
 		router-view(
 			name="StartSect"
@@ -19,13 +20,11 @@
 		router-view(name="RequestSect")
 		//- end home
 
-
 		page-footer(data-page-header-theme="dark")
 </template>
 
 <script>
 	import PageHeader from '../../components/PageHeader';
-
 	import PageFooter from '../../components/PageFooter';
 
 	export default {

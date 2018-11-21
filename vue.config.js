@@ -6,7 +6,6 @@ const pages = {
 		entry: 'src/pages/index/main.js',
 		template: 'src/pages/index/index.pug',
 		filename: 'index.html',
-		title: 'Home',
 	},
 };
 
@@ -14,9 +13,8 @@ module.exports = {
 	baseUrl: process.env.VUE_APP_STAGE ? process.env.VUE_APP_STAGE : '/',
 	pages,
 	runtimeCompiler: false,
-
-	chainWebpack: config => {
-		// `html-webpack-plugin`
+	chainWebpack (config) {
+		// `html-webpack-plugin` and loaders `pug`
 		config.module.rule('pug').uses.clear();
 
 		config.module.rule('pug').oneOf('vue')
@@ -35,12 +33,11 @@ module.exports = {
 		Object.keys(pages).forEach(page => {
 			config.plugin(`html-${page}`).tap(options => {
 				options[0].minify = false;
-				options[0].title = `${pages[page].title} - ${process.env.VUE_APP_TITLE}`;
+				options[0].title = process.env.VUE_APP_TITLE;
 
 				return options;
 			});
 		});
-
 
 		// loaders `scss`
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
@@ -60,7 +57,6 @@ module.exports = {
 				});
 		});
 	},
-
 	css: {
 		sourceMap: true,
 	},
