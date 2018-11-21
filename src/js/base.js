@@ -12,9 +12,7 @@ import cssVars from 'css-vars-ponyfill';
 import 'focus-visible';
 import focusWithin from 'focus-within';
 
-// Import other modules
-
-// Import Vue
+// Import misc
 import Vue from 'vue';
 
 // Polyfills
@@ -29,6 +27,7 @@ focusWithin(document, {
 // Vue
 Vue.config.productionTip = false;
 
+// Import base components
 const requireComponent = require.context('../components', true, /Base[A-Z]\w+\.(vue|js)$/);
 
 requireComponent.keys().forEach(fileName => {

@@ -1,5 +1,5 @@
-import '../scss/animate.scss';
 import anime from 'animejs';
+import '../scss/animate.scss';
 
 const animate = {
 	// Get data options

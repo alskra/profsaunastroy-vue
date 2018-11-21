@@ -5,12 +5,8 @@ const pages = {
 	index: {
 		entry: 'src/pages/index/main.js',
 		template: 'src/pages/index/index.pug',
-		title: 'Index',
-	},
-	['article-view']: {
-		entry: 'src/pages/article-view/main.js',
-		template: 'src/pages/article-view/index.pug',
-		title: 'Article View',
+		filename: 'index.html',
+		title: 'Home',
 	},
 };
 

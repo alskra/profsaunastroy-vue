@@ -4,6 +4,7 @@
 
 .page {
 	@include reset;
+
 	overflow-x: hidden;
 
 	&--has-open-menu {
@@ -27,7 +28,7 @@
 			}
 		}
 
-		#app {
+		.page-app {
 			> :not(.page-header) {
 				@media (--lt-md) {
 					transform: translateX(300px);
@@ -39,25 +40,11 @@
 
 .page-body {
 	@include reset;
+
 	overflow-x: hidden;
 
 	&::before {
 		content: "";
 		transition: background-color var(--page-header-transition);
-	}
-}
-
-#app {
-	display: flex;
-	flex-flow: column;
-	padding-top: 3.5rem;
-	min-width: 320px;
-	min-height: 100vh;
-	background-color: var(--page-background-color);
-
-	> :not(.page-header) {
-		@media (--lt-md) {
-			transition: transform var(--page-header-transition);
-		}
 	}
 }

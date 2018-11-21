@@ -1,0 +1,21 @@
+@import "../../node_modules/nprogress/nprogress.css";
+
+:root {
+	--nprogress-color: #C04000;
+}
+
+#nprogress {
+	.bar {
+		background: var(--nprogress-color);
+	}
+
+	.peg {
+		box-shadow: 0 0 10px var(--nprogress-color),
+		0 0 5px var(--nprogress-color);
+	}
+
+	.spinner-icon {
+		border-top-color: var(--nprogress-color);
+		border-left-color: var(--nprogress-color);
+	}
+}
