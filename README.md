@@ -1,7 +1,7 @@
 # profsaunastroy-vue
 
 ## App map
-* [home](https://alskra.github.io/profsaunastroy-vue/stage/)
+* [Главная](https://alskra.github.io/profsaunastroy-vue/stage/)
 
 ## Project setup
 ```

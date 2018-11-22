@@ -4,6 +4,7 @@ import animate from '../../js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
+import NotFound from '../../components/NotFound';
 import StartSect from '../../components/StartSect';
 import SaunaSect from '../../components/SaunaSect';
 import FastLinks from '../../components/FastLinks';
@@ -14,6 +15,16 @@ import RequestSect from '../../components/RequestSect';
 Vue.use(VueRouter);
 
 const routes = [
+	{
+		path: '*',
+		name: '404',
+		meta: {
+			title: '404',
+		},
+		components: {
+			NotFound,
+		},
+	},
 	{
 		path: '',
 		name: 'home',

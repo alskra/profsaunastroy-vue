@@ -2,23 +2,27 @@
 	.page-app
 		page-header
 
+		//- 404
+		template
+			router-view(name="NotFound")
+
 		//- home
-		router-view(
-			name="StartSect"
-			data-page-header-theme="transparent"
-		)
-		router-view(name="SaunaSect")
-		router-view(
-			name="FastLinks"
-			data-page-header-theme="dark"
-		)
-		router-view(name="CatalogueSect")
-		router-view(
-			name="ProjectSect"
-			data-page-header-theme="dark"
-		)
-		router-view(name="RequestSect")
-		//- end home
+		template
+			router-view(
+				name="StartSect"
+				data-page-header-theme="transparent"
+			)
+			router-view(name="SaunaSect")
+			router-view(
+				name="FastLinks"
+				data-page-header-theme="dark"
+			)
+			router-view(name="CatalogueSect")
+			router-view(
+				name="ProjectSect"
+				data-page-header-theme="dark"
+			)
+			router-view(name="RequestSect")
 
 		page-footer(data-page-header-theme="dark")
 </template>
