@@ -4,20 +4,15 @@ import animate from '../../js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
-import NotFound from '../../components/NotFound';
-import StartSect from '../../components/StartSect';
-import SaunaSect from '../../components/SaunaSect';
-import FastLinks from '../../components/FastLinks';
-import CatalogueSect from '../../components/CatalogueSect';
-import ProjectSect from '../../components/ProjectSect';
-import RequestSect from '../../components/RequestSect';
+import NotFoundPage from '../../components/NotFoundPage';
+import HomePage from '../../components/HomePage';
 
 Vue.use(VueRouter);
 
 const routes = [
 	{
 		path: '*',
-		component: NotFound,
+		component: NotFoundPage,
 		name: '404',
 		meta: {
 			title: '404',
@@ -25,14 +20,7 @@ const routes = [
 	},
 	{
 		path: '',
-		components: {
-			StartSect,
-			SaunaSect,
-			FastLinks,
-			CatalogueSect,
-			ProjectSect,
-			RequestSect,
-		},
+		component: HomePage,
 		name: 'home',
 		alias: [
 			'home',
@@ -48,6 +36,16 @@ const router = new VueRouter({
 	routes,
 	mode: 'history',
 	base: process.env.BASE_URL,
+	scrollBehavior (to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition;
+		} else {
+			return {
+				x: 0,
+				y: 0,
+			};
+		}
+	},
 });
 
 NProgress.configure({showSpinner: false});

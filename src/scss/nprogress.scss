@@ -1,5 +1,5 @@
 :root {
-	--nprogress-color: #C04000;
+	--nprogress-color: var(--content-link-color);
 }
 
 #nprogress {
