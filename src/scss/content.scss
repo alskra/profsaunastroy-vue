@@ -44,6 +44,15 @@ h1, h2, h3, h4, h5, h6,
 	word-wrap: break-word;
 	color: var(--content-color);
 
+	a {
+		color: var(--content-link-color);
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
 	p, blockquote {
 		// page-break-inside: avoid;
 	}

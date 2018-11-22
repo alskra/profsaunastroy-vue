@@ -50,7 +50,7 @@
 
 	export default {
 		name: "StartSect",
-		data() {
+		data () {
 			return {
 				slickCarouselOptions: {
 					arrows: false,
@@ -67,7 +67,7 @@
 			};
 		},
 		methods: {
-			updateRenderedDOM() {
+			updateRenderedDOM () {
 				animate.update();
 
 				$(this.$refs.slickCarousel)
@@ -111,7 +111,7 @@
 				$(this.$refs.slickCarousel).slick('slickGoTo', index);
 			},
 		},
-		created() {
+		created () {
 			// Get data async
 			setTimeout(() => {
 				this.slides = [
@@ -136,14 +136,17 @@
 				];
 			}, 100);
 		},
-		mounted() {
+		mounted () {
 			this.updateRenderedDOM();
 		},
-		beforeUpdate() {
+		beforeUpdate () {
 			$(this.$refs.slickCarousel).slick('unslick');
 		},
-		updated() {
+		updated () {
 			this.updateRenderedDOM();
+		},
+		beforeDestroy () {
+			$(this.$refs.slickCarousel).slick('unslick');
 		},
 	}
 </script>

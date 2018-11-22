@@ -17,20 +17,14 @@ Vue.use(VueRouter);
 const routes = [
 	{
 		path: '*',
+		component: NotFound,
 		name: '404',
 		meta: {
 			title: '404',
 		},
-		components: {
-			NotFound,
-		},
 	},
 	{
 		path: '',
-		name: 'home',
-		meta: {
-			title: 'Главная',
-		},
 		components: {
 			StartSect,
 			SaunaSect,
@@ -38,6 +32,14 @@ const routes = [
 			CatalogueSect,
 			ProjectSect,
 			RequestSect,
+		},
+		name: 'home',
+		alias: [
+			'home',
+			'index.html',
+		].map((aliasItem) => process.env.BASE_URL + aliasItem),
+		meta: {
+			title: 'Главная',
 		},
 	},
 ];

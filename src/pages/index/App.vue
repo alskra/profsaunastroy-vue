@@ -4,7 +4,7 @@
 
 		//- 404
 		template
-			router-view(name="NotFound")
+			router-view
 
 		//- home
 		template

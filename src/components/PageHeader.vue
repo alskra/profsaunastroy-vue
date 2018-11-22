@@ -155,6 +155,11 @@
 				}, 20);
 			},
 		},
+		watch: {
+			'$route' () {
+				this.onWindowScroll();
+			},
+		},
 		created() {
 			document.addEventListener('click', this.onDocumentClick);
 			window.addEventListener('scroll', this.onWindowScroll);
