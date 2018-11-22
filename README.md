@@ -1,7 +1,7 @@
 # profsaunastroy-vue
 
-## Pages list
-* [index](https://alskra.github.io/profsaunastroy-vue/stage/)
+## App map
+* [home](https://alskra.github.io/profsaunastroy-vue/stage/)
 
 ## Project setup
 ```
