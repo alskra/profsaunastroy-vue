@@ -9,15 +9,22 @@
 </template>
 
 <script>
+	import StartSect from './StartSect';
+	import SaunaSect from './SaunaSect';
+	import FastLinks from './FastLinks';
+	import CatalogueSect from './CatalogueSect';
+	import ProjectSect from './ProjectSect';
+	import RequestSect from './RequestSect';
+
 	export default {
 		name: "HomePage",
 		components: {
-			StartSect: () => import('./StartSect'),
-			SaunaSect: () => import('./SaunaSect'),
-			FastLinks: () => import('./FastLinks'),
-			CatalogueSect: () => import('./CatalogueSect'),
-			ProjectSect: () => import('./ProjectSect'),
-			RequestSect: () => import('./RequestSect'),
+			StartSect,
+			SaunaSect,
+			FastLinks,
+			CatalogueSect,
+			ProjectSect,
+			RequestSect,
 		},
 	}
 </script>

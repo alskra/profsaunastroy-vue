@@ -4,15 +4,13 @@ import animate from '../../js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
-import NotFoundPage from '../../components/NotFoundPage';
-import HomePage from '../../components/HomePage';
 
 Vue.use(VueRouter);
 
 const routes = [
 	{
 		path: '*',
-		component: NotFoundPage,
+		component: () => import('../../components/NotFoundPage'),
 		name: '404',
 		meta: {
 			title: '404',
@@ -20,7 +18,7 @@ const routes = [
 	},
 	{
 		path: '',
-		component: HomePage,
+		component: () => import('../../components/HomePage'),
 		name: 'home',
 		alias: [
 			'home',
