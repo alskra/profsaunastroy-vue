@@ -1,5 +1,5 @@
 <template lang="pug">
-	main
+	main.page-main
 		start-sect(data-page-header-theme="transparent")
 		sauna-sect
 		fast-links(data-page-header-theme="dark")
@@ -9,17 +9,10 @@
 </template>
 
 <script>
-	import StartSect from './StartSect';
-	// import SaunaSect from './SaunaSect';
-	// import FastLinks from './FastLinks';
-	// import CatalogueSect from './CatalogueSect';
-	// import ProjectSect from './ProjectSect';
-	// import RequestSect from './RequestSect';
-
 	export default {
 		name: "HomePage",
 		components: {
-			StartSect,
+			StartSect: () => import('./StartSect'),
 			SaunaSect: () => import('./SaunaSect'),
 			FastLinks: () => import('./FastLinks'),
 			CatalogueSect: () => import('./CatalogueSect'),
@@ -30,5 +23,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+	.page-main {
+		margin-top: -3.5rem;
+	}
 </style>

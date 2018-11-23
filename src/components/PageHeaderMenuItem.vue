@@ -12,13 +12,9 @@
 			)
 			.__title
 				| {{ menuItem.title }}
-		transition(
-			name="submenu--transition"
-			v-if="menuItem.submenu"
-		)
-			.submenu(
-				v-show="submenuOpened"
-			)
+
+		template(v-if="menuItem.submenu")
+			.submenu(v-expand="submenuOpened")
 				a.__item(
 					v-for="submenuItem in menuItem.submenu"
 					:key="submenuItem.id"
@@ -35,13 +31,13 @@
 		props: {
 			menuItem: Object,
 		},
-		data() {
+		data () {
 			return {
 				submenuOpened: false,
 			};
 		},
 		methods: {
-			onDocumentClick(evt) {
+			onDocumentClick (evt) {
 				const target = evt.target;
 				const menuItemElem = this.$refs.menuItem;
 
@@ -49,15 +45,15 @@
 					this.submenuOpened = false;
 				}
 			},
-			onDocumentKeyup(evt) {
+			onDocumentKeyup (evt) {
 				this.onDocumentClick(evt);
 			},
 		},
-		created() {
+		created () {
 			document.addEventListener('click', this.onDocumentClick);
 			document.addEventListener('keyup', this.onDocumentKeyup);
 		},
-		destroyed() {
+		destroyed () {
 			document.removeEventListener('click', this.onDocumentClick);
 			document.removeEventListener('keyup', this.onDocumentKeyup);
 		},
@@ -135,10 +131,11 @@
 
 	.submenu {
 		position: absolute;
-		margin: 15px 0 0 -1px;
+		top: 100%;
+		margin-left: -1px;
 		border: 1px solid var(--page-header-border-color);
 		border-top-color: var(--page-header-background-color);
-		padding: 0 0 0.5rem;
+		padding: 0.5rem 0;
 		max-width: 200px;
 		background-color: var(--page-header-background-color);
 		transition: border-color var(--page-header-transition),
@@ -147,11 +144,6 @@
 		@media (--lt-md) {
 			position: relative;
 			margin: 0;
-			//box-shadow: inset 0 3px 3px -3px var(--page-header-border-color),
-			//inset 0 -3px 3px -3px var(--page-header-border-color);
-			//border-top-color: var(--page-header-border-color);
-			//border-left: 0;
-			//border-right: 0;
 			border: 0;
 			padding: 0;
 			max-width: none;
@@ -182,25 +174,6 @@
 				@media (--lt-md) {
 					padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 2.875rem;
 				}
-			}
-		}
-
-		&--transition {
-			&-enter-active,
-			&-leave-active {
-				transform-origin: 0 0;
-				transition: opacity var(--page-header-transition),
-				transform var(--page-header-transition);
-
-				@media (--lt-md) {
-					transition: none;
-				}
-			}
-
-			&-enter,
-			&-leave-to {
-				opacity: 0;
-				transform: scaleY(0);
 			}
 		}
 	}

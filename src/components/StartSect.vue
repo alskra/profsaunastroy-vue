@@ -155,7 +155,6 @@
 	.start-sect {
 		@include reset;
 
-		margin-top: -3.5rem;
 		position: relative;
 		background-color: var(--content-color);
 	}

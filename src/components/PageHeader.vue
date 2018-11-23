@@ -48,7 +48,7 @@
 		components: {
 			MenuItem,
 		},
-		data() {
+		data () {
 			return {
 				baseUrl: process.env.BASE_URL,
 				menuOpened: false,
@@ -125,7 +125,7 @@
 			};
 		},
 		methods: {
-			onDocumentClick(evt) {
+			onDocumentClick (evt) {
 				const target = evt.target;
 				const menuElem = this.$refs.menu;
 				const searchElem = this.$refs.search;
@@ -138,42 +138,34 @@
 					this.searchOpened = false;
 				}
 			},
-			onWindowScroll() {
-				clearTimeout(this.setThemeTimer);
+			checkTheme () {
+				for (let elem of document.querySelectorAll('[data-page-header-theme]')) {
+					if (elem.getBoundingClientRect().top <= this.$el.offsetHeight
+						&& elem.getBoundingClientRect().bottom > this.$el.offsetHeight) {
+						this.$el.dataset.theme = elem.dataset.pageHeaderTheme;
 
-				this.setThemeTimer = setTimeout(() => {
-					for (let elem of document.querySelectorAll('[data-page-header-theme]')) {
-						if (elem.getBoundingClientRect().top <= this.$el.offsetHeight
-							&& elem.getBoundingClientRect().bottom > this.$el.offsetHeight) {
-							this.$el.dataset.theme = elem.dataset.pageHeaderTheme;
-
-							return;
-						}
+						return;
 					}
+				}
 
-					delete this.$el.dataset.theme;
-				}, 20);
+				delete this.$el.dataset.theme;
 			},
 		},
-		watch: {
-			'$route' () {
-				this.onWindowScroll();
-			},
-		},
-		created() {
+		created () {
 			document.addEventListener('click', this.onDocumentClick);
-			window.addEventListener('scroll', this.onWindowScroll);
 		},
-		destroyed() {
+		destroyed () {
 			document.removeEventListener('click', this.onDocumentClick);
-			window.removeEventListener('scroll', this.onWindowScroll);
 		},
-		mounted() {
-			this.onWindowScroll();
-		},
-		updated() {
-			this.onWindowScroll();
+		mounted () {
+			const vm = this;
 
+			vm.checkThemeTimer = setTimeout(function checkTheme() {
+				vm.checkTheme();
+				vm.checkThemeTimer = setTimeout(checkTheme, 100);
+			}, 100);
+		},
+		updated () {
 			document.documentElement.classList.toggle('page--has-open-menu', this.menuOpened);
 
 			if (this.searchOpened) {
@@ -212,7 +204,9 @@
 
 		&--has-open-menu {
 			.menu__items {
-				transform: translateX(0);
+				@media (--lt-md) {
+					transform: translateX(0);
+				}
 			}
 		}
 
