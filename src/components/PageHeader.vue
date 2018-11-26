@@ -375,6 +375,7 @@
 					@media (--lt-md) {
 						display: flex;
 						margin-top: auto;
+						margin-bottom: 0;
 						border-top: 1px solid var(--page-header-border-color);
 						padding-top: 1rem;
 					}
