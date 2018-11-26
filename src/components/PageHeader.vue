@@ -364,7 +364,6 @@
 
 				@media (--lt-md) {
 					flex-direction: column;
-					margin-bottom: 1rem;
 					padding: 1rem 0;
 					flex-shrink: 0;
 				}
@@ -375,9 +374,7 @@
 					@media (--lt-md) {
 						display: flex;
 						margin-top: auto;
-						margin-bottom: 0;
 						border-top: 1px solid var(--page-header-border-color);
-						padding-top: 1rem;
 					}
 				}
 			}
