@@ -51,8 +51,8 @@
 						}
 					)
 						btn-primary.btn(
-							type="a"
-							href=""
+							el="router-link"
+							to=""
 						) Оставить заявку
 </template>
 

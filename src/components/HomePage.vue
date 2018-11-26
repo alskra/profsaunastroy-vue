@@ -1,36 +1,30 @@
 <template lang="pug">
-	main.page-main
-		start-sect(data-page-header-theme="transparent")
-		sauna-sect
-		fast-links(data-page-header-theme="dark")
-		catalogue-sect
-		project-sect(data-page-header-theme="dark")
-		request-sect
+	main.home-page
+		router-view(
+			name="StartSect"
+			data-page-header-theme="transparent"
+		)
+		router-view(name="SaunaSect")
+		router-view(
+			name="FastLinks"
+			data-page-header-theme="dark"
+		)
+		router-view(name="CatalogueSect")
+		router-view(
+			name="ProjectSect"
+			data-page-header-theme="dark"
+		)
+		router-view(name="RequestSect")
 </template>
 
 <script>
-	import StartSect from './StartSect';
-	import SaunaSect from './SaunaSect';
-	import FastLinks from './FastLinks';
-	import CatalogueSect from './CatalogueSect';
-	import ProjectSect from './ProjectSect';
-	import RequestSect from './RequestSect';
-
 	export default {
 		name: "HomePage",
-		components: {
-			StartSect,
-			SaunaSect,
-			FastLinks,
-			CatalogueSect,
-			ProjectSect,
-			RequestSect,
-		},
 	}
 </script>
 
 <style lang="scss" scoped>
-	.page-main {
+	.home-page {
 		margin-top: -3.5rem;
 	}
 </style>

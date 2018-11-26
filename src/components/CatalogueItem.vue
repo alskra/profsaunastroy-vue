@@ -29,14 +29,14 @@
 				)
 					.col.col-auto.mw-100
 						btn-primary(
-							type="a"
-							href=""
+							el="router-link"
+							to=""
 						) Перейти в каталог
 
 					.col.col-auto.mw-100
 						btn-primary(
-							type="a"
-							href=""
+							el="router-link"
+							to=""
 						) Нужна консультация
 
 			.col.col-12.col-md-6

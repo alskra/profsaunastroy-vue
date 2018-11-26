@@ -30,8 +30,8 @@
 						}
 					)
 						btn-primary.btn-primary--invert.btn(
-							type="a"
-							href=""
+							el="router-link"
+							to=""
 						) Предложить проект
 
 				.col.col-12.col-md-6.col-lg-5

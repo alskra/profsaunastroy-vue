@@ -14,7 +14,7 @@
 
 <script>
 	export default {
-		name: "BaseIcon",
+		name: 'BaseIcon',
 		props: {
 			name: {
 				type: String,

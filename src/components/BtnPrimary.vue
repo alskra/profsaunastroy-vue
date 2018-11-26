@@ -1,7 +1,10 @@
 <template lang="pug">
-	button.btn-primary(v-if="type === 'button'")
+	button.btn-primary(v-if="el === 'button'")
 		slot
-	a.btn-primary(v-else-if="type === 'a'")
+	router-link.btn-primary(
+		v-else-if="el === 'router-link'"
+		:to="to"
+	)
 		slot
 </template>
 
@@ -9,10 +12,20 @@
 	export default {
 		name: "BtnPrimary",
 		props: {
-			type: {
+			el: {
 				type: String,
 				default: 'button',
 			},
+			to: {
+				type: [String, Object],
+				default () {
+					return {name: 'home'};
+				},
+			},
+		},
+		beforeRouteEnter () {
+			alert('beforeRouteEnter on BtnPrimary!');
+			// next();
 		},
 	}
 </script>

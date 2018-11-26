@@ -2,7 +2,10 @@
 	.page-app
 		page-header
 		router-view
-		page-footer(data-page-header-theme="dark")
+		page-footer(
+			v-if="showFooter"
+			data-page-header-theme="dark"
+		)
 </template>
 
 <script>
@@ -14,6 +17,16 @@
 		components: {
 			PageHeader,
 			PageFooter,
+		},
+		data () {
+			return {
+				showFooter: false,
+			};
+		},
+		beforeCreate () {
+			this.$router.afterEach(() => {
+				this.showFooter = true;
+			});
 		},
 	}
 </script>

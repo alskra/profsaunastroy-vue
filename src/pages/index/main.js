@@ -19,14 +19,27 @@ const routes = [
 	{
 		path: '',
 		component: () => import('../../components/HomePage'),
-		name: 'home',
-		alias: [
-			'home',
-			'index.html',
-		].map((aliasItem) => process.env.BASE_URL + aliasItem),
-		meta: {
-			title: 'Главная',
-		},
+		children: [
+			{
+				path: '',
+				components: {
+					StartSect: () => import('../../components/StartSect'),
+					SaunaSect: () => import('../../components/SaunaSect'),
+					FastLinks: () => import('../../components/FastLinks'),
+					CatalogueSect: () => import('../../components/CatalogueSect'),
+					ProjectSect: () => import('../../components/ProjectSect'),
+					RequestSect: () => import('../../components/RequestSect'),
+				},
+				name: 'home',
+				alias: [
+					'home',
+					'index.html',
+				],
+				meta: {
+					title: 'Главная',
+				},
+			},
+		],
 	},
 ];
 
@@ -53,7 +66,9 @@ router.beforeEach((to, from, next) => {
 
 	to.matched.slice().reverse().some((routeRecord) => {
 		if (routeRecord.meta.title) {
-			document.title = `${routeRecord.meta.title} - ${process.env.VUE_APP_TITLE}`;
+			document.title = `${routeRecord.meta.title} \u2014 ${process.env.VUE_APP_TITLE}`;
+
+			return true;
 		}
 
 		return false;

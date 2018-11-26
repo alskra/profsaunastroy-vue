@@ -1,14 +1,11 @@
 <template lang="pug">
-	.err.py-5
-		.container(@click="click(88)")
+	main.not-found-page
+		.container
 			.content
 				h1 404 &mdash; Страница не найдена
 				p
-			btn-primary(
-				type="a"
 
-				@click="click(45)"
-			)
+			btn-primary(el="router-link")
 				| На главную
 </template>
 
@@ -20,19 +17,15 @@
 		components: {
 			BtnPrimary,
 		},
-		data () {
-			return {
-				baseUrl: process.env.BASE_URL,
-			};
-		},
-		methods: {
-			click (param) {
-				alert(param);
-			},
-		},
 	}
 </script>
 
 <style lang="scss" scoped>
+	.not-found-page {
+		padding: 6rem;
 
+		@media (--lt-md) {
+			padding: 3rem 0;
+		}
+	}
 </style>
