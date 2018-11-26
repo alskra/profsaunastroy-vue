@@ -59,7 +59,7 @@ module.exports = {
 	},
 	css: {
 		extract: false,
-		sourceMap: true,
+		sourceMap: process.env.NODE_ENV !== 'production',
 	},
 	productionSourceMap: false,
 };
