@@ -44,7 +44,7 @@
 
 		> :not(.page-header) {
 			@media (--lt-md) {
-				transition: transform var(--page-header-transition);
+				transition: transform var(--page-header-transition) !important;
 			}
 		}
 	}

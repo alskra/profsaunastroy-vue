@@ -44,7 +44,9 @@
 	overflow-x: hidden;
 
 	&::before {
-		content: "";
-		transition: background-color var(--page-header-transition);
+		@media (--lt-md) {
+			content: "";
+			transition: background-color var(--page-header-transition);
+		}
 	}
 }
