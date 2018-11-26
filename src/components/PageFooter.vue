@@ -100,7 +100,7 @@
 									v-for="sectMenuItem in sectMenu.items"
 									:key="sectMenuItem.id"
 								)
-									a.__item-link(:href="sectMenuItem.url") {{ sectMenuItem.title }}
+									router-link.__item-link(:to="sectMenuItem.url") {{ sectMenuItem.title }}
 
 		.bottom-sect
 			.container-fluid

@@ -18,7 +18,7 @@
 						h2.__content-title {{ fastLinkItem.title }}
 						p.__content-desc {{ fastLinkItem.desc }}
 
-					a.__content-link(:href="fastLinkItem.url")
+					router-link.__content-link(:to="fastLinkItem.url")
 
 			.bg(
 				:key="fastLinkItem.id + '-bg'"

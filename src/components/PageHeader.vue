@@ -6,8 +6,8 @@
 		]`
 	)
 		.container-fluid
-			a.logo(
-				href=""
+			router-link.logo(
+				:to="{name: 'home'}"
 				title="ProfSaunaStroy"
 			)
 				base-icon.__icon(name="logo")
@@ -21,6 +21,13 @@
 						:key="menuItem.id"
 						:menu-item="menuItem"
 					)
+
+					.__footer
+						menu-item(
+							v-for="menuItem in menuFooter"
+							:key="menuItem.id"
+							:menu-item="menuItem"
+						)
 
 			form.search(
 				action=""
@@ -121,6 +128,22 @@
 						url: '',
 						submenu: null
 					}
+				],
+				menuFooter: [
+					{
+						id: 1,
+						title: '+7 (495) 532-76-95',
+						url: 'tel:+74955327695',
+						submenu: null,
+						icon: 'phone',
+					},
+					{
+						id: 2,
+						title: 'info@profsaunastroy.ru',
+						url: 'mailto:info@profsaunastroy.ru',
+						submenu: null,
+						icon: 'email',
+					},
 				],
 			};
 		},
@@ -335,6 +358,25 @@
 				background-color: var(--page-header-background-color);
 				transform: translateX(-100%);
 				transition: transform var(--page-header-transition);
+			}
+		}
+
+		&__footer {
+			display: none;
+
+			@media (--lt-md) {
+				display: flex;
+				flex-direction: column;
+				flex-shrink: 0;
+				margin-top: auto;
+
+				&::before {
+					content: '';
+					display: block;
+					margin-top: 1rem;
+					border-top: 1px solid var(--page-header-border-color);
+					padding-bottom: 1rem;
+				}
 			}
 		}
 	}

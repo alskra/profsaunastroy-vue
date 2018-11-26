@@ -1,15 +1,16 @@
 <template lang="pug">
 	.menu-item(ref="menuItem")
 		a.button(
-			:href="!menuItem.submenu ? menuItem.url : null"
+			:href="menuItem.submenu ? null : menuItem.url"
 			tabindex="0"
-			@click="submenuOpened = !submenuOpened"
-			@keyup.enter="submenuOpened = !submenuOpened"
+			@click="menuItem.submenu ? submenuOpened = !submenuOpened : null"
+			@keyup.enter="menuItem.submenu ? submenuOpened = !submenuOpened : null"
 		)
 			base-icon.__icon(
-				name="menu"
-				v-if="menuItem.submenu"
+				:name="menuItem.icon || 'menu'"
+				v-if="menuItem.icon || menuItem.submenu"
 			)
+
 			.__title
 				| {{ menuItem.title }}
 
@@ -39,9 +40,9 @@
 		methods: {
 			onDocumentClick (evt) {
 				const target = evt.target;
-				const menuItemElem = this.$refs.menuItem;
+				const menuItemEl = this.$refs.menuItem;
 
-				if (menuItemElem !== target && !menuItemElem.contains(target)) {
+				if (menuItemEl !== target && !menuItemEl.contains(target)) {
 					this.submenuOpened = false;
 				}
 			},
