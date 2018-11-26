@@ -28,16 +28,10 @@
 					}
 				)
 					.col.col-auto.mw-100
-						btn-primary(
-							el="router-link"
-							to=""
-						) Перейти в каталог
+						btn-primary(el="router-link") Перейти в каталог
 
 					.col.col-auto.mw-100
-						btn-primary(
-							el="router-link"
-							to=""
-						) Нужна консультация
+						btn-primary(el="router-link") Нужна консультация
 
 			.col.col-12.col-md-6
 				.img-items(v-if="catalogueItem.images")

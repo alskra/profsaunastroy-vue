@@ -18,9 +18,7 @@
 			},
 			to: {
 				type: [String, Object],
-				default () {
-					return {name: 'home'};
-				},
+				default: '',
 			},
 		},
 		beforeRouteEnter () {

@@ -1,6 +1,7 @@
 # profsaunastroy-vue
 
 ## App map
+* [404](https://alskra.github.io/profsaunastroy-vue/stage/404)
 * [Главная](https://alskra.github.io/profsaunastroy-vue/stage/)
 
 ## Project setup

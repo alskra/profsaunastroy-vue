@@ -5,7 +5,10 @@
 				h1 404 &mdash; Страница не найдена
 				p
 
-			btn-primary(el="router-link")
+			btn-primary(
+				el="router-link"
+				:to="{name: 'home'}"
+			)
 				| На главную
 </template>
 
@@ -22,6 +25,8 @@
 
 <style lang="scss" scoped>
 	.not-found-page {
+		@include reset;
+
 		padding: 6rem;
 
 		@media (--lt-md) {

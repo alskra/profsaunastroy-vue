@@ -33,6 +33,8 @@
 
 <style lang="scss">
 	.page-app {
+		@include reset;
+
 		display: flex;
 		flex-flow: column;
 		padding-top: 3.5rem;

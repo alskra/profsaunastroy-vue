@@ -50,10 +50,7 @@
 							targets: '.btn'
 						}
 					)
-						btn-primary.btn(
-							el="router-link"
-							to=""
-						) Оставить заявку
+						btn-primary.btn(el="router-link") Оставить заявку
 </template>
 
 <script>

@@ -25,6 +25,8 @@
 
 <style lang="scss" scoped>
 	.home-page {
+		@include reset;
+
 		margin-top: -3.5rem;
 	}
 </style>

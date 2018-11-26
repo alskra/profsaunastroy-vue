@@ -86,7 +86,7 @@
 									v-for="menuItem in menu"
 									:key="menuItem.id"
 								)
-									a.__item-link(:href="menuItem.url") {{ menuItem.title }}
+									router-link.__item-link(:to="menuItem.url") {{ menuItem.title }}
 
 					.col.col-12.col-md-3.col-lg-3.flex-lg-shrink-1(
 						v-for="sectMenu in sectMenuList"
@@ -121,31 +121,34 @@
 <script>
 	import animate from '../js/animate';
 
-	const baseUrl = process.env.BASE_URL;
-
 	export default {
 		name: "PageFooter",
-		data() {
+		data () {
 			return {
-				baseUrl,
+				baseUrl: process.env.BASE_URL,
 				menu: [
 					{
 						id: 1,
+						title: 'Главная',
+						url: {name: 'home'},
+					},
+					{
+						id: 2,
 						title: 'О компании',
 						url: '',
 					},
 					{
-						id: 2,
+						id: 3,
 						title: 'Наши работы',
 						url: '',
 					},
 					{
-						id: 3,
+						id: 4,
 						title: 'Контакты',
 						url: '',
 					},
 					{
-						id: 4,
+						id: 5,
 						title: 'Статьи',
 						url: '',
 					},
@@ -283,10 +286,10 @@
 				],
 			};
 		},
-		mounted() {
+		mounted () {
 			animate.update();
 		},
-		updated() {
+		updated () {
 			animate.update();
 		},
 	}
