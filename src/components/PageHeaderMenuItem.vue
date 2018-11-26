@@ -95,14 +95,13 @@
 			position: relative;
 			flex-shrink: 0;
 			margin-right: 0.5rem;
-			padding: 0.125rem;
 			width: 1.5rem;
 			height: 1.5rem;
 
 			@media (--lt-md) {
 				margin-right: -2.875rem;
 				margin-left: 0.375rem;
-				padding: 0.625rem;
+				padding: 0.5rem;
 				width: 2.5rem;
 				height: 2.5rem;
 			}
