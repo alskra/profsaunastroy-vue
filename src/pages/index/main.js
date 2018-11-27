@@ -4,6 +4,7 @@ import animate from '../../js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
+import StartSect from '../../components/StartSect';
 
 Vue.use(VueRouter);
 
@@ -23,7 +24,7 @@ const routes = [
 			{
 				path: '',
 				components: {
-					StartSect: () => import('../../components/StartSect'),
+					StartSect,
 					SaunaSect: () => import('../../components/SaunaSect'),
 					FastLinks: () => import('../../components/FastLinks'),
 					CatalogueSect: () => import('../../components/CatalogueSect'),
