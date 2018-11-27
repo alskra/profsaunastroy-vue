@@ -142,16 +142,21 @@
 		border-top-color: var(--page-header-background-color);
 		padding: 0.5rem 0;
 		max-width: 240px;
+		max-height: calc(100vh - 3.5rem);
+		overflow-y: auto;
 		background-color: var(--page-header-background-color);
 		transition: border-color var(--page-header-transition),
 		background-color var(--page-header-transition);
 
 		@media (--lt-md) {
 			position: relative;
+			top: auto;
 			margin: 0;
 			border: 0;
 			padding: 0;
 			max-width: none;
+			max-height: none;
+			overflow-y: visible;
 		}
 
 		&__item {
@@ -170,14 +175,14 @@
 			&-title {
 				flex-grow: 1;
 				overflow: hidden;
-				padding: (2rem - 1.125rem * 1.25) / 2 1rem (2rem - 1.125rem * 1.25) / 2 2rem;
-				font-size: 1.125rem;
+				padding: (2rem - 1rem * 1.25) / 2 1rem (2rem - 1rem * 1.25) / 2 2rem;
+				font-size: 1rem;
 				line-height: 1.25;
 				// white-space: nowrap;
 				text-overflow: ellipsis;
 
 				@media (--lt-md) {
-					padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 3rem;
+					padding: (2rem - 1rem * 1.25) / 2 1rem (2rem - 1rem * 1.25) / 2 3rem;
 				}
 			}
 		}
