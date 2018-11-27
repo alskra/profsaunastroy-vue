@@ -1,97 +1,111 @@
 <script>
 	import Vue from 'vue';
 
-	const resetStyles = {
+	const enterTo = {
 		borderTopWidth: '',
 		borderBottomWidth: '',
 		paddingTop: '',
 		paddingBottom: '',
 		height: '',
-		transition: 'none',
+		opacity: '',
 	};
 
-	const hiddenStyles = {
+	const leaveTo = {
 		borderTopWidth: 0,
 		borderBottomWidth: 0,
 		paddingTop: 0,
 		paddingBottom: 0,
 		height: 0,
-	};
-
-	const visibleStyles = {
-		borderTopWidth: '',
-		borderBottomWidth: '',
-		paddingTop: '',
-		paddingBottom: '',
-		height: '',
+		opacity: 0,
 	};
 
 	const onEnterTransitionend = (evt) => {
-		if (evt.currentTarget === evt.target) {
-			evt.currentTarget.removeEventListener('transitionend', onEnterTransitionend);
-			evt.currentTarget.classList.remove('expand-enter-active');
-			evt.currentTarget.style.height = '';
+		const el = evt.currentTarget;
+
+		if (el === evt.target) {
+			el.removeEventListener('transitionend', onEnterTransitionend);
+			el.classList.remove('expand-enter-active');
+			Object.assign(el.style, enterTo);
 		}
 	};
 
 	const onLeaveTransitionend = (evt) => {
-		if (evt.currentTarget === evt.target) {
-			evt.currentTarget.removeEventListener('transitionend', onLeaveTransitionend);
-			evt.currentTarget.classList.remove('expand-leave-active');
+		const el = evt.currentTarget;
+
+		if (el === evt.target) {
+			el.removeEventListener('transitionend', onLeaveTransitionend);
+			el.classList.remove('expand-leave-active');
+			Object.assign(el.style, enterTo, {display: 'none'});
 		}
 	};
 
 	Vue.directive('expand', {
 		bind (el, binding) {
-			el.style.overflow = 'hidden';
-
-			if (binding.value) {
-				Object.assign(el.style, visibleStyles);
-			} else {
-				Object.assign(el.style, hiddenStyles);
+			if (!binding.value) {
+				Object.assign(el.style, {display: 'none'});
 			}
 		},
 		update (el, binding) {
 			if (binding.value !== binding.oldValue) {
 				clearTimeout(el.timer);
-				delete el.timer;
 
-				const {
-					borderTopWidth,
-					borderBottomWidth,
-					paddingTop,
-					paddingBottom,
-					height,
-				} = getComputedStyle(el);
+				// Save state
+				let currentStyles = {};
 
-				el.removeEventListener('transitionend', onEnterTransitionend);
-				el.removeEventListener('transitionend', onLeaveTransitionend);
-				el.classList.remove('expand-enter-active', 'expand-leave-active');
+				if (el.classList.contains('expand-enter-active') || el.classList.contains('expand-leave-active')) {
+					const {
+						borderTopWidth,
+						borderBottomWidth,
+						paddingTop,
+						paddingBottom,
+						height,
+						opacity,
+					} = getComputedStyle(el);
 
-				Object.assign(el.style, resetStyles);
-				const fullHeight = el.offsetHeight + 'px';
+					Object.assign(currentStyles, {
+						borderTopWidth,
+						borderBottomWidth,
+						paddingTop,
+						paddingBottom,
+						height,
+						opacity,
+					});
+					el.removeEventListener('transitionend', onEnterTransitionend);
+					el.removeEventListener('transitionend', onLeaveTransitionend);
+					el.classList.remove('expand-enter-active', 'expand-leave-active');
+				} else if (binding.oldValue) {
+					currentStyles = enterTo;
+				} else {
+					currentStyles = leaveTo;
+				}
 
-				Object.assign(el.style, {
-					borderTopWidth,
-					borderBottomWidth,
-					paddingTop,
-					paddingBottom,
-					height,
+				// Computed height
+				Object.assign(el.style, enterTo, {
+					display: '',
+					transition: 'none',
 				});
 
-				if (binding.value) {
-					el.timer = setTimeout(() => {
+				const fullHeight = el.offsetHeight + 'px';
+
+				// Restore state
+				Object.assign(el.style, currentStyles);
+
+				el.timer = setTimeout(() => {
+					delete el.timer;
+
+					if (binding.value) {
 						el.addEventListener('transitionend', onEnterTransitionend);
 						el.classList.add('expand-enter-active');
-						Object.assign(el.style, {transition: ''}, visibleStyles, {height: fullHeight});
-					}, 20);
-				} else {
-					el.timer = setTimeout(() => {
+						Object.assign(el.style, enterTo, {
+							transition: '',
+							height: fullHeight,
+						});
+					} else {
 						el.addEventListener('transitionend', onLeaveTransitionend);
 						el.classList.add('expand-leave-active');
-						Object.assign(el.style, {transition: ''}, hiddenStyles);
-					}, 20);
-				}
+						Object.assign(el.style, leaveTo, {transition: ''});
+					}
+				}, 20);
 			}
 		},
 	});
@@ -105,22 +119,26 @@
 	.expand {
 		&-enter-active,
 		&-leave-active {
+			overflow: hidden !important;
 			transition-property:
 				border-top-width,
 				border-bottom-width,
 				padding-top,
 				padding-bottom,
-				height !important;
-			transition-duration: 0.3s !important;
+				height,
+				opacity !important;
+			transition-duration: 0.15s !important;
 			transition-delay: 0s !important;
 		}
 
 		&-enter-active {
-			transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+			// transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+			transition-timing-function: ease-out !important;
 		}
 
 		&-leave-active {
-			transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045) !important;
+			// transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045) !important;
+			transition-timing-function: ease-in !important;
 		}
 	}
 </style>

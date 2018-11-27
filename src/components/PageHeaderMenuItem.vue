@@ -1,28 +1,33 @@
 <template lang="pug">
 	.menu-item(ref="menuItem")
-		a.button(
-			:href="menuItem.submenu ? null : menuItem.url"
-			tabindex="0"
-			@click="menuItem.submenu ? submenuOpened = !submenuOpened : null"
-			@keyup.enter="menuItem.submenu ? submenuOpened = !submenuOpened : null"
+		button.button(
+			v-if="menuItem.submenu"
+			@click="submenuOpened = !submenuOpened"
 		)
 			base-icon.__icon(
-				:name="menuItem.icon || 'menu'"
-				v-if="menuItem.icon || menuItem.submenu"
+				v-if="menuItem.icon"
+				:name="menuItem.icon"
 			)
+			span.__title {{ menuItem.title }}
 
-			.__title
-				| {{ menuItem.title }}
+		router-link.button(
+			v-else
+			:to="menuItem.url"
+		)
+			base-icon.__icon(
+				v-if="menuItem.icon"
+				:name="menuItem.icon"
+			)
+			.__title {{ menuItem.title }}
 
 		template(v-if="menuItem.submenu")
 			.submenu(v-expand="submenuOpened")
-				a.__item(
+				router-link.__item(
 					v-for="submenuItem in menuItem.submenu"
 					:key="submenuItem.id"
-					:href="submenuItem.url"
+					:to="submenuItem.url"
 				)
-					.__item-title
-						| {{ submenuItem.title }}
+					span.__item-title {{ submenuItem.title }}
 
 </template>
 
@@ -99,8 +104,8 @@
 			height: 1.5rem;
 
 			@media (--lt-md) {
-				margin-right: -2.875rem;
-				margin-left: 0.375rem;
+				margin-right: -3rem;
+				margin-left: 0.5rem;
 				padding: 0.5rem;
 				width: 2.5rem;
 				height: 2.5rem;
@@ -108,7 +113,7 @@
 
 			+ .button__title {
 				@media (--lt-md) {
-					padding-left: 2.875rem;
+					padding-left: 3rem;
 				}
 			}
 		}
@@ -136,7 +141,7 @@
 		border: 1px solid var(--page-header-border-color);
 		border-top-color: var(--page-header-background-color);
 		padding: 0.5rem 0;
-		max-width: 200px;
+		max-width: 240px;
 		background-color: var(--page-header-background-color);
 		transition: border-color var(--page-header-transition),
 		background-color var(--page-header-transition);
@@ -168,11 +173,11 @@
 				padding: (2rem - 1.125rem * 1.25) / 2 1rem (2rem - 1.125rem * 1.25) / 2 2rem;
 				font-size: 1.125rem;
 				line-height: 1.25;
-				white-space: nowrap;
+				// white-space: nowrap;
 				text-overflow: ellipsis;
 
 				@media (--lt-md) {
-					padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 2.875rem;
+					padding: (2.5rem - 1.125rem * 1.25) / 2 1rem (2.5rem - 1.125rem * 1.25) / 2 3rem;
 				}
 			}
 		}

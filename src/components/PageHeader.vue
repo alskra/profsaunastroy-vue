@@ -64,86 +64,106 @@
 				menu: [
 					{
 						id: 1,
+						icon: 'menu',
 						title: 'Услуги',
 						url: '',
 						submenu: [
 							{
 								id: 1,
-								title: 'Все услуги',
+								title: 'Отделка парилок, саун и бань',
 								url: ''
 							},
 							{
 								id: 2,
-								title: 'Услуга 1',
+								title: 'Мебель в стиле лофт на заказ',
 								url: ''
 							},
 							{
 								id: 3,
-								title: 'Услуга 2 very long very long very long',
+								title: 'Соляная комната',
 								url: ''
 							},
-							{
-								id: 4,
-								title: 'Услуга 3',
-								url: ''
-							}
-						]
+						],
 					},
 					{
 						id: 2,
+						icon: 'menu',
 						title: 'Каталог',
 						url: '',
 						submenu: [
 							{
 								id: 1,
-								title: 'Все категории',
+								title: 'Электрические печи',
 								url: ''
 							},
 							{
 								id: 2,
-								title: 'Категория 1',
+								title: 'Дровяные печи',
 								url: ''
 							},
 							{
 								id: 3,
-								title: 'Категория 2',
+								title: 'Пульты управления',
 								url: ''
-							}
-						]
+							},
+							{
+								id: 4,
+								title: 'Талькохлорит (облицовка печи)',
+								url: ''
+							},
+							{
+								id: 5,
+								title: 'Змеевик (облицовка печи)',
+								url: ''
+							},
+							{
+								id: 6,
+								title: 'Двери для бани и сауны',
+								url: ''
+							},
+							{
+								id: 7,
+								title: 'Купели',
+								url: ''
+							},
+						],
 					},
 					{
 						id: 3,
+						icon: null,
 						title: 'Наши работы',
 						url: '',
-						submenu: null
+						submenu: null,
 					},
 					{
 						id: 4,
+						icon: null,
 						title: 'О компании',
 						url: '',
-						submenu: null
+						submenu: null,
 					},
 					{
 						id: 5,
+						icon: null,
 						title: 'Контакты',
 						url: '',
-						submenu: null
-					}
+						submenu: null,
+					},
 				],
 				menuFooter: [
 					{
 						id: 1,
+						icon: 'call',
 						title: '+7 (495) 532-76-95',
 						url: 'tel:+74955327695',
 						submenu: null,
-						icon: 'phone',
 					},
 					{
 						id: 2,
+						icon: 'email',
 						title: 'info@profsaunastroy.ru',
 						url: 'mailto:info@profsaunastroy.ru',
 						submenu: null,
-						icon: 'email',
 					},
 				],
 			};
@@ -151,22 +171,22 @@
 		methods: {
 			onDocumentClick (evt) {
 				const target = evt.target;
-				const menuElem = this.$refs.menu;
-				const searchElem = this.$refs.search;
+				const menuEl = this.$refs.menu;
+				const searchEl = this.$refs.search;
 
-				if (menuElem !== target && !menuElem.contains(target)) {
+				if (menuEl !== target && !menuEl.contains(target)) {
 					this.menuOpened = false;
 				}
 
-				if (searchElem !== target && !searchElem.contains(target)) {
+				if (searchEl !== target && !searchEl.contains(target)) {
 					this.searchOpened = false;
 				}
 			},
 			checkTheme () {
-				for (let elem of document.querySelectorAll('[data-page-header-theme]')) {
-					if (elem.getBoundingClientRect().top <= this.$el.offsetHeight
-						&& elem.getBoundingClientRect().bottom > this.$el.offsetHeight) {
-						this.$el.dataset.theme = elem.dataset.pageHeaderTheme;
+				for (let el of document.querySelectorAll('[data-page-header-theme]')) {
+					if (el.getBoundingClientRect().top <= this.$el.offsetHeight
+						&& el.getBoundingClientRect().bottom > this.$el.offsetHeight) {
+						this.$el.dataset.theme = el.dataset.pageHeaderTheme;
 
 						return;
 					}
@@ -338,8 +358,8 @@
 			}
 
 			&-icon {
-				width: 2rem;
-				height: 2rem;
+				width: 1.5rem;
+				height: 1.5rem;
 			}
 		}
 
@@ -432,8 +452,8 @@
 			}
 
 			&-icon {
-				width: 2rem;
-				height: 2rem;
+				width: 1.5rem;
+				height: 1.5rem;
 			}
 		}
 	}
