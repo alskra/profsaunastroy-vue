@@ -1,7 +1,7 @@
 <script>
 	import Vue from 'vue';
 
-	const enterTo = {
+	const resetStyles = {
 		borderTopWidth: '',
 		borderBottomWidth: '',
 		paddingTop: '',
@@ -10,7 +10,7 @@
 		opacity: '',
 	};
 
-	const leaveTo = {
+	const hiddenStyles = {
 		borderTopWidth: 0,
 		borderBottomWidth: 0,
 		paddingTop: 0,
@@ -25,7 +25,7 @@
 		if (el === evt.target) {
 			el.removeEventListener('transitionend', onEnterTransitionend);
 			el.classList.remove('expand-enter-active');
-			Object.assign(el.style, enterTo);
+			Object.assign(el.style, resetStyles, {overflow: ''});
 		}
 	};
 
@@ -35,7 +35,10 @@
 		if (el === evt.target) {
 			el.removeEventListener('transitionend', onLeaveTransitionend);
 			el.classList.remove('expand-leave-active');
-			Object.assign(el.style, enterTo, {display: 'none'});
+			Object.assign(el.style, resetStyles, {
+				display: 'none',
+				overflow: '',
+			});
 		}
 	};
 
@@ -49,10 +52,12 @@
 			if (binding.value !== binding.oldValue) {
 				clearTimeout(el.timer);
 
-				// Save state
-				let currentStyles = {};
+				let fromStyles = {};
+				let toStyles = {};
 
-				if (el.classList.contains('expand-enter-active') || el.classList.contains('expand-leave-active')) {
+				// Define from styles
+				if ((el.classList.contains('expand-enter-active') || el.classList.contains('expand-leave-active'))
+				|| binding.oldValue) {
 					const {
 						borderTopWidth,
 						borderBottomWidth,
@@ -62,7 +67,7 @@
 						opacity,
 					} = getComputedStyle(el);
 
-					Object.assign(currentStyles, {
+					Object.assign(fromStyles, {
 						borderTopWidth,
 						borderBottomWidth,
 						paddingTop,
@@ -70,40 +75,58 @@
 						height,
 						opacity,
 					});
+
 					el.removeEventListener('transitionend', onEnterTransitionend);
 					el.removeEventListener('transitionend', onLeaveTransitionend);
 					el.classList.remove('expand-enter-active', 'expand-leave-active');
-				} else if (binding.oldValue) {
-					currentStyles = enterTo;
 				} else {
-					currentStyles = leaveTo;
+					Object.assign(fromStyles, hiddenStyles);
 				}
 
-				// Computed height
-				Object.assign(el.style, enterTo, {
+				Object.assign(el.style, resetStyles, {
 					display: '',
+					overflow: 'hidden',
 					transition: 'none',
 				});
 
-				const fullHeight = el.offsetHeight + 'px';
+				// Define to styles
+				if (binding.value) {
+					const {
+						borderTopWidth,
+						borderBottomWidth,
+						paddingTop,
+						paddingBottom,
+						height,
+						opacity,
+					} = getComputedStyle(el);
 
-				// Restore state
-				Object.assign(el.style, currentStyles);
+					Object.assign(toStyles, {
+						borderTopWidth,
+						borderBottomWidth,
+						paddingTop,
+						paddingBottom,
+						height,
+						opacity,
+					}, {transition: ''});
+				} else {
+					Object.assign(toStyles, hiddenStyles, {transition: ''});
+				}
 
+				// Animate from...
+				Object.assign(el.style, fromStyles);
+
+				// Animate to...
 				el.timer = setTimeout(() => {
 					delete el.timer;
 
 					if (binding.value) {
 						el.addEventListener('transitionend', onEnterTransitionend);
 						el.classList.add('expand-enter-active');
-						Object.assign(el.style, enterTo, {
-							transition: '',
-							height: fullHeight,
-						});
+						Object.assign(el.style, toStyles);
 					} else {
 						el.addEventListener('transitionend', onLeaveTransitionend);
 						el.classList.add('expand-leave-active');
-						Object.assign(el.style, leaveTo, {transition: ''});
+						Object.assign(el.style, toStyles);
 					}
 				}, 20);
 			}
@@ -119,7 +142,6 @@
 	.expand {
 		&-enter-active,
 		&-leave-active {
-			overflow: hidden !important;
 			transition-property:
 				border-top-width,
 				border-bottom-width,
@@ -127,7 +149,7 @@
 				padding-bottom,
 				height,
 				opacity !important;
-			transition-duration: 0.15s !important;
+			transition-duration: .15s !important;
 			transition-delay: 0s !important;
 		}
 
