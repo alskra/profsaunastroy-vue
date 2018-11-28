@@ -1,16 +1,20 @@
 <template lang="pug">
-	.page-content
-		slot
+	main.articles-page
+		.container
+			.row
+				.col.col-lg-10.offset-1
+					router-view(name="PageBreadcrumb")
+					| Articles
 </template>
 
 <script>
 	export default {
-		name: "PageContent",
+		name: 'ArticlesPage',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.page-content {
+	.articles-page {
 		@include reset;
 
 		padding: 6rem 0;

@@ -8,6 +8,8 @@ import StartSect from '../../components/StartSect';
 
 Vue.use(VueRouter);
 
+const baseUrl = process.env.BASE_URL;
+
 const routes = [
 	{
 		path: '*',
@@ -18,7 +20,7 @@ const routes = [
 		},
 	},
 	{
-		path: '',
+		path: baseUrl,
 		component: () => import('../../components/HomePage'),
 		children: [
 			{
@@ -38,6 +40,39 @@ const routes = [
 				],
 				meta: {
 					title: 'Главная',
+				},
+			},
+		],
+	},
+	{
+		path: `${baseUrl}articles`,
+		component: () => import('../../components/ArticlesPage'),
+		children: [
+			{
+				path: '',
+				components: {
+					PageBreadcrumb: () => import('../../components/PageBreadcrumb'),
+				},
+				name: 'articles',
+				meta: {
+					title: 'Полезные статьи',
+				},
+			},
+		],
+	},
+	{
+		path: `${baseUrl}articles/:id`,
+		component: () => import('../../components/ArticleViewPage'),
+		children: [
+			{
+				path: '',
+				components: {
+					PageBreadcrumb: () => import('../../components/PageBreadcrumb'),
+					ArticleView: () => import('../../components/ArticleView'),
+				},
+				name: 'article-view',
+				meta: {
+					title: 'Статья',
 				},
 			},
 		],
