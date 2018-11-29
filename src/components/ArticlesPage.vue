@@ -4,7 +4,7 @@
 			.row
 				.col.col-lg-10.offset-1
 					router-view(name="PageBreadcrumb")
-					| Articles
+					router-view(name="ArticleView")
 </template>
 
 <script>

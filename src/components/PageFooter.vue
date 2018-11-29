@@ -130,7 +130,7 @@
 					{
 						id: 1,
 						title: 'Главная',
-						url: {name: 'home'},
+						url: {name: 'Home'},
 					},
 					{
 						id: 2,

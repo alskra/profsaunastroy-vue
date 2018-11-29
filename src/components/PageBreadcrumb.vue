@@ -18,26 +18,39 @@
 					{
 						id: 1,
 						title: 'Главная',
-						url: {name: 'home'},
+						url: {name: 'Home'},
 					},
 				],
 			};
 		},
 		methods: {
-			setData (to) {
+			setData (to) {console.log('setData!');
 				this.breadcrumb.splice(1, this.breadcrumb.length);
 
-				to.matched.forEach((routeRecord) => {
-					let id = 1;
-
+				to.matched.forEach((routeRecord, index) => {
 					if (routeRecord.meta.title) {
-						id++;
+						let title = routeRecord.meta.title;
+						let url = routeRecord.path;
 
-						this.breadcrumb.push({
-							id,
-							title: routeRecord.meta.title,
-							url: routeRecord.path,
-						});
+						if (Object.keys(to.params).some(paramKey => url.indexOf(`:${paramKey}`) !== -1)) {
+							Object.keys(to.params).forEach(paramKey => url = url.replace(`:${paramKey}`, to.params[paramKey]));
+
+							fetch('https://my-json-server.typicode.com/alskra/profsaunastroy-vue' + url)
+								.then(response => response.json())
+								.then(data => {
+									this.breadcrumb.push({
+										id: index + 2,
+										title: data.title || title,
+										url,
+									});
+								});
+						} else {
+							this.breadcrumb.push({
+								id: index + 2,
+								title,
+								url,
+							});
+						}
 					}
 				});
 			},
@@ -46,6 +59,10 @@
 			next(vm => vm.setData(to));
 		},
 		beforeRouteUpdate (to, from, next) {
+			this.setData(to);
+			next();
+		},
+		beforeRouteLeave (to, from, next) {
 			this.setData(to);
 			next();
 		},

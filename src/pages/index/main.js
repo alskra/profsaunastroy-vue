@@ -6,73 +6,75 @@ import VueRouter from 'vue-router';
 import App from './App';
 import StartSect from '../../components/StartSect';
 
+const NotFoundPage = () => import('../../components/NotFoundPage');
+const HomePage = () => import('../../components/HomePage');
+const SaunaSect = () => import('../../components/SaunaSect');
+const FastLinks = () => import('../../components/FastLinks');
+const CatalogueSect = () => import('../../components/CatalogueSect');
+const ProjectSect = () => import('../../components/ProjectSect');
+const RequestSect = () => import('../../components/RequestSect');
+const ArticlesPage = () => import('../../components/ArticlesPage');
+const PageBreadcrumb = () => import('../../components/PageBreadcrumb');
+const ArticleView = () => import('../../components/ArticleView');
+
 Vue.use(VueRouter);
 
 const baseUrl = process.env.BASE_URL;
 
 const routes = [
 	{
+		name: 'NotFound',
 		path: '*',
-		component: () => import('../../components/NotFoundPage'),
-		name: '404',
+		component: NotFoundPage,
 		meta: {
 			title: '404',
 		},
 	},
 	{
 		path: baseUrl,
-		component: () => import('../../components/HomePage'),
+		component: HomePage,
+		meta: {
+			title: 'Главная',
+		},
 		children: [
 			{
+				name: 'Home',
 				path: '',
+				alias: ['index.html'],
 				components: {
 					StartSect,
-					SaunaSect: () => import('../../components/SaunaSect'),
-					FastLinks: () => import('../../components/FastLinks'),
-					CatalogueSect: () => import('../../components/CatalogueSect'),
-					ProjectSect: () => import('../../components/ProjectSect'),
-					RequestSect: () => import('../../components/RequestSect'),
-				},
-				name: 'home',
-				alias: [
-					'home',
-					'index.html',
-				],
-				meta: {
-					title: 'Главная',
+					SaunaSect,
+					FastLinks,
+					CatalogueSect,
+					ProjectSect,
+					RequestSect,
 				},
 			},
 		],
 	},
 	{
 		path: `${baseUrl}articles`,
-		component: () => import('../../components/ArticlesPage'),
+		component: ArticlesPage,
+		meta: {
+			title: 'Полезные статьи',
+		},
 		children: [
 			{
+				name: 'Articles',
 				path: '',
 				components: {
-					PageBreadcrumb: () => import('../../components/PageBreadcrumb'),
-				},
-				name: 'articles',
-				meta: {
-					title: 'Полезные статьи',
+					PageBreadcrumb,
 				},
 			},
-		],
-	},
-	{
-		path: `${baseUrl}articles/:id`,
-		component: () => import('../../components/ArticleViewPage'),
-		children: [
 			{
-				path: '',
+				name: 'ArticleView',
+				path: ':articleId',
 				components: {
-					PageBreadcrumb: () => import('../../components/PageBreadcrumb'),
-					ArticleView: () => import('../../components/ArticleView'),
+					PageBreadcrumb,
+					ArticleView,
 				},
-				name: 'article-view',
 				meta: {
-					title: 'Статья',
+					title: 'Просмотр статьи',
 				},
 			},
 		],
@@ -100,6 +102,14 @@ NProgress.configure({showSpinner: false});
 router.beforeEach((to, from, next) => {
 	NProgress.start();
 
+	next();
+});
+
+router.afterEach((to) => {
+	NProgress.done();
+
+	document.title = process.env.VUE_APP_TITLE;
+
 	to.matched.slice().reverse().some((routeRecord) => {
 		if (routeRecord.meta.title) {
 			document.title = `${routeRecord.meta.title} \u2014 ${process.env.VUE_APP_TITLE}`;
@@ -109,16 +119,10 @@ router.beforeEach((to, from, next) => {
 
 		return false;
 	});
-
-	next();
-});
-
-router.afterEach(() => {
-	NProgress.done();
 });
 
 router.onError((err) => {
-	alert(err);
+	throw err;
 });
 
 new Vue({
