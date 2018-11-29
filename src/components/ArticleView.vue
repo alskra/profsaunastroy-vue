@@ -1,8 +1,8 @@
 <template lang="pug">
-	article.article-view(v-if="err || article")
+	article.article-view(v-if="err || (article && article.id)")
 		.err(v-if="err") {{ err }}
 
-		template(v-else)
+		template(v-else-if="article && article.id")
 			header.header
 				h1.__title {{ article.title }}
 
@@ -13,6 +13,9 @@
 							:title="`${dateString} ${timeString}`"
 						)
 							| {{ dateString }}
+
+					.__col.col-auto.mw-100
+						.__share Поделиться PULSO
 
 			.content(v-html="article.body")
 </template>
@@ -58,6 +61,8 @@
 				.catch(err => next(vm => vm.setData(err, null)));
 		},
 		beforeRouteUpdate (to, from, next) {
+			this.err = this.article = null;
+
 			fetch(process.env.VUE_APP_API_HOST + '/articles/' + to.params.articleId)
 				.then(response => response.json())
 				.then(article => (this.setData(null, article), next()))
@@ -84,6 +89,13 @@
 		}
 
 		&__datetime {
+			font-weight: 300;
+			font-size: calc(var(--content-font-size) * 14 / 16);
+			line-height: 1.25;
+			color: var(--content-headings-color);
+		}
+
+		&__share {
 			font-weight: 300;
 			font-size: calc(var(--content-font-size) * 14 / 16);
 			line-height: 1.25;

@@ -5,7 +5,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App';
 import StartSect from '../../components/StartSect';
-
 const NotFoundPage = () => import('../../components/NotFoundPage');
 const HomePage = () => import('../../components/HomePage');
 const SaunaSect = () => import('../../components/SaunaSect');

@@ -1,18 +1,25 @@
 <template lang="pug">
 	main.articles-page
 		.container
+			page-breadcrumb
+
 			.row
 				.col.col-lg-10.offset-1
-					page-breadcrumb
 					router-view(name="ArticleView")
+
+		request-sect
 </template>
 
 <script>
 	import PageBreadcrumb from "./PageBreadcrumb";
+	const RequestSect = () => import('./RequestSect');
 
 	export default {
 		name: 'ArticlesPage',
-		components: {PageBreadcrumb},
+		components: {
+			PageBreadcrumb,
+			RequestSect,
+		},
 	}
 </script>
 

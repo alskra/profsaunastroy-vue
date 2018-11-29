@@ -150,7 +150,7 @@
 					{
 						id: 5,
 						title: 'Статьи',
-						url: '',
+						url: {name: 'Articles'},
 					},
 				],
 				sectMenuList: [
