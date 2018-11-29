@@ -31,7 +31,7 @@ const routes = [
 		},
 	},
 	{
-		path: baseUrl,
+		path: '/',
 		component: HomePage,
 		meta: {
 			title: 'Главная',
@@ -54,7 +54,7 @@ const routes = [
 		],
 	},
 	{
-		path: `${baseUrl}articles`,
+		path: `/articles`,
 		component: ArticlesPage,
 		meta: {
 			title: 'Полезные статьи',
