@@ -77,6 +77,8 @@
 	}
 
 	.header {
+		margin-bottom: 2rem;
+
 		&__title {
 			@include reset;
 
@@ -96,6 +98,7 @@
 		}
 
 		&__share {
+			display: inline;
 			font-weight: 300;
 			font-size: calc(var(--content-font-size) * 14 / 16);
 			line-height: 1.25;

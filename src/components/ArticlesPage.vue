@@ -1,24 +1,22 @@
 <template lang="pug">
 	main.articles-page
 		.container
-			page-breadcrumb
+			.breadcrumb
+				page-breadcrumb
 
-			.row
-				.col.col-lg-10.offset-1
-					router-view(name="ArticleView")
+			.main
+				router-view(name="ArticleView")
 
-		request-sect
+		router-view(name="RequestSect")
 </template>
 
 <script>
 	import PageBreadcrumb from "./PageBreadcrumb";
-	const RequestSect = () => import('./RequestSect');
 
 	export default {
 		name: 'ArticlesPage',
 		components: {
 			PageBreadcrumb,
-			RequestSect,
 		},
 	}
 </script>
@@ -27,10 +25,23 @@
 	.articles-page {
 		@include reset;
 
-		padding: 6rem 0;
+		padding: 3rem 0;
 
 		@media (--lt-md) {
-			padding: 3rem 0;
+			padding: 2rem 0;
 		}
+	}
+
+	.breadcrumb {
+		margin-bottom: 2rem;
+
+		@media (--lt-md) {
+			margin-bottom: 1.5rem;
+		}
+	}
+
+	.main {
+		max-width: env(--md);
+		margin: 0 auto;
 	}
 </style>

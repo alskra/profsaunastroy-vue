@@ -72,6 +72,7 @@ const routes = [
 				path: ':articleId',
 				components: {
 					ArticleView,
+					RequestSect,
 				},
 				meta: {
 					title: 'Просмотр статьи',
