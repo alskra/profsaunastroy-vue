@@ -1,5 +1,5 @@
 <template lang="pug">
-	nav.page-breadcrumb
+	nav.page-breadcrumb(v-if="breadcrumb.length > 1")
 		.items
 			.item(
 				v-for="(item, index) in breadcrumb"
@@ -24,48 +24,28 @@
 			};
 		},
 		methods: {
-			setData (to) {console.log('setData!');
+			setData () {
 				this.breadcrumb.splice(1, this.breadcrumb.length);
 
-				to.matched.forEach((routeRecord, index) => {
-					if (routeRecord.meta.title) {
-						let title = routeRecord.meta.title;
-						let url = routeRecord.path;
-
-						if (Object.keys(to.params).some(paramKey => url.indexOf(`:${paramKey}`) !== -1)) {
-							Object.keys(to.params).forEach(paramKey => url = url.replace(`:${paramKey}`, to.params[paramKey]));
-
-							fetch('https://my-json-server.typicode.com/alskra/profsaunastroy-vue' + url)
-								.then(response => response.json())
-								.then(data => {
-									this.breadcrumb.push({
-										id: index + 2,
-										title: data.title || title,
-										url,
-									});
-								});
-						} else {
-							this.breadcrumb.push({
-								id: index + 2,
-								title,
-								url,
-							});
-						}
+				this.$route.matched.forEach((routeRecord) => {
+					if (routeRecord.meta.breadcrumb) {
+						this.breadcrumb.push({
+							id: this.breadcrumb.length + 1,
+							title: routeRecord.meta.title,
+							url: routeRecord.meta.url,
+						})
 					}
 				});
 			},
 		},
-		beforeRouteEnter (to, from, next) {
-			next(vm => vm.setData(to));
+		created () {
+			this.setData();
 		},
-		beforeRouteUpdate (to, from, next) {
-			this.setData(to);
-			next();
-		},
-		beforeRouteLeave (to, from, next) {
-			this.setData(to);
-			next();
-		},
+		watch: {
+			'$route' () {
+				this.setData();
+			},
+		}
 	}
 </script>
 

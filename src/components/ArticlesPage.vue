@@ -3,13 +3,16 @@
 		.container
 			.row
 				.col.col-lg-10.offset-1
-					router-view(name="PageBreadcrumb")
+					page-breadcrumb
 					router-view(name="ArticleView")
 </template>
 
 <script>
+	import PageBreadcrumb from "./PageBreadcrumb";
+
 	export default {
 		name: 'ArticlesPage',
+		components: {PageBreadcrumb},
 	}
 </script>
 

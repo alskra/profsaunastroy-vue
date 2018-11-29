@@ -28,6 +28,7 @@ const routes = [
 		component: NotFoundPage,
 		meta: {
 			title: '404',
+			breadcrumb: true,
 		},
 	},
 	{
@@ -35,6 +36,7 @@ const routes = [
 		component: HomePage,
 		meta: {
 			title: 'Главная',
+			breadcrumb: false,
 		},
 		children: [
 			{
@@ -57,24 +59,24 @@ const routes = [
 		component: ArticlesPage,
 		meta: {
 			title: 'Полезные статьи',
+			breadcrumb: true,
 		},
 		children: [
 			{
 				name: 'Articles',
 				path: '',
 				components: {
-					PageBreadcrumb,
 				},
 			},
 			{
 				name: 'ArticleView',
 				path: ':articleId',
 				components: {
-					PageBreadcrumb,
 					ArticleView,
 				},
 				meta: {
 					title: 'Просмотр статьи',
+					breadcrumb: true,
 				},
 			},
 		],
@@ -102,7 +104,35 @@ NProgress.configure({showSpinner: false});
 router.beforeEach((to, from, next) => {
 	NProgress.start();
 
-	next();
+	let resolveRoutesMeta = Promise.resolve();
+
+	to.matched.forEach((routeRecord, index, routeRecordArr) => {
+		let title = routeRecord.meta.title;
+		let url = routeRecord.path;
+
+		if (Object.keys(to.params).some(paramKey => url.indexOf(`:${paramKey}`) !== -1)) {
+			Object.keys(to.params).forEach(paramKey => {
+				url = url.replace(`:${paramKey}`, to.params[paramKey]);
+			});
+
+			resolveRoutesMeta = resolveRoutesMeta
+				.then(() => fetch(process.env.VUE_APP_API_HOST + url))
+				.then(response => {
+					// if (response.status === 404 && index === routeRecordArr.length - 1) {
+					// 	next({name: 'NotFound'});
+					// }
+
+					return response.json();
+				})
+				.then(data => routeRecord.meta.title = data.title || title)
+		}
+
+		resolveRoutesMeta = resolveRoutesMeta.then(() => routeRecord.meta.url = url);
+	});
+
+	resolveRoutesMeta
+		.then(() => next())
+		.catch(() => next());
 });
 
 router.afterEach((to) => {

@@ -9,6 +9,8 @@ const pages = {
 	},
 };
 
+process.env.VUE_APP_API_HOST = 'https://my-json-server.typicode.com/alskra/profsaunastroy-vue';
+
 module.exports = {
 	baseUrl: process.env.VUE_APP_STAGE ? process.env.VUE_APP_STAGE : '/',
 	pages,
