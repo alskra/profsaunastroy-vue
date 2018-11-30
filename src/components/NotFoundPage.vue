@@ -7,7 +7,7 @@
 
 			btn-primary(
 				el="router-link"
-				:to="{name: 'Home'}"
+				:to="{name: 'HomePage'}"
 			)
 				| На главную
 </template>

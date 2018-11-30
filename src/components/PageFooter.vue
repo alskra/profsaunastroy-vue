@@ -130,7 +130,7 @@
 					{
 						id: 1,
 						title: 'Главная',
-						url: {name: 'Home'},
+						url: {name: 'HomePage'},
 					},
 					{
 						id: 2,
@@ -150,7 +150,7 @@
 					{
 						id: 5,
 						title: 'Статьи',
-						url: {name: 'Articles'},
+						url: {name: 'ArticlesPage'},
 					},
 				],
 				sectMenuList: [

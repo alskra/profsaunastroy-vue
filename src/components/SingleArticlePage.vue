@@ -1,22 +1,22 @@
 <template lang="pug">
-	main.articles-page
+	main.single-article-page
 		.container
 			router-view(name="PageBreadcrumb")
 
 			.main
-				| Articles Page
+				router-view(name="ArticleView")
 
 		router-view(name="RequestSect")
 </template>
 
 <script>
 	export default {
-		name: 'ArticlesPage',
+		name: 'SingleArticlePage',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.articles-page {
+	.single-article-page {
 		@include reset;
 
 		padding: 3rem 0;

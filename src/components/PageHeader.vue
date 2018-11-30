@@ -7,7 +7,7 @@
 	)
 		.container-fluid
 			router-link.logo(
-				:to="{name: 'Home'}"
+				:to="{name: 'HomePage'}"
 				title="ProfSaunaStroy"
 			)
 				base-icon.__icon(name="logo")

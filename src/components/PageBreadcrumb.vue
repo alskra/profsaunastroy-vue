@@ -14,27 +14,17 @@
 		name: 'PageBreadcrumb',
 		data () {
 			return {
-				breadcrumb: [
-					{
-						id: 1,
-						title: 'Главная',
-						url: {name: 'Home'},
-					},
-				],
+				breadcrumb: [],
 			};
 		},
 		methods: {
 			setData () {
-				this.breadcrumb.splice(1, this.breadcrumb.length);
-
-				this.$route.matched.forEach((routeRecord) => {
-					if (routeRecord.meta.breadcrumb) {
-						this.breadcrumb.push({
-							id: this.breadcrumb.length + 1,
-							title: routeRecord.meta.title,
-							url: routeRecord.meta.url,
-						})
-					}
+				this.$route.matched.slice().pop().meta.breadcrumb.forEach(location => {
+					this.breadcrumb.push({
+						id: this.breadcrumb.length + 1,
+						title: location.title,
+						url: location,
+					})
 				});
 			},
 		},
@@ -43,6 +33,7 @@
 		},
 		watch: {
 			'$route' () {
+				this.breadcrumb = null;
 				this.setData();
 			},
 		}

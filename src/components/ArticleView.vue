@@ -55,16 +55,20 @@
 			}
 		},
 		beforeRouteEnter (to, from, next) {
-			fetch(process.env.VUE_APP_API_HOST + '/articles/' + to.params.articleId)
-				.then(response => response.json())
+			const requestUrl = '/articles/' + to.params.articleId + '/';
+
+			Promise.resolve(localStorage[requestUrl] || fetch(process.env.VUE_APP_API_HOST + requestUrl))
+				.then(response => typeof response === 'string' ? JSON.parse(response) : response.json())
 				.then(article => next(vm => vm.setData(null, article)))
 				.catch(err => next(vm => vm.setData(err, null)));
 		},
 		beforeRouteUpdate (to, from, next) {
 			this.err = this.article = null;
 
-			fetch(process.env.VUE_APP_API_HOST + '/articles/' + to.params.articleId)
-				.then(response => response.json())
+			const requestUrl = '/articles/' + to.params.articleId;
+
+			Promise.resolve(localStorage[requestUrl] || fetch(process.env.VUE_APP_API_HOST + requestUrl))
+				.then(response => typeof response === 'string' ? JSON.parse(response) : response.json())
 				.then(article => (this.setData(null, article), next()))
 				.catch(err => (this.setData(err, null), next()));
 		},
