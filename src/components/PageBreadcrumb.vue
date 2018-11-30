@@ -1,11 +1,11 @@
 <template lang="pug">
-	nav.page-breadcrumb(v-if="breadcrumb.length > 1")
+	nav.page-breadcrumb(v-if="breadcrumb.length > 0")
 		.items
 			.item(
-				v-for="(item, index) in breadcrumb"
-				:key="item.id"
+				v-for="(location, index) in breadcrumb"
+				:key="location.id"
 			)
-				router-link.__title(:to="item.url") {{ item.title }}
+				router-link.__title(:to="location") {{ location.title }}
 				.__delimiter(v-if="index !== breadcrumb.length - 1") >
 </template>
 
@@ -19,12 +19,8 @@
 		},
 		methods: {
 			setData () {
-				this.$route.matched.slice().pop().meta.breadcrumb.forEach(location => {
-					this.breadcrumb.push({
-						id: this.breadcrumb.length + 1,
-						title: location.title,
-						url: location,
-					})
+				this.$route.matched[this.$route.matched.length - 1].meta.breadcrumb.forEach(location => {
+					this.breadcrumb.push(Object.assign({id: this.breadcrumb.length + 1}, location));
 				});
 			},
 		},
@@ -33,7 +29,7 @@
 		},
 		watch: {
 			'$route' () {
-				this.breadcrumb = null;
+				this.breadcrumb = [];
 				this.setData();
 			},
 		}

@@ -1,5 +1,5 @@
 <template lang="pug">
-	article.article-view(v-if="err || (article && article.id)")
+	article.article-view(v-if="(article && article.id) || err")
 		.err(v-if="err") {{ err }}
 
 		template(v-else-if="article && article.id")
@@ -21,12 +21,23 @@
 </template>
 
 <script>
+	const fetchData = (to) => {
+		const requestUrl = `/articles/${to.params.articleId}/`;
+
+		if (localStorage[requestUrl]) {
+			return Promise.resolve(JSON.parse(localStorage[requestUrl]));
+		}
+
+		return fetch(process.env.VUE_APP_API_HOST + requestUrl)
+			.then(response => response.json());
+	};
+
 	export default {
 		name: "ArticleView",
 		data () {
 			return {
-				err: null,
 				article: null,
+				err: null,
 			};
 		},
 		computed: {
@@ -55,20 +66,15 @@
 			}
 		},
 		beforeRouteEnter (to, from, next) {
-			const requestUrl = '/articles/' + to.params.articleId + '/';
-
-			Promise.resolve(localStorage[requestUrl] || fetch(process.env.VUE_APP_API_HOST + requestUrl))
-				.then(response => typeof response === 'string' ? JSON.parse(response) : response.json())
+			fetchData(to)
 				.then(article => next(vm => vm.setData(null, article)))
 				.catch(err => next(vm => vm.setData(err, null)));
 		},
 		beforeRouteUpdate (to, from, next) {
-			this.err = this.article = null;
+			this.article = null;
+			this.err = null;
 
-			const requestUrl = '/articles/' + to.params.articleId;
-
-			Promise.resolve(localStorage[requestUrl] || fetch(process.env.VUE_APP_API_HOST + requestUrl))
-				.then(response => typeof response === 'string' ? JSON.parse(response) : response.json())
+			fetchData(to)
 				.then(article => (this.setData(null, article), next()))
 				.catch(err => (this.setData(err, null), next()));
 		},

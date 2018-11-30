@@ -155,7 +155,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to) => {
 	NProgress.done();
 	animate.update();
-	document.title = `${to.matched.slice().pop().meta.title} \u2014 ${process.env.VUE_APP_TITLE}`;
+	document.title = `${to.matched[to.matched.length - 1].meta.title} \u2014 ${process.env.VUE_APP_TITLE}`;
 });
 
 router.onError((err) => {
