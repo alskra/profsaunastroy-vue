@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="page" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ProfSaunaStroy (staging)</title>
+    <base href="/profsaunastroy-vue/stage/">
+    <link rel="icon" href="favicon.ico">
+    <script>/**
+ *
+ *  ____ _ ___ _  _ _  _ ___     ___  ____ ____ ____ ____    ____ ___  ____
+ *  | __ |  |  |__| |  | |__]    |__] |__| | __ |___ [__     [__  |__] |__|
+ *  |__] |  |  |  | |__| |__]    |    |  | |__] |___ ___]    ___] |    |  |
+ *
+ *  Easy way to enable Single Page Applications for GitHub Pages
+ *
+ *  This project was released under MIT license.
+ *
+ *  @link      https://github.com/rafrex/spa-github-pages
+ *  @author    Rafael Pedicini <code@rafrex.com>
+ *  @link      http://websemantics.ca
+ *  @author    Adnan M.Sagar, PhD. <adnan@websemantics.ca>
+ *
+ *  @param {Object} l, the document current location
+ *  @param {Boolean} projectPages, true by default, https://help.github.com/articles/user-organization-and-project-pages
+ *
+ */
+
+;(function(l, projectPages) {
+
+  var repo = projectPages ? '/' + l.pathname.split('/')[1] + '/stage' : ''
+
+   /* redirect all 404 trafic to index.html */
+   function redirect() {
+     l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repo + '/?' +
+              (l.pathname ? 'p=' + l.pathname.replace(/&/g, '~and~').replace(repo, '') : '') +
+              (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+              (l.hash))
+   }
+
+   /* resolve 404 redirects into internal routes */
+   function resolve() {
+     if (l.search) {
+       var q = {}
+       l.search.slice(1).split('&').forEach(function(v) {
+         var a = v.split('=')
+         q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
+       })
+       if (q.p !== undefined) {
+         window.history.replaceState(null, null,
+           repo + (q.p || '') +
+           (q.q ? ('?' + q.q) : '') +
+           l.hash
+         )
+       }
+     }
+   }
+
+  /* if current document is 404 page page, redirect to index.html otherwise resolve */
+  document.title === '404' ? redirect() : resolve()
+
+}(window.location, window.projectPages || true ))
+
+    </script>
+  <link href="/profsaunastroy-vue/stage/css/chunk-23b72cd2.f6a59ab9.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-328938ee.0889c0e0.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-3e470bc2.519227ce.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-459e777a.92e967c1.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-51667cdf.1fa11450.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-7ea07506.ba569419.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-ccc2a4b4.692c540b.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-fbda99e6.50b322ab.css" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-23b72cd2.cdd4acf6.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-328938ee.0e604374.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-3e470bc2.6f335c0e.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-459e777a.90a3691d.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-51667cdf.853690f1.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-7ea07506.7cd9b9c0.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-ccc2a4b4.273fa6be.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/js/chunk-fbda99e6.df09a00e.js" rel="prefetch"><link href="/profsaunastroy-vue/stage/css/chunk-vendors.65803f91.css" rel="preload" as="style"><link href="/profsaunastroy-vue/stage/css/index.0d21b3ac.css" rel="preload" as="style"><link href="/profsaunastroy-vue/stage/js/chunk-vendors.33e97c4a.js" rel="modulepreload" as="script"><link href="/profsaunastroy-vue/stage/js/index.0d6a88d7.js" rel="modulepreload" as="script"><link href="/profsaunastroy-vue/stage/css/chunk-vendors.65803f91.css" rel="stylesheet"><link href="/profsaunastroy-vue/stage/css/index.0d21b3ac.css" rel="stylesheet"></head>
+  <body class="page-body">
+    <noscript><strong>We're sorry but profsaunastroy-vue doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
+    <div id="app"></div>
+  <script type="module" src="/profsaunastroy-vue/stage/js/chunk-vendors.33e97c4a.js"></script><script type="module" src="/profsaunastroy-vue/stage/js/index.0d6a88d7.js"></script><script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script><script type="text/javascript" src="/profsaunastroy-vue/stage/js/chunk-vendors-legacy.92a4f8cf.js" nomodule></script><script type="text/javascript" src="/profsaunastroy-vue/stage/js/index-legacy.3110f56f.js" nomodule></script></body>
+</html>

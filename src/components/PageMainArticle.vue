@@ -36,6 +36,8 @@
 						query: {redirect: to.fullPath},
 						replace: true,
 					});
+				} else if (response.status !== 200) {
+					next(new Error(String(response.status)));
 				}
 
 				return response.json();
