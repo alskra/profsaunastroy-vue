@@ -54,7 +54,7 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 	import BtnPrimary from './BtnPrimary';
 
 	export default {
@@ -76,7 +76,7 @@
 		@include reset;
 
 		padding: 6rem 0;
-		background: url("../img/bg-1.jpg") no-repeat 50% 50%;
+		background: url("../assets/img/bg-1.jpg") no-repeat 50% 50%;
 		background-size: cover;
 		background-color: var(--content-color);
 

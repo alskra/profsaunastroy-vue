@@ -41,7 +41,7 @@
 						:class="{'img-item--single': catalogueItem.images.length === 1}"
 					)
 						img.__elem.animate(
-							:src="`${baseUrl}${imgItem.src}`"
+							:src="imgItem.src"
 							:alt="imgItem.title"
 							:title="imgItem.title"
 							data-animate={
@@ -54,14 +54,12 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 	import SectNav from './SectNav';
 	import BtnPrimary from './BtnPrimary';
 
-	const baseUrl = process.env.BASE_URL;
-
 	export default {
-		name: "CatalogueItem",
+		name: 'CatalogueItem',
 		components: {
 			SectNav,
 			BtnPrimary,
@@ -82,9 +80,7 @@
 			index: Number,
 		},
 		data() {
-			return {
-				baseUrl,
-			};
+			return {};
 		},
 		mounted() {
 			animate.update();
@@ -98,6 +94,10 @@
 <style lang="scss" scoped>
 	.catalogue-item {
 		@include reset;
+
+		.sect-nav {
+			margin-bottom: 3rem;
+		}
 	}
 
 	.row {
@@ -109,10 +109,6 @@
 	}
 
 	.content {
-		margin-bottom: 3rem;
-	}
-
-	.sect-nav {
 		margin-bottom: 3rem;
 	}
 

@@ -1,0 +1,23 @@
+doctype
+html.page(lang="ru")
+	head
+		block meta
+			meta(charset="utf-8")
+			meta(http-equiv="X-UA-Compatible" content="IE=edge")
+			meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+		title= htmlWebpackPlugin.options.title
+		base(href=BASE_URL)
+
+		block styles
+			link(rel="icon" href="favicon.ico")
+
+		if VUE_APP_STAGE
+			script
+				include ../../../ghspa.js
+	body.page-body
+		noscript
+			strong We're sorry but profsaunastroy-vue doesn't work properly without JavaScript enabled. Please enable it to continue.
+
+		#app
+		block scripts

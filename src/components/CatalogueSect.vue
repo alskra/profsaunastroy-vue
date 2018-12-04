@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 	import CatalogueItem from './CatalogueItem';
 
 	export default {

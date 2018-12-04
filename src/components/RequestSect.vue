@@ -54,7 +54,7 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 	import SectNav from './SectNav';
 	import BtnPrimary from './BtnPrimary';
 
@@ -106,7 +106,7 @@
 		position: relative;
 		overflow: hidden;
 		padding: 12rem 0;
-		background: url("../img/leafs.png")
+		background: url("../assets/img/leafs.png")
 		no-repeat
 		left percentage(170px / 1920px) bottom 6rem var(--page-background-color);
 

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 
 	export default {
 		name: "SaunaSect",

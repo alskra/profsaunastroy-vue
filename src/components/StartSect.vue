@@ -46,7 +46,7 @@
 	import $ from 'jquery';
 	import 'slick-carousel/slick/slick.scss';
 	import 'slick-carousel';
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 
 	export default {
 		name: "StartSect",

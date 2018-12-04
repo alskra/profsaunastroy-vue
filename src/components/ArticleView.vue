@@ -1,8 +1,8 @@
 <template lang="pug">
-	article.article-view(v-if="(article && article.id) || err")
+	article.article-view(v-if="err || article")
 		.err(v-if="err") {{ err }}
 
-		template(v-else-if="article && article.id")
+		template(v-else)
 			header.header
 				h1.__title {{ article.title }}
 
@@ -15,26 +15,30 @@
 							| {{ dateString }}
 
 					.__col.col-auto.mw-100
-						.__share Поделиться PULSO
+						.__share Поделиться PLUSO
 
 			.content(v-html="article.body")
 </template>
 
 <script>
-	const fetchData = (to) => {
-		const requestUrl = `/articles/${to.params.articleId}/`;
+	const fetchData = (to, from, next) => {
+		return fetch(`${process.env.VUE_APP_API_HOST}/articles/${to.params.articleId}`)
+			.then(response => {
+				if (response.status === 404) {
+					next({
+						path: '404',
+						query: {redirect: to.fullPath},
+						replace: true,
+					});
+				}
 
-		if (localStorage[requestUrl]) {
-			return Promise.resolve(JSON.parse(localStorage[requestUrl]));
-		}
-
-		return fetch(process.env.VUE_APP_API_HOST + requestUrl)
-			.then(response => response.json());
+				return response.json();
+			});
 	};
 
 	export default {
-		name: "ArticleView",
-		data () {
+		name: 'ArticleView',
+		data() {
 			return {
 				article: null,
 				err: null,
@@ -57,7 +61,7 @@
 			},
 		},
 		methods: {
-			setData (err, article) {
+			setData(err, article) {
 				if (err) {
 					this.err = err.toString();
 				} else {
@@ -65,16 +69,16 @@
 				}
 			}
 		},
-		beforeRouteEnter (to, from, next) {
-			fetchData(to)
+		beforeRouteEnter(to, from, next) {
+			fetchData(to, from, next)
 				.then(article => next(vm => vm.setData(null, article)))
 				.catch(err => next(vm => vm.setData(err, null)));
 		},
-		beforeRouteUpdate (to, from, next) {
+		beforeRouteUpdate(to, from, next) {
 			this.article = null;
 			this.err = null;
 
-			fetchData(to)
+			fetchData(to, from, next)
 				.then(article => (this.setData(null, article), next()))
 				.catch(err => (this.setData(err, null), next()));
 		},

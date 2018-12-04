@@ -17,6 +17,15 @@ module.exports = {
 	runtimeCompiler: false,
 	chainWebpack (config) {
 		// `html-webpack-plugin` and loaders `pug`
+		Object.keys(pages).forEach(page => {
+			config.plugin(`html-${page}`).tap(options => {
+				options[0].minify = false;
+				options[0].title = process.env.VUE_APP_TITLE;
+
+				return options;
+			});
+		});
+
 		config.module.rule('pug').uses.clear();
 
 		config.module.rule('pug').oneOf('vue')
@@ -32,15 +41,6 @@ module.exports = {
 				plugins: [pugBem],
 			});
 
-		Object.keys(pages).forEach(page => {
-			config.plugin(`html-${page}`).tap(options => {
-				options[0].minify = false;
-				options[0].title = process.env.VUE_APP_TITLE;
-
-				return options;
-			});
-		});
-
 		// loaders `scss`
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
 
@@ -52,15 +52,14 @@ module.exports = {
 				.loader('style-resources-loader')
 				.options({
 					patterns: [
-						path.resolve(__dirname, 'src/scss/variables.scss'),
-						path.resolve(__dirname, 'src/scss/functions/*.scss'),
-						path.resolve(__dirname, 'src/scss/mixins/*.scss'),
+						path.resolve(__dirname, 'src/assets/scss/variables.scss'),
+						path.resolve(__dirname, 'src/assets/scss/functions/*.scss'),
+						path.resolve(__dirname, 'src/assets/scss/mixins/*.scss'),
 					],
 				});
 		});
 	},
 	css: {
-		extract: false,
 		sourceMap: process.env.NODE_ENV !== 'production',
 	},
 	productionSourceMap: false,

@@ -21,10 +21,6 @@
 				default: '',
 			},
 		},
-		beforeRouteEnter () {
-			alert('beforeRouteEnter on BtnPrimary!');
-			// next();
-		},
 	}
 </script>
 

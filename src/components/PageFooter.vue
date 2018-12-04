@@ -119,7 +119,7 @@
 </template>
 
 <script>
-	import animate from '../js/animate';
+	import animate from '../assets/js/animate';
 
 	export default {
 		name: "PageFooter",
@@ -130,7 +130,7 @@
 					{
 						id: 1,
 						title: 'Главная',
-						url: {name: 'HomePage'},
+						url: {name: 'Home'},
 					},
 					{
 						id: 2,
@@ -150,7 +150,7 @@
 					{
 						id: 5,
 						title: 'Статьи',
-						url: {name: 'ArticlesPage'},
+						url: {name: 'Articles'},
 					},
 				],
 				sectMenuList: [
@@ -305,7 +305,7 @@
 		@include reset;
 
 		margin-top: auto;
-		background: url("../img/footer-bg.svg") no-repeat 50% 50% / #{percentage(1497 / 1920)} auto #3e3e3e;
+		background: url("../assets/img/footer-bg.svg") no-repeat 50% 50% / #{percentage(1497 / 1920)} auto #3e3e3e;
 	}
 
 	.top-sect {
@@ -580,8 +580,8 @@
 			flex-shrink: 0;
 			background: {
 				image: image-set(
-						url("../img/icons/png/zingy.png") 1x,
-						url("../img/icons/png/zingy@2x.png") 2x
+						url("../assets/img/icons/png/zingy.png") 1x,
+						url("../assets/img/icons/png/zingy@2x.png") 2x
 				);
 				repeat: no-repeat;
 				position: 50% 50%;
