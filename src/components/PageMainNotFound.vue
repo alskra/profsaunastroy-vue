@@ -2,7 +2,7 @@
 	main.page-main-not-found
 		.container
 			.content
-				h1 404 &mdash; Страница не найдена
+				h1 404: Страница не найдена
 				p
 
 			btn-primary(

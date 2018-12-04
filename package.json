@@ -8,7 +8,9 @@
 		"dev-build": "vue-cli-service build --modern --mode development",
 		"staging": "vue-cli-service build --modern --mode staging --dest stage",
 		"lint": "vue-cli-service lint",
-		"imagemin": "node imagemin.config.js"
+		"imagemin": "node imagemin.config.js",
+		"postinstall": "npm run build",
+		"start": "node server.js"
 	},
 	"dependencies": {
 		"animejs": "^2.2.0",
@@ -33,6 +35,7 @@
 		"css-mqpacker": "^7.0.0",
 		"eslint": "^5.9.0",
 		"eslint-plugin-vue": "^5.0.0-0",
+		"express": "^4.16.4",
 		"imagemin": "^6.0.0",
 		"imagemin-gifsicle": "^6.0.1",
 		"imagemin-mozjpeg": "^8.0.0",
@@ -46,6 +49,7 @@
 		"pug-bem": "^1.0.1",
 		"pug-bem-plain-loader": "^1.0.5",
 		"pug-loader": "^2.4.0",
+		"serve-static": "^1.13.2",
 		"sort-css-media-queries": "^1.4.1",
 		"style-resources-loader": "^1.2.1",
 		"vue-template-compiler": "^2.5.17"

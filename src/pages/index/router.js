@@ -26,7 +26,7 @@ const routes = [
 		path: '*',
 		component: PageMainNotFound,
 		meta: {
-			title: '404 — Not Found',
+			title: '404: Страница не найдена',
 			breadcrumb: [
 				{name: 'Home'},
 				{name: 'NotFound'},
