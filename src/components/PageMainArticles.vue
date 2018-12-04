@@ -1,22 +1,22 @@
 <template lang="pug">
-	main.article-route-view
+	main.page-main-articles
 		.container
 			router-view(name="PageBreadcrumb")
 
-			.main
-				router-view(name="ArticleView")
+			.center-col
+				| Articles Page
 
 		router-view(name="RequestSect")
 </template>
 
 <script>
 	export default {
-		name: 'ArticleRouteView',
+		name: 'PageMainArticles',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.article-route-view {
+	.page-main-articles {
 		@include reset;
 
 		padding: 3rem 0;
@@ -29,12 +29,12 @@
 			margin-bottom: 2rem;
 
 			@media (--lt-md) {
-				margin-bottom: 1.5rem;
+				margin-bottom: (2rem / 1.5);
 			}
 		}
 	}
 
-	.main {
+	.center-col {
 		max-width: env(--md);
 		margin: 0 auto;
 	}

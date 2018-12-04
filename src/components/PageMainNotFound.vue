@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.not-found-route-view
+	main.page-main-not-found
 		.container
 			.content
 				h1 404 &mdash; Страница не найдена
@@ -16,7 +16,7 @@
 	import BtnPrimary from './BtnPrimary';
 
 	export default {
-		name: 'NotFoundRouteView',
+		name: 'PageMainNotFound',
 		components: {
 			BtnPrimary,
 		},
@@ -24,7 +24,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.not-found-route-view {
+	.page-main-not-found {
 		@include reset;
 
 		padding: 6rem;

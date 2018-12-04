@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.home-route-view
+	main.page-main-home
 		router-view(
 			name="StartSect"
 			data-page-header-theme="transparent"
@@ -19,12 +19,12 @@
 
 <script>
 	export default {
-		name: 'HomeRouteView',
+		name: 'PageMainHome',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.home-route-view {
+	.page-main-home {
 		@include reset;
 
 		margin-top: -3.5rem;

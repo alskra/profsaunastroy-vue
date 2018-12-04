@@ -1,23 +1,29 @@
 <template lang="pug">
-	article.article-view(v-if="err || article")
-		.err(v-if="err") {{ err }}
+	main.page-main-article
+		.container
+			router-view(name="PageBreadcrumb")
 
-		template(v-else)
-			header.header
-				h1.__title {{ article.title }}
+			article.article(v-if="err || article")
+				.err(v-if="err") {{ err }}
 
-				.__row.row.justify-content-between
-					.__col.col-auto.mw-100
-						time.__datetime(
-							:datetime="new Date(article.date).toISOString()"
-							:title="`${dateString} ${timeString}`"
-						)
-							| {{ dateString }}
+				template.__scope(v-else)
+					header.__header
+						h1.__title {{ article.title }}
 
-					.__col.col-auto.mw-100
-						.__share Поделиться PLUSO
+						.__row.row
+							.__col.col-auto.mw-100
+								time.__datetime(
+									:datetime="new Date(article.date).toISOString()"
+									:title="`${dateString} ${timeString}`"
+								)
+									| {{ dateString }}
 
-			.content(v-html="article.body")
+							.__col.col-auto.mw-100.ml-auto
+								.__share Поделиться PLUSO
+
+					.__body.content(v-html="article.body")
+
+		router-view(name="RequestSect")
 </template>
 
 <script>
@@ -37,7 +43,7 @@
 	};
 
 	export default {
-		name: 'ArticleView',
+		name: 'PageMainArticle',
 		data() {
 			return {
 				article: null,
@@ -86,12 +92,36 @@
 </script>
 
 <style lang="scss" scoped>
-	.article-view {
+	.page-main-article {
 		@include reset;
+
+		padding: 3rem 0;
+
+		@media (--lt-md) {
+			padding: 2rem 0;
+		}
+
+		.page-breadcrumb {
+			margin: 0 auto 2rem;
+			max-width: calc(env(--md) + 4rem);
+
+			@media (--lt-md) {
+				margin-bottom: (2rem / 1.5);
+			}
+		}
 	}
 
-	.header {
-		margin-bottom: 2rem;
+	.article {
+		margin: 0 auto;
+		max-width: env(--md);
+
+		&__header {
+			margin-bottom: 2rem;
+
+			@media (--lt-md) {
+				margin-bottom: (2rem / 1.5);
+			}
+		}
 
 		&__title {
 			@include reset;
@@ -105,6 +135,9 @@
 		}
 
 		&__datetime {
+			@include reset;
+
+			display: inline;
 			font-weight: 300;
 			font-size: calc(var(--content-font-size) * 14 / 16);
 			line-height: 1.25;

@@ -1,20 +1,21 @@
-import NProgress from 'nprogress';
+import NProgress from '../../assets/js/nprogress';
 import animate from '../../assets/js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import StartSect from '../../components/StartSect';
-import SaunaSect from '../../components/SaunaSect';
-import FastLinks from '../../components/FastLinks';
-import CatalogueSect from '../../components/CatalogueSect';
-import ProjectSect from '../../components/ProjectSect';
-import RequestSect from '../../components/RequestSect';
-import ArticlesRouteView from '../../components/ArticlesRouteView';
-import PageBreadcrumb from '../../components/PageBreadcrumb';
-import ArticleRouteView from '../../components/ArticleRouteView';
-import ArticleView from '../../components/ArticleView';
 
-const NotFoundRouteView = () => import('../../components/NotFoundRouteView');
-const HomeRouteView = () => import('../../components/HomeRouteView');
+import PageMainHome from '../../components/PageMainHome';
+import StartSect from '../../components/StartSect';
+import PageBreadcrumb from '../../components/PageBreadcrumb';
+
+const PageMainNotFound = () => import('../../components/PageMainNotFound');
+const PageMainArticles = () => import('../../components/PageMainArticles');
+const PageMainArticle = () => import('../../components/PageMainArticle');
+
+const SaunaSect = () => import('../../components/SaunaSect');
+const FastLinks = () => import('../../components/FastLinks');
+const CatalogueSect = () => import('../../components/CatalogueSect');
+const ProjectSect = () => import('../../components/ProjectSect');
+const RequestSect = () => import('../../components/RequestSect');
 
 NProgress.configure({showSpinner: false});
 Vue.use(VueRouter);
@@ -23,7 +24,7 @@ const routes = [
 	{
 		name: 'NotFound',
 		path: '*',
-		component: NotFoundRouteView,
+		component: PageMainNotFound,
 		meta: {
 			title: '404 — Not Found',
 			breadcrumb: [
@@ -34,7 +35,7 @@ const routes = [
 	},
 	{
 		path: '/',
-		component: HomeRouteView,
+		component: PageMainHome,
 		children: [
 			{
 				name: 'Home',
@@ -58,7 +59,7 @@ const routes = [
 	},
 	{
 		path: '/articles',
-		component: ArticlesRouteView,
+		component: PageMainArticles,
 		children: [
 			{
 				name: 'Articles',
@@ -79,14 +80,13 @@ const routes = [
 	},
 	{
 		path: '/articles/:articleId',
-		component: ArticleRouteView,
+		component: PageMainArticle,
 		children: [
 			{
 				name: 'Article',
 				path: '',
 				components: {
 					PageBreadcrumb,
-					ArticleView,
 					RequestSect,
 				},
 				meta: {
