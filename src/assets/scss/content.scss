@@ -174,8 +174,7 @@ h1, h2, h3, h4, h5, h6,
 
 	blockquote {
 		position: relative;
-		margin-left: 2.5rem;
-		margin-right: 2.5rem;
+		margin: calc(var(--content-space) * 2.5) 2.5rem;
 		border-left: 4px solid var(--content-headings-color);
 		padding: 1rem 0 1rem calc(1rem + 4px);
 
