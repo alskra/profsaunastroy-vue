@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.page-main-articles
+	main.articles-page
 		.container
 			router-view(name="PageBreadcrumb")
 
@@ -11,12 +11,12 @@
 
 <script>
 	export default {
-		name: 'PageMainArticles',
+		name: 'ArticlesPage',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.page-main-articles {
+	.articles-page {
 		@include reset;
 
 		padding: 3rem 0;

@@ -23,6 +23,29 @@
 				showFooter: false,
 			};
 		},
+		metaInfo: {
+			title: null,
+			titleTemplate: (titleChunk) =>
+				titleChunk ? `${titleChunk} — ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE,
+			htmlAttrs: {lang: 'ru'},
+			base: {href: process.env.BASE_URL},
+			meta: [
+				{charset: 'utf-8'},
+				{
+					name: 'viewport',
+					content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+				},
+			],
+			link: [
+				{
+					rel: 'favicon',
+					href: 'favicon.ico',
+				},
+			],
+			noscript: [
+				{innerHTML: 'This website requires JavaScript.'},
+			],
+		},
 		beforeCreate() {
 			this.$router.afterEach(() => {
 				this.showFooter = true;

@@ -1,8 +1,8 @@
 <template lang="pug">
-	main.page-main-not-found
+	main.not-found-page
 		.container
 			.content
-				h1 404: Страница не найдена
+				h1 {{ title }}
 				p
 
 			btn-primary(
@@ -16,18 +16,28 @@
 	import BtnPrimary from './BtnPrimary';
 
 	export default {
-		name: 'PageMainNotFound',
+		name: 'NotFoundPage',
 		components: {
 			BtnPrimary,
+		},
+		data() {
+			return {
+				title: '404: Страница не найдена',
+			};
+		},
+		metaInfo() {
+			return {
+				title: this.title,
+			};
 		},
 	}
 </script>
 
 <style lang="scss" scoped>
-	.page-main-not-found {
+	.not-found-page {
 		@include reset;
 
-		padding: 6rem;
+		padding: 6rem 0;
 
 		@media (--lt-md) {
 			padding: 3rem 0;

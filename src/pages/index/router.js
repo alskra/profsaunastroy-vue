@@ -2,14 +2,15 @@ import NProgress from '../../assets/js/nprogress';
 import animate from '../../assets/js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueMeta from 'vue-meta';
 
-import PageMainHome from '../../components/PageMainHome';
+import HomePage from '../../components/HomePage';
 import StartSect from '../../components/StartSect';
 import PageBreadcrumb from '../../components/PageBreadcrumb';
 
-const PageMainNotFound = () => import('../../components/PageMainNotFound');
-const PageMainArticles = () => import('../../components/PageMainArticles');
-const PageMainArticle = () => import('../../components/PageMainArticle');
+const NotFoundPage = () => import('../../components/NotFoundPage');
+const ArticlesPage = () => import('../../components/ArticlesPage');
+const ArticlePage = () => import('../../components/ArticlePage');
 
 const SaunaSect = () => import('../../components/SaunaSect');
 const FastLinks = () => import('../../components/FastLinks');
@@ -19,27 +20,24 @@ const RequestSect = () => import('../../components/RequestSect');
 
 NProgress.configure({showSpinner: false});
 Vue.use(VueRouter);
+Vue.use(VueMeta);
 
 const routes = [
 	{
-		name: 'NotFound',
 		path: '*',
-		component: PageMainNotFound,
+		name: 'NotFound',
+		component: NotFoundPage,
 		meta: {
-			title: '404: Страница не найдена',
-			breadcrumb: [
-				{name: 'Home'},
-				{name: 'NotFound'},
-			],
+			breadcrumb: '',
 		},
 	},
 	{
 		path: '/',
-		component: PageMainHome,
+		component: HomePage,
 		children: [
 			{
-				name: 'Home',
 				path: '',
+				name: 'Home',
 				components: {
 					StartSect,
 					SaunaSect,
@@ -49,53 +47,41 @@ const routes = [
 					RequestSect,
 				},
 				meta: {
-					title: 'Главная',
-					breadcrumb: [
-						{name: 'Home'},
-					],
+					breadcrumb: '',
 				},
 			},
 		],
 	},
 	{
 		path: '/articles',
-		component: PageMainArticles,
+		component: ArticlesPage,
 		children: [
 			{
-				name: 'Articles',
 				path: '',
+				name: 'Articles',
 				components: {
 					PageBreadcrumb,
 					RequestSect,
 				},
 				meta: {
-					title: 'Полезные статьи',
-					breadcrumb: [
-						{name: 'Home'},
-						{name: 'Articles'},
-					],
+					breadcrumb: '',
 				},
 			},
 		],
 	},
 	{
 		path: '/articles/:articleId',
-		component: PageMainArticle,
+		component: ArticlePage,
 		children: [
 			{
-				name: 'Article',
 				path: '',
+				name: 'Article View',
 				components: {
 					PageBreadcrumb,
 					RequestSect,
 				},
 				meta: {
-					title: 'Просмотр статьи',
-					breadcrumb: [
-						{name: 'Home'},
-						{name: 'Articles'},
-						{name: 'Article'},
-					],
+					breadcrumb: '',
 				},
 			}
 		],
@@ -122,39 +108,14 @@ export default router;
 
 router.beforeEach((to, from, next) => {
 	NProgress.start();
-
-	const breadcrumb = to.matched[to.matched.length - 1].meta.breadcrumb;
-	let resolveBreadcrumb = Promise.resolve();
-
-	breadcrumb.forEach(location => {
-		const route = router.match(Object.assign(location, {params: to.params}));
-		const routeRecord = route.matched[route.matched.length - 1];
-		const title = routeRecord.meta.title;
-
-		if (Object.keys(to.params).some(paramKey => routeRecord.path.indexOf(`:${paramKey}`) !== -1)) {
-			resolveBreadcrumb = resolveBreadcrumb
-				.then(() => fetch(process.env.VUE_APP_API_HOST + route.path))
-				.then(response => response.json())
-				.then(data => {
-					localStorage[route.path] = JSON.stringify(data);
-					routeRecord.meta.title = data.title || title;
-				});
-		}
-
-		resolveBreadcrumb.then(() => location.title = routeRecord.meta.title);
-	});
-
-	resolveBreadcrumb
-		.then(() => next())
-		.catch((err) => next(err));
+	next();
 });
 
-router.afterEach((to) => {
+router.afterEach(() => {
 	NProgress.done();
 	animate.update();
-	document.title = `${to.matched[to.matched.length - 1].meta.title} \u2014 ${process.env.VUE_APP_TITLE}`;
 });
 
 router.onError((err) => {
-	throw err;
+	alert(err);
 });

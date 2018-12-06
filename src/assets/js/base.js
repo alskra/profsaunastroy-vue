@@ -13,6 +13,7 @@ import 'focus-visible';
 import focusWithin from 'focus-within';
 
 // Import misc
+import animate from './animate';
 import Vue from 'vue';
 
 // Polyfills
@@ -23,6 +24,9 @@ focusWithin(document, {
 	className: 'focus-within',
 	force: true,
 });
+
+// Animate
+animate.init();
 
 // Vue
 Vue.config.productionTip = false;

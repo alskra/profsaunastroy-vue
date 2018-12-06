@@ -54,19 +54,12 @@
 </template>
 
 <script>
-	import animate from '../assets/js/animate';
 	import BtnPrimary from './BtnPrimary';
 
 	export default {
 		name: "ProjectSect",
 		components: {
 			BtnPrimary,
-		},
-		mounted() {
-			animate.update();
-		},
-		updated() {
-			animate.update();
 		},
 	}
 </script>

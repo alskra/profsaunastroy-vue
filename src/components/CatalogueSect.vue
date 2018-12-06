@@ -25,7 +25,6 @@
 </template>
 
 <script>
-	import animate from '../assets/js/animate';
 	import CatalogueItem from './CatalogueItem';
 
 	export default {
@@ -149,12 +148,6 @@
 					},
 				],
 			};
-		},
-		mounted() {
-			animate.update();
-		},
-		updated() {
-			animate.update();
 		},
 	}
 </script>

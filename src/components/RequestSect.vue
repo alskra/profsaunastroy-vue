@@ -54,7 +54,6 @@
 </template>
 
 <script>
-	import animate from '../assets/js/animate';
 	import SectNav from './SectNav';
 	import BtnPrimary from './BtnPrimary';
 
@@ -89,12 +88,6 @@
 					},
 				],
 			};
-		},
-		mounted() {
-			animate.update();
-		},
-		updated() {
-			animate.update();
 		},
 	}
 </script>

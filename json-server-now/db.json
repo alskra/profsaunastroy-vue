@@ -1,4 +1,28 @@
 {
+	"pages": [
+		{
+			"id": "home",
+			"title": "Главная",
+			"meta": [
+				{
+					"vmid": "description",
+					"name": "description",
+					"content": "Описание страницы \"Главная\""
+				}
+			]
+		},
+		{
+			"id": "articles",
+			"title": "Полезные статьи",
+			"meta": [
+				{
+					"vmid": "description",
+					"name": "description",
+					"content": "Описание страницы \"Полезные статьи\""
+				}
+			]
+		}
+	],
 	"articles": [
 		{
 			"id": 1,

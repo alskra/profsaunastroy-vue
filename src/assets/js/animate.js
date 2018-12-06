@@ -11,19 +11,6 @@ const animate = {
 		return {};
 	},
 
-	// Split text for `.animate-text` type animation
-	splitText() {
-		document.querySelectorAll('.animate-text:not(.animate-text--split)').forEach((elem) => {
-			elem.innerHTML = elem.textContent.replace(/[\S\u00A0]+/g, (match) => {
-				match = match.replace(/\S/g, '<span class="animate__letter">$&</span>');
-
-				return `<span class="animate__word">${match}</span>`;
-			});
-
-			elem.classList.add('animate-text--split');
-		});
-	},
-
 	// Start animation
 	start(elem, options) {
 		if (!elem.classList.contains('animate--started')) {
@@ -51,44 +38,41 @@ const animate = {
 		}
 	},
 
-	// Events to start
-	onScroll() {
-		document.querySelectorAll('.animate:not(.animate--completed)').forEach((elem) => {
-			if (animate.getDataOptions(elem).start === 'scroll'
-				&& elem.getBoundingClientRect().bottom >= 100
-				&& elem.getBoundingClientRect().top <= window.innerHeight - 100) {
-				animate.start(elem);
-			}
-		});
-	},
-	onLoaded() {
-		document.querySelectorAll('.animate:not(.animate--completed)').forEach((elem) => {
-			if (animate.getDataOptions(elem).start === 'load' && elem.complete) {
-				animate.start(elem);
-			}
-		});
-	},
-	onLoad(evt) {
-		const elem = evt.target;
-
-		if (elem.classList.contains('animate') && animate.getDataOptions(elem).start === 'load') {
-			animate.start(elem);
-		}
-	},
-
 	// Update
 	update() {
-		animate.splitText();
-		animate.onScroll();
-		animate.onLoaded();
+		const animateElList = document.querySelectorAll('.animate:not(.animate--completed)');
+
+		animateElList.forEach((elem) => {
+			if (elem.matches('.animate-text:not(.animate-text--split)')) {
+				elem.innerHTML = elem.textContent.replace(/[\S\u00A0]+/g, (match) => {
+					match = match.replace(/\S/g, '<span class="animate__letter">$&</span>');
+
+					return `<span class="animate__word">${match}</span>`;
+				});
+
+				elem.classList.add('animate-text--split');
+			}
+
+			const animateStart = animate.getDataOptions(elem).start;
+
+			if (animateStart === 'scroll') {
+				const elCoords = elem.getBoundingClientRect();
+
+				if (elCoords.top <= window.innerHeight - 100 && elCoords.bottom >= 100) {
+					animate.start(elem);
+				}
+			} else if (animateStart === 'load') {
+				elem.complete ? animate.start(elem) : null;
+			}
+		});
 	},
 
 	// Initialize
 	init() {
-		animate.update();
-
-		window.addEventListener('scroll', animate.onScroll);
-		document.addEventListener('load', animate.onLoad, true);
+		requestAnimationFrame(function runAnimate() {
+			animate.update();
+			requestAnimationFrame(runAnimate);
+		});
 	},
 
 	// Animations

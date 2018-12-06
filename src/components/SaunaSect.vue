@@ -37,8 +37,6 @@
 </template>
 
 <script>
-	import animate from '../assets/js/animate';
-
 	export default {
 		name: "SaunaSect",
 		data() {
@@ -55,12 +53,6 @@
 				`,
 				runningString: 'Интерьер для саун и бань, проектирование',
 			};
-		},
-		mounted() {
-			animate.update();
-		},
-		updated() {
-			animate.update();
 		},
 	}
 </script>

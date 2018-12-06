@@ -56,7 +56,7 @@
 		components: {
 			MenuItem,
 		},
-		data () {
+		data() {
 			return {
 				baseUrl: process.env.BASE_URL,
 				menuOpened: false,
@@ -169,7 +169,7 @@
 			};
 		},
 		methods: {
-			onDocumentClick (evt) {
+			onDocumentClick(evt) {
 				const target = evt.target;
 				const menuEl = this.$refs.menu;
 				const searchEl = this.$refs.search;
@@ -182,7 +182,7 @@
 					this.searchOpened = false;
 				}
 			},
-			checkTheme () {
+			checkTheme() {
 				for (let el of document.querySelectorAll('[data-page-header-theme]')) {
 					if (el.getBoundingClientRect().top <= this.$el.offsetHeight
 						&& el.getBoundingClientRect().bottom > this.$el.offsetHeight) {
@@ -195,21 +195,21 @@
 				delete this.$el.dataset.theme;
 			},
 		},
-		created () {
+		created() {
 			document.addEventListener('click', this.onDocumentClick);
 		},
-		destroyed () {
+		destroyed() {
 			document.removeEventListener('click', this.onDocumentClick);
 		},
-		mounted () {
+		mounted() {
 			const vm = this;
 
-			vm.checkThemeTimer = setTimeout(function checkTheme() {
+			requestAnimationFrame(function checkTheme() {
 				vm.checkTheme();
-				vm.checkThemeTimer = setTimeout(checkTheme, 100);
-			}, 100);
+				requestAnimationFrame(checkTheme);
+			});
 		},
-		updated () {
+		updated() {
 			document.documentElement.classList.toggle('page--has-open-menu', this.menuOpened);
 
 			if (this.searchOpened) {

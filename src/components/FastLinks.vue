@@ -27,8 +27,6 @@
 </template>
 
 <script>
-	import animate from '../assets/js/animate';
-
 	export default {
 		name: "FastLinks",
 		data() {
@@ -57,12 +55,6 @@
 					},
 				],
 			};
-		},
-		mounted() {
-			animate.update();
-		},
-		updated() {
-			animate.update();
 		},
 	}
 </script>
