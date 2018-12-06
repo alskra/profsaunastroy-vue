@@ -49,11 +49,9 @@
 			},
 		},
 		beforeRouteEnter(to, from, next) {
-			setTimeout(() => {
-				getData(to, from, next, reqUrl)
-					.then(data => next(vm => vm.setData(null, data)))
-					.catch(err => next(vm => vm.setData(err, null)));
-			}, 5000)
+			getData(to, from, next, reqUrl)
+				.then(data => next(vm => vm.setData(null, data)))
+				.catch(err => next(vm => vm.setData(err, null)));
 		},
 		beforeRouteUpdate(to, from, next) {
 			this.err = null;
