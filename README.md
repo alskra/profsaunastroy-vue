@@ -1,10 +1,13 @@
 # profsaunastroy-vue
 
-## App map
-* [404](https://alskra.github.io/profsaunastroy-vue/stage/404)
-* [Главная](https://alskra.github.io/profsaunastroy-vue/stage/)
-* [Полезные статьи](https://alskra.github.io/profsaunastroy-vue/stage/articles)
-* [Просмотр статьи](https://alskra.github.io/profsaunastroy-vue/stage/articles/1)
+## API JSON Server
+[https://api-profsaunastroy.now.sh](https://api-profsaunastroy.now.sh)
+
+## App routes
+* [404](https://profsaunastroy.now.sh/404)
+* [Главная](https://profsaunastroy.now.sh)
+* [Полезные статьи](https://profsaunastroy.now.sh/articles)
+* [Просмотр статьи](https://profsaunastroy.now.sh/articles/1)
 
 ## Project setup
 ```

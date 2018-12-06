@@ -9,13 +9,15 @@ const pages = {
 	},
 };
 
-process.env.VUE_APP_API_HOST = 'https://my-json-server.typicode.com/alskra/profsaunastroy-vue';
+process.env.VUE_APP_TITLE = 'ProfSaunaStroy';
+process.env.VUE_APP_API_HOST = process.env.NODE_ENV === 'production' ? 'https://api-profsaunastroy.now.sh'
+	: '//localhost:3000';
 
 module.exports = {
-	baseUrl: process.env.VUE_APP_STAGE ? process.env.VUE_APP_STAGE : '/',
+	baseUrl: '/',
 	pages,
 	runtimeCompiler: false,
-	chainWebpack (config) {
+	chainWebpack(config) {
 		// `html-webpack-plugin` and loaders `pug`
 		Object.keys(pages).forEach(page => {
 			config.plugin(`html-${page}`).tap(options => {

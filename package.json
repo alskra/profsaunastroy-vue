@@ -5,12 +5,10 @@
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build --modern",
-		"dev-build": "vue-cli-service build --modern --mode development",
-		"staging": "vue-cli-service build --modern --mode staging --dest stage",
 		"lint": "vue-cli-service lint",
 		"imagemin": "node imagemin.config.js",
-		"postinstall": "npm run build",
-		"start": "node server.js"
+		"now-build": "npm run build",
+		"now": "now && now alias"
 	},
 	"dependencies": {
 		"animejs": "^2.2.0",
@@ -18,7 +16,6 @@
 		"css-vars-ponyfill": "^1.15.1",
 		"focus-visible": "^4.1.5",
 		"focus-within": "^3.0.1",
-		"ghspa": "^1.0.0",
 		"jquery": "^3.3.1",
 		"normalize.css": "^8.0.1",
 		"nprogress": "^0.2.0",
@@ -35,7 +32,6 @@
 		"css-mqpacker": "^7.0.0",
 		"eslint": "^5.9.0",
 		"eslint-plugin-vue": "^5.0.0-0",
-		"express": "^4.16.4",
 		"imagemin": "^6.0.0",
 		"imagemin-gifsicle": "^6.0.1",
 		"imagemin-mozjpeg": "^8.0.0",
