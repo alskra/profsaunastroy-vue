@@ -1,0 +1,17 @@
+{
+	"version": 2,
+	"name": "api-profsaunastroy",
+	"alias": "api-profsaunastroy.now.sh",
+	"builds": [
+		{
+			"src": "index.js",
+			"use": "@now/node-server"
+		}
+	],
+	"routes": [
+		{
+			"src": ".*",
+			"dest": "/"
+		}
+	]
+}
