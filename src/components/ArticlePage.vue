@@ -4,7 +4,7 @@
 
 		template(v-else)
 			.container
-				router-view(name="PageBreadcrumb")
+				page-breadcrumbs(:breadcrumb="breadcrumb")
 
 				article.article
 					header.__header
@@ -13,7 +13,7 @@
 						.__row.row
 							.__col.col-auto.mw-100
 								time.__datetime(
-									:datetime="new Date(data.published_date).toISOString()"
+									:datetime="new Date(data.publication_date).toISOString()"
 									:title="`${dateString} ${timeString}`"
 								)
 									| {{ dateString }}
@@ -28,20 +28,31 @@
 
 <script>
 	import MixinPage from './MixinPage';
+	import PageBreadcrumbs from "./PageBreadcrumbs";
 
 	export default {
 		name: 'ArticlePage',
 		mixins: [MixinPage()],
+		components: {PageBreadcrumbs},
 		computed: {
+			breadcrumb() {
+				return {
+					parents: [
+						'Home',
+						'Articles',
+					],
+					label: this.data ? this.data.title : null,
+				};
+			},
 			dateString() {
-				return new Date(this.data.published_date).toLocaleDateString('ru', {
+				return new Date(this.data.publication_date).toLocaleDateString('ru', {
 					year: 'numeric',
 					month: 'long',
 					day: '2-digit',
 				});
 			},
 			timeString() {
-				return new Date(this.data.published_date).toLocaleTimeString('ru', {
+				return new Date(this.data.publication_date).toLocaleTimeString('ru', {
 					hour: '2-digit',
 					minute: '2-digit',
 					second: '2-digit',
@@ -61,7 +72,7 @@
 			padding: 2rem 0;
 		}
 
-		.page-breadcrumb {
+		.page-breadcrumbs {
 			margin: 0 auto 2rem;
 			max-width: calc(env(--md) + 4rem);
 

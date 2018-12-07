@@ -3,11 +3,11 @@ import animate from '../../assets/js/animate';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
+import VueBreadcrumbs from 'vue-breadcrumbs';
 
 import NotFoundPage from '../../components/NotFoundPage';
 import HomePage from '../../components/HomePage';
 import StartSect from '../../components/StartSect';
-import PageBreadcrumb from '../../components/PageBreadcrumb';
 
 const ArticlesPage = () => import('../../components/ArticlesPage');
 const ArticlePage = () => import('../../components/ArticlePage');
@@ -19,17 +19,16 @@ const ProjectSect = () => import('../../components/ProjectSect');
 const RequestSect = () => import('../../components/RequestSect');
 
 NProgress.configure({showSpinner: false});
+
 Vue.use(VueRouter);
 Vue.use(VueMeta);
+Vue.use(VueBreadcrumbs);
 
 const routes = [
 	{
 		path: '*',
 		name: 'NotFound',
 		component: NotFoundPage,
-		meta: {
-			breadcrumb: '',
-		},
 	},
 	{
 		path: '/',
@@ -47,7 +46,7 @@ const routes = [
 					RequestSect,
 				},
 				meta: {
-					breadcrumb: '',
+					breadcrumb: 'Главная',
 				},
 			},
 		],
@@ -60,28 +59,26 @@ const routes = [
 				path: '',
 				name: 'Articles',
 				components: {
-					PageBreadcrumb,
 					RequestSect,
 				},
 				meta: {
-					breadcrumb: '',
+					breadcrumb: 'Полезные статьи',
 				},
 			},
 		],
 	},
 	{
-		path: '/articles/:articleId',
+		path: '/articles/:article_id',
 		component: ArticlePage,
 		children: [
 			{
 				path: '',
-				name: 'Article View',
+				name: 'Article',
 				components: {
-					PageBreadcrumb,
 					RequestSect,
 				},
 				meta: {
-					breadcrumb: '',
+					breadcrumb: 'Просмотр статьи',
 				},
 			}
 		],

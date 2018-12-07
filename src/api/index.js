@@ -3,7 +3,7 @@ export const getData = (to, from, next, reqUrl) => {
 		.then(response => {
 			if (response.status === 404) {
 				next({
-					name: 'NotFound',
+					path: '/404',
 					query: {redirect: to.fullPath},
 					replace: true,
 				});

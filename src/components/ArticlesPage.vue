@@ -4,7 +4,7 @@
 
 		template(v-else)
 			.container
-				router-view(name="PageBreadcrumb")
+				page-breadcrumbs(:breadcrumb="breadcrumb")
 
 				.center-col
 					| Articles Page
@@ -14,10 +14,22 @@
 
 <script>
 	import MixinPage from './MixinPage';
+	import PageBreadcrumbs from './PageBreadcrumbs';
 
 	export default {
 		name: 'ArticlesPage',
 		mixins: [MixinPage('/pages/articles')],
+		components: {PageBreadcrumbs},
+		computed: {
+			breadcrumb() {
+				return {
+					parents: [
+						'Home',
+					],
+					label: this.$route.matched.slice().pop().meta.breadcrumb,
+				};
+			},
+		},
 	}
 </script>
 
@@ -31,8 +43,9 @@
 			padding: 2rem 0;
 		}
 
-		.page-breadcrumb {
-			margin-bottom: 2rem;
+		.page-breadcrumbs {
+			margin: 0 auto 2rem;
+			max-width: calc(env(--md) + 4rem);
 
 			@media (--lt-md) {
 				margin-bottom: (2rem / 1.5);
