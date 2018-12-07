@@ -4,11 +4,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
+import NotFoundPage from '../../components/NotFoundPage';
 import HomePage from '../../components/HomePage';
 import StartSect from '../../components/StartSect';
 import PageBreadcrumb from '../../components/PageBreadcrumb';
 
-const NotFoundPage = () => import('../../components/NotFoundPage');
 const ArticlesPage = () => import('../../components/ArticlesPage');
 const ArticlePage = () => import('../../components/ArticlePage');
 

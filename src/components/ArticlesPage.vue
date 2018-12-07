@@ -1,17 +1,23 @@
 <template lang="pug">
-	main.articles-page
-		.container
-			router-view(name="PageBreadcrumb")
+	main.articles-page(v-if="err || data")
+		.err(v-if="err") {{ err }}
 
-			.center-col
-				| Articles Page
+		template(v-else)
+			.container
+				router-view(name="PageBreadcrumb")
 
-		router-view(name="RequestSect")
+				.center-col
+					| Articles Page
+
+			router-view(name="RequestSect")
 </template>
 
 <script>
+	import MixinPage from './MixinPage';
+
 	export default {
 		name: 'ArticlesPage',
+		mixins: [MixinPage('/pages/articles')],
 	}
 </script>
 

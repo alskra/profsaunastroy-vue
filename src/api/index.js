@@ -1,5 +1,5 @@
-export const getData = (to, from, next, url) => {
-	return fetch(process.env.VUE_APP_API_HOST + url)
+export const getData = (to, from, next, reqUrl) => {
+	return fetch(process.env.VUE_APP_API_HOST + reqUrl)
 		.then(response => {
 			if (response.status === 404) {
 				next({

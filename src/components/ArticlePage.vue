@@ -1,19 +1,19 @@
 <template lang="pug">
-	main.article-page
-		.container
-			router-view(name="PageBreadcrumb")
+	main.article-page(v-if="err || data")
+		.err(v-if="err") {{ err }}
 
-			article.article(v-if="err || article")
-				.err(v-if="err") {{ err }}
+		template(v-else)
+			.container
+				router-view(name="PageBreadcrumb")
 
-				template.__scope(v-else)
+				article.article
 					header.__header
-						h1.__title {{ article.title }}
+						h1.__title {{ data.title }}
 
 						.__row.row
 							.__col.col-auto.mw-100
 								time.__datetime(
-									:datetime="new Date(article.date).toISOString()"
+									:datetime="new Date(data.published_date).toISOString()"
 									:title="`${dateString} ${timeString}`"
 								)
 									| {{ dateString }}
@@ -21,74 +21,32 @@
 							.__col.col-auto.mw-100.ml-auto
 								.__share Поделиться PLUSO
 
-					.__body.content(v-html="article.body")
+					.__body.content(v-html="data.body")
 
-		router-view(name="RequestSect")
+			router-view(name="RequestSect")
 </template>
 
 <script>
-	const fetchData = (to, from, next) => {
-		return fetch(`${process.env.VUE_APP_API_HOST}/articles/${to.params.articleId}`)
-			.then(response => {
-				if (response.status === 404) {
-					next({
-						path: '404',
-						query: {redirect: to.fullPath},
-						replace: true,
-					});
-				} else if (response.status !== 200) {
-					next(new Error(String(response.status)));
-				}
-
-				return response.json();
-			});
-	};
+	import MixinPage from './MixinPage';
 
 	export default {
 		name: 'ArticlePage',
-		data() {
-			return {
-				article: null,
-				err: null,
-			};
-		},
+		mixins: [MixinPage()],
 		computed: {
 			dateString() {
-				return new Date(this.article.date).toLocaleDateString('ru', {
+				return new Date(this.data.published_date).toLocaleDateString('ru', {
 					year: 'numeric',
 					month: 'long',
 					day: '2-digit',
 				});
 			},
 			timeString() {
-				return new Date(this.article.date).toLocaleTimeString('ru', {
+				return new Date(this.data.published_date).toLocaleTimeString('ru', {
 					hour: '2-digit',
 					minute: '2-digit',
 					second: '2-digit',
 				});
 			},
-		},
-		methods: {
-			setData(err, article) {
-				if (err) {
-					this.err = err.toString();
-				} else {
-					this.article = article;
-				}
-			}
-		},
-		beforeRouteEnter(to, from, next) {
-			fetchData(to, from, next)
-				.then(article => next(vm => vm.setData(null, article)))
-				.catch(err => next(vm => vm.setData(err, null)));
-		},
-		beforeRouteUpdate(to, from, next) {
-			this.article = null;
-			this.err = null;
-
-			fetchData(to, from, next)
-				.then(article => (this.setData(null, article), next()))
-				.catch(err => (this.setData(err, null), next()));
 		},
 	}
 </script>
