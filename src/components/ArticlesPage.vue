@@ -4,14 +4,19 @@
 
 		template(v-else)
 			base-section
-				template(slot="breadcrumbs")
-					page-breadcrumbs(:breadcrumb="breadcrumb")
-
 				template(slot="bg-text") Статьи
-				template(slot="title") Полезные статьи
 
-				template(slot="body")
-					p В этом разделе вы найдете полезные статьи и материалы по тематике стоительства и отделки саун и бань.
+				page-breadcrumbs(
+					slot="breadcrumbs"
+					:breadcrumb="breadcrumb"
+				)
+
+				template(slot="title") {{ page.title }}
+
+				div(
+					slot="body"
+					v-html="page.body"
+				)
 
 			router-view(name="RequestSect")
 </template>
