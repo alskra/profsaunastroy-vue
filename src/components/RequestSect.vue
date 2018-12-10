@@ -140,6 +140,10 @@
 			}
 		}
 
+		.sect-nav {
+			margin-bottom: 3rem;
+		}
+
 		&.animate--started,
 		&.animate--completed {
 			&::before,
@@ -182,10 +186,6 @@
 	}
 
 	.content {
-		margin-bottom: 3rem;
-	}
-
-	.sect-nav {
 		margin-bottom: 3rem;
 	}
 </style>

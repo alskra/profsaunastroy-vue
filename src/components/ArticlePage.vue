@@ -21,7 +21,26 @@
 							.__col.col-auto.mw-100.ml-auto
 								.__share Поделиться PLUSO
 
-					.__body.content(v-html="page.body")
+					.__body.mb-2.mb-md-3
+						.content(v-html="page.body")
+
+					.row.mb-2.mb-md-3
+						.col-12.col-md-4.mb-1.mb-md-0
+							img.mx-auto.d-block.mw-100(src="upload/vagonka_kedr.jpg" alt="")
+
+						.col-12.col-md-8
+							.content
+								h3 Вагонка из кедра канадского
+								p Одним из элитных и дорогостоящих материалов, применяемых для отделки сауны, является кедр канадский. Цвет этого благородного природного материала варьируется от темно-розовой до красно-коричневой и имеет приятный аромат. Он обладает целым рядом достоинств.
+
+					.row.mb-2.mb-md-3
+						.col-12.col-md-4.order-md-1.mb-1.mb-md-0
+							img.mx-auto.d-block.mw-100(src="upload/vagonka_list.jpg" alt="")
+
+						.col-12.col-md-8
+							.content
+								h3 Вагонка из лиственницы для комнаты отдыха
+								p Вагонка из лиственницы подойдет как для комнаты отдыха, так и в душевую и предбанник. Эта хвойная порода дерева славится своей прочностью, которая сравнима с прочностью дуба. Вагонка из лиственницы обладает низкой теплопроводностью, имеет красивую структуру дерева и приятный аромат, устойчива к условиям высокой влажности.
 
 			router-view(name="RequestSect")
 </template>
@@ -66,17 +85,12 @@
 	.article-page {
 		@include reset;
 
-		padding: 3rem 0;
-
-		@media (--lt-md) {
-			padding: 2rem 0;
-		}
-
 		.page-breadcrumbs {
-			margin: 0 auto 2rem;
+			margin: 3rem auto 2rem;
 			max-width: calc(env(--md) + 4rem);
 
 			@media (--lt-md) {
+				margin-top: 2rem;
 				margin-bottom: (2rem / 1.5);
 			}
 		}
