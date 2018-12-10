@@ -18,6 +18,7 @@
 					v-html="page.body"
 				)
 
+			router-view(name="ArticlesList")
 			router-view(name="RequestSect")
 </template>
 

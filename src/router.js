@@ -15,6 +15,7 @@ const FastLinks = () => import('./components/FastLinks');
 const CatalogueSect = () => import('./components/CatalogueSect');
 const ProjectSect = () => import('./components/ProjectSect');
 const RequestSect = () => import('./components/RequestSect');
+const ArticlesList = () => import('./components/ArticlesList');
 
 NProgress.configure({showSpinner: false});
 
@@ -56,6 +57,7 @@ const routes = [
 				path: '',
 				name: 'Articles',
 				components: {
+					ArticlesList,
 					RequestSect,
 				},
 				meta: {
