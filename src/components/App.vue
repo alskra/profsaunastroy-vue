@@ -27,7 +27,13 @@
 			title: null,
 			titleTemplate: (titleChunk) =>
 				titleChunk ? `${titleChunk} — ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE,
-			htmlAttrs: {lang: 'ru'},
+			htmlAttrs: {
+				class: 'page',
+				lang: 'ru',
+			},
+			bodyAttrs: {
+				class: 'page-body',
+			},
 			base: {href: process.env.BASE_URL},
 			meta: [
 				{charset: 'utf-8'},

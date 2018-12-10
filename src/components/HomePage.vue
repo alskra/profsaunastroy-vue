@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.home-page(v-if="err || data")
+	main.home-page(v-if="err || page.id")
 		.err(v-if="err") {{ err }}
 
 		template(v-else)
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-	import MixinPage from './MixinPage';
+	import BasePage from './BasePage';
 
 	export default {
 		name: 'HomePage',
-		mixins: [MixinPage('/pages/home')],
+		mixins: [BasePage.createMixin('/pages/home')],
 	}
 </script>
 

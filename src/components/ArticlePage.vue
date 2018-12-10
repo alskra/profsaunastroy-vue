@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.article-page(v-if="err || data")
+	main.article-page(v-if="err || page.id")
 		.err(v-if="err") {{ err }}
 
 		template(v-else)
@@ -8,12 +8,12 @@
 
 				article.article
 					header.__header
-						h1.__title {{ data.title }}
+						h1.__title {{ page.title }}
 
 						.__row.row
 							.__col.col-auto.mw-100
 								time.__datetime(
-									:datetime="new Date(data.publication_date).toISOString()"
+									:datetime="new Date(page.publication_date).toISOString()"
 									:title="`${dateString} ${timeString}`"
 								)
 									| {{ dateString }}
@@ -21,18 +21,18 @@
 							.__col.col-auto.mw-100.ml-auto
 								.__share Поделиться PLUSO
 
-					.__body.content(v-html="data.body")
+					.__body.content(v-html="page.body")
 
 			router-view(name="RequestSect")
 </template>
 
 <script>
-	import MixinPage from './MixinPage';
-	import PageBreadcrumbs from "./PageBreadcrumbs";
+	import BasePage from './BasePage';
+	import PageBreadcrumbs from './PageBreadcrumbs';
 
 	export default {
 		name: 'ArticlePage',
-		mixins: [MixinPage()],
+		mixins: [BasePage.createMixin()],
 		components: {PageBreadcrumbs},
 		computed: {
 			breadcrumb() {
@@ -41,18 +41,18 @@
 						'Home',
 						'Articles',
 					],
-					label: this.data ? this.data.title : null,
+					label: this.page.title,
 				};
 			},
 			dateString() {
-				return new Date(this.data.publication_date).toLocaleDateString('ru', {
+				return new Date(this.page.publication_date).toLocaleDateString('ru', {
 					year: 'numeric',
 					month: 'long',
 					day: '2-digit',
 				});
 			},
 			timeString() {
-				return new Date(this.data.publication_date).toLocaleTimeString('ru', {
+				return new Date(this.page.publication_date).toLocaleTimeString('ru', {
 					hour: '2-digit',
 					minute: '2-digit',
 					second: '2-digit',

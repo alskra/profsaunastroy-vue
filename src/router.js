@@ -1,28 +1,25 @@
-import NProgress from '../../assets/js/nprogress';
-import animate from '../../assets/js/animate';
+import NProgress from './assets/js/nprogress';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
-import VueBreadcrumbs from 'vue-breadcrumbs';
 
-import NotFoundPage from '../../components/NotFoundPage';
-import HomePage from '../../components/HomePage';
-import StartSect from '../../components/StartSect';
+import NotFoundPage from './components/NotFoundPage';
+import HomePage from './components/HomePage';
+import StartSect from './components/StartSect';
 
-const ArticlesPage = () => import('../../components/ArticlesPage');
-const ArticlePage = () => import('../../components/ArticlePage');
+const ArticlesPage = () => import('./components/ArticlesPage');
+const ArticlePage = () => import('./components/ArticlePage');
 
-const SaunaSect = () => import('../../components/SaunaSect');
-const FastLinks = () => import('../../components/FastLinks');
-const CatalogueSect = () => import('../../components/CatalogueSect');
-const ProjectSect = () => import('../../components/ProjectSect');
-const RequestSect = () => import('../../components/RequestSect');
+const SaunaSect = () => import('./components/SaunaSect');
+const FastLinks = () => import('./components/FastLinks');
+const CatalogueSect = () => import('./components/CatalogueSect');
+const ProjectSect = () => import('./components/ProjectSect');
+const RequestSect = () => import('./components/RequestSect');
 
 NProgress.configure({showSpinner: false});
 
 Vue.use(VueRouter);
 Vue.use(VueMeta);
-Vue.use(VueBreadcrumbs);
 
 const routes = [
 	{
@@ -110,7 +107,6 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(() => {
 	NProgress.done();
-	animate.update();
 });
 
 router.onError((err) => {

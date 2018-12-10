@@ -1,13 +1,13 @@
 <template lang="pug">
-	nav.page-breadcrumbs(v-if="breadcrumb.label")
+	nav.page-breadcrumbs(v-if="currentLabel")
 		.item(v-for="parent in breadcrumb.parents")
-			router-link.__label(:to="{name: parent}")
-				| {{ $router.match({name: parent}).matched.pop().meta.breadcrumb || parent }}
+			router-link.__label(:to="{name: parent, params: $route.params}")
+				| {{ getParentLabel(parent) }}
 
 			span.__delimiter >
 
 		.item
-			router-link.__label(to="") {{ breadcrumb.label }}
+			span.__label {{ currentLabel }}
 </template>
 
 <script>
@@ -20,7 +20,28 @@
 					return {};
 				},
 			},
-		}
+		},
+		computed: {
+			currentLabel() {
+				if (this.breadcrumb.hasOwnProperty('label')) {
+					return this.breadcrumb.label;
+				}
+
+				const matchedRouteRecord = this.$route.matched.slice().pop();
+
+				return matchedRouteRecord.meta.breadcrumb || matchedRouteRecord.name;
+			}
+		},
+		methods: {
+			getParentLabel(parent) {
+				const matchedRouteRecord = this.$router.match({
+					name: parent,
+					params: this.$route.params,
+				}).matched.slice().pop();
+
+				return matchedRouteRecord.meta.breadcrumb || matchedRouteRecord.name;
+			},
+		},
 	}
 </script>
 
@@ -39,11 +60,15 @@
 			font-weight: 300;
 			font-size: calc(var(--content-font-size) * 14 / 16);
 			color: var(--content-headings-color);
-			cursor: pointer;
-			transition: color 0.15s ease-in-out;
+			cursor: default;
 
-			&:hover {
-				color: var(--content-link-color);
+			&:any-link {
+				cursor: pointer;
+				transition: color 0.15s ease-in-out;
+
+				&:hover {
+					color: var(--content-link-color);
+				}
 			}
 		}
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.articles-page(v-if="err || data")
+	main.articles-page(v-if="err || page.id")
 		.err(v-if="err") {{ err }}
 
 		template(v-else)
@@ -13,20 +13,17 @@
 </template>
 
 <script>
-	import MixinPage from './MixinPage';
+	import BasePage from './BasePage';
 	import PageBreadcrumbs from './PageBreadcrumbs';
 
 	export default {
 		name: 'ArticlesPage',
-		mixins: [MixinPage('/pages/articles')],
+		mixins: [BasePage.createMixin('/pages/articles')],
 		components: {PageBreadcrumbs},
 		computed: {
 			breadcrumb() {
 				return {
-					parents: [
-						'Home',
-					],
-					label: this.$route.matched.slice().pop().meta.breadcrumb,
+					parents: ['Home'],
 				};
 			},
 		},

@@ -30,8 +30,8 @@ const INPUT_DIRS = [
 	// 'static/images'
 	// ADD NEW FOLDERS HERE
 	// ...
-	'src/img',
-	'public'
+	'src/assets/img',
+	'public/upload'
 ];
 
 /**

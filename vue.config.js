@@ -1,33 +1,15 @@
 const path = require('path');
 const pugBem = require('pug-bem');
 
-const pages = {
-	index: {
-		entry: 'src/pages/index/main.js',
-		template: 'src/pages/index/index.pug',
-		filename: 'index.html',
-	},
-};
-
 process.env.VUE_APP_TITLE = 'ProfSaunaStroy';
 process.env.VUE_APP_API_HOST = process.env.NODE_ENV === 'production' ? 'https://api-profsaunastroy.now.sh'
 	: '//localhost:3000';
 
 module.exports = {
 	baseUrl: '/',
-	pages,
 	runtimeCompiler: false,
 	chainWebpack(config) {
-		// `html-webpack-plugin` and loaders `pug`
-		Object.keys(pages).forEach(page => {
-			config.plugin(`html-${page}`).tap(options => {
-				options[0].minify = false;
-				options[0].title = process.env.VUE_APP_TITLE;
-
-				return options;
-			});
-		});
-
+		// rule `pug`
 		config.module.rule('pug').uses.clear();
 
 		config.module.rule('pug').oneOf('vue')
@@ -43,7 +25,7 @@ module.exports = {
 				plugins: [pugBem],
 			});
 
-		// loaders `scss`
+		// rule `scss`
 		const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
 
 		types.forEach(type => {
@@ -61,8 +43,8 @@ module.exports = {
 				});
 		});
 	},
+	productionSourceMap: false,
 	css: {
 		sourceMap: process.env.NODE_ENV !== 'production',
 	},
-	productionSourceMap: false,
 };
