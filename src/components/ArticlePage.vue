@@ -86,12 +86,10 @@
 		@include reset;
 
 		.page-breadcrumbs {
-			margin: 3rem auto 2rem;
-			max-width: calc(env(--md) + 4rem);
+			margin: 3rem 0 2rem;
 
 			@media (--lt-md) {
-				margin-top: 2rem;
-				margin-bottom: (2rem / 1.5);
+				margin: 2rem 0 (2rem / 1.5);
 			}
 		}
 	}

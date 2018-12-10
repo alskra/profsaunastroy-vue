@@ -1,5 +1,5 @@
 <template lang="pug">
-	section.request-sect.animate(
+	section.section.animate(
 		data-animate={
 			start: 'scroll'
 		}
@@ -11,20 +11,22 @@
 				duration: 1000,
 				delayStep: 100
 			}
-		) Заявка
+		)
+			slot(name="bg-text")
 
 		.container
-			.row
-				.col.col-12.col-md-6
+			slot(name="breadcrumbs")
 
-				.col.col-12.col-md-6
+			.row
+				.col.col-12.col-md-6.col-lg-5.offset-lg-1
 					.content
-						h2.h1.animate.animate-text(
+						h1.animate.animate-text(
 							data-animate={
 								start: 'scroll',
 								name: 'lettersFadeInUp'
 							}
-						) Бесплатная консультация с менеджером
+						)
+							slot(name="title")
 
 						.animate(
 							data-animate={
@@ -32,78 +34,26 @@
 								name: 'fadeIn'
 							}
 						)
-							p.
-								Вы можете задать любой интересующий вас вопрос нашему менеджеру.
-								<br>Мы обязательно ответим Вам!
-
-					sect-nav.animate(
-						:items="sectNav"
-						data-animate={
-							start: 'scroll',
-							name: 'fadeInUp',
-							targets: '.item__link'
-						}
-					)
-
-					.text-center.text-md-left.animate(
-						data-animate={
-							start: 'scroll',
-							name: 'fadeIn',
-							targets: '.btn'
-						}
-					)
-						btn-primary.btn(el="router-link") Оставить заявку
+							slot(name="body")
 </template>
 
 <script>
-	import SectNav from './SectNav';
-	import BtnPrimary from './BtnPrimary';
-
 	export default {
-		name: "RequestSect",
-		components: {
-			SectNav,
-			BtnPrimary,
-		},
-		data() {
-			return {
-				sectNav: [
-					{
-						id: 1,
-						title: 'Отделка финской сауны',
-						url: '',
-					},
-					{
-						id: 2,
-						title: 'Отделка парилок и бань',
-						url: '',
-					},
-					{
-						id: 3,
-						title: 'Стоительство финских саун, бань',
-						url: '',
-					},
-					{
-						id: 4,
-						title: 'Мебель в стиле лофт',
-						url: '',
-					},
-				],
-			};
-		},
+		name: 'BaseSection',
 	}
 </script>
 
 <style lang="scss" scoped>
-	.request-sect {
+	.section {
 		@include reset;
 
 		position: relative;
 		overflow: hidden;
 		padding: 12rem 0;
-		background: url("../assets/img/leafs.png")
+		background: none
 		no-repeat
-		left percentage(170px / 1920px) bottom 6rem var(--page-background-color);
+		left percentage(170px / 1920px) bottom 6rem
+		var(--page-background-color);
 
 		@media (--lt-md) {
 			padding: 3rem 0;

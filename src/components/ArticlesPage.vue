@@ -3,11 +3,16 @@
 		.err(v-if="err") {{ err }}
 
 		template(v-else)
-			.container
-				page-breadcrumbs(:breadcrumb="breadcrumb")
+			base-section
+				page-breadcrumbs(
+					:breadcrumb="breadcrumb"
+					slot="breadcrumbs"
+				)
 
-				.center-col
-					| Articles Page
+				template(slot="bg-text") Статьи
+				template(slot="title") Полезные статьи
+				template(slot="body")
+					p В этом разделе вы найдете полезные статьи и материалы по тематике стоительства и отделки саун и бань.
 
 			router-view(name="RequestSect")
 </template>
@@ -34,24 +39,12 @@
 	.articles-page {
 		@include reset;
 
-		padding: 3rem 0;
-
-		@media (--lt-md) {
-			padding: 2rem 0;
-		}
-
 		.page-breadcrumbs {
-			margin: 0 auto 2rem;
-			max-width: calc(env(--md) + 4rem);
+			margin-bottom: 2rem;
 
 			@media (--lt-md) {
 				margin-bottom: (2rem / 1.5);
 			}
 		}
-	}
-
-	.center-col {
-		max-width: env(--md);
-		margin: 0 auto;
 	}
 </style>
