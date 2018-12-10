@@ -1,5 +1,5 @@
 <template lang="pug">
-	section.section.animate(
+	section.section.--head.animate(
 		data-animate={
 			start: 'scroll'
 		}
@@ -56,7 +56,7 @@
 		var(--page-background-color);
 
 		@media (--lt-md) {
-			padding: 3rem 0;
+			padding: 2rem 0;
 			background-image: none;
 		}
 
@@ -107,6 +107,26 @@
 				height: 6rem;
 			}
 		}
+
+		&--head {
+			padding-top: 3rem;
+
+			@media (--lt-md) {
+				padding-top: 2rem;
+			}
+
+			&::before {
+				content: normal;
+			}
+
+			.bg-text {
+				top: 6rem;
+
+				@media (--lt-md) {
+					top: 4rem;
+				}
+			}
+		}
 	}
 
 	.bg-text {
@@ -129,7 +149,7 @@
 		user-select: none;
 
 		@media (--lt-md) {
-			top: 3rem;
+			top: 2rem;
 		}
 
 		/deep/ .animate__word {

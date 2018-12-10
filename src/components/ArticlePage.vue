@@ -8,7 +8,13 @@
 
 				article.article
 					header.__header
-						h1.__title {{ page.title }}
+						h1.__title.animate.animate-text(
+							data-animate={
+								start: 'scroll',
+								name: 'lettersFadeInUp'
+							}
+						)
+							| {{ page.title }}
 
 						.__row.row
 							.__col.col-auto.mw-100

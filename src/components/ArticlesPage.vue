@@ -4,13 +4,12 @@
 
 		template(v-else)
 			base-section
-				page-breadcrumbs(
-					:breadcrumb="breadcrumb"
-					slot="breadcrumbs"
-				)
+				template(slot="breadcrumbs")
+					page-breadcrumbs(:breadcrumb="breadcrumb")
 
 				template(slot="bg-text") Статьи
 				template(slot="title") Полезные статьи
+
 				template(slot="body")
 					p В этом разделе вы найдете полезные статьи и материалы по тематике стоительства и отделки саун и бань.
 
@@ -40,10 +39,10 @@
 		@include reset;
 
 		.page-breadcrumbs {
-			margin-bottom: 2rem;
+			margin: 0 0 2rem;
 
 			@media (--lt-md) {
-				margin-bottom: (2rem / 1.5);
+				margin: 0 0 (2rem / 1.5);
 			}
 		}
 	}
