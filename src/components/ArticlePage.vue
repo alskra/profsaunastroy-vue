@@ -19,7 +19,7 @@
 						.__row.row
 							.__col.col-auto.mw-100
 								time.__datetime(
-									:datetime="new Date(page.publication_date).toISOString()"
+									:datetime="new Date(page.publish_date).toISOString()"
 									:title="`${dateString} ${timeString}`"
 								)
 									| {{ dateString }}
@@ -62,7 +62,7 @@
 
 	export default {
 		name: 'ArticlePage',
-		mixins: [BasePage.createMixin()],
+		mixins: [BasePage.createMixin('articles/posts?id=:postId')],
 		components: {PageBreadcrumbs},
 		computed: {
 			breadcrumb() {
@@ -75,14 +75,14 @@
 				};
 			},
 			dateString() {
-				return new Date(this.page.publication_date).toLocaleDateString('ru', {
+				return new Date(this.page.publish_date).toLocaleDateString('ru', {
 					year: 'numeric',
 					month: 'long',
 					day: '2-digit',
 				});
 			},
 			timeString() {
-				return new Date(this.page.publication_date).toLocaleTimeString('ru', {
+				return new Date(this.page.publish_date).toLocaleTimeString('ru', {
 					hour: '2-digit',
 					minute: '2-digit',
 					second: '2-digit',

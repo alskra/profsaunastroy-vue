@@ -1,6 +1,6 @@
 <template lang="pug">
-	main.articles-page(v-if="err || page.id")
-		.err(v-if="err") {{ err }}
+	main.articles-page(v-if="err || Object.keys(page).length")
+		.err.container(v-if="err") {{ err }}
 
 		template(v-else)
 			base-section
@@ -28,7 +28,7 @@
 
 	export default {
 		name: 'ArticlesPage',
-		mixins: [BasePage.createMixin('/pages/articles')],
+		mixins: [BasePage],
 		components: {PageBreadcrumbs},
 		computed: {
 			breadcrumb() {

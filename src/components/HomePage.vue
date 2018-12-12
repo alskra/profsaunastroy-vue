@@ -1,36 +1,36 @@
 <template lang="pug">
-	main.home-page(v-if="err || page.id")
-		.err(v-if="err") {{ err }}
+	main.home-page(v-if="err || Object.keys(page).length")
+		.err.container(v-if="err") {{ err }}
 
 		template(v-else)
-			router-view(
-				name="StartSect"
-				data-page-header-theme="transparent"
-			)
-
-			router-view(name="SaunaSect")
-
-			router-view(
-				name="FastLinks"
-				data-page-header-theme="dark"
-			)
-
-			router-view(name="CatalogueSect")
-
-			router-view(
-				name="ProjectSect"
-				data-page-header-theme="dark"
-			)
-
-			router-view(name="RequestSect")
+			start-sect(data-page-header-theme="transparent")
+			sauna-sect
+			fast-links(data-page-header-theme="dark")
+			catalogue-sect
+			project-sect(data-page-header-theme="dark")
+			request-sect
 </template>
 
 <script>
 	import BasePage from './BasePage';
+	import StartSect from './StartSect';
+	import SaunaSect from './SaunaSect';
+	import FastLinks from './FastLinks';
+	import CatalogueSect from './CatalogueSect';
+	import ProjectSect from './ProjectSect';
+	import RequestSect from './RequestSect';
 
 	export default {
 		name: 'HomePage',
-		mixins: [BasePage.createMixin('/pages/home')],
+		mixins: [BasePage],
+		components: {
+			StartSect,
+			SaunaSect,
+			FastLinks,
+			CatalogueSect,
+			ProjectSect,
+			RequestSect,
+		},
 	}
 </script>
 
