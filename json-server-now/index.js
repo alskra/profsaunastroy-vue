@@ -7,13 +7,13 @@ const port = 3000;
 
 server.use(middlewares);
 
-// Add `singular` query
+// If filter on `id` or `slug` query
 server.use((req, res, next) => {
 	const _status = res.status;
 	const _send = res.send;
 
 	res.send = function (body) {
-		if (req.query.id !== undefined) {
+		if (req.query.id !== undefined || req.query.slug !== undefined) {
 			try {
 				const json = JSON.parse(body);
 
@@ -24,7 +24,8 @@ server.use((req, res, next) => {
 						return _status.call(this, 404).send('{}');
 					}
 				}
-			} catch (e) {}
+			} catch (e) {
+			}
 		}
 
 		return _send.call(this, body);
@@ -35,8 +36,8 @@ server.use((req, res, next) => {
 
 // Add custom routes
 server.use(jsonServer.rewriter({
-	'/home': '/pages/1',
-	'/articles': '/pages/2',
+	'/home': '/pages?slug=home',
+	'/articles': '/pages?slug=articles',
 	'/articles/:postId': '/categories/1/posts?id=:postId',
 }));
 
