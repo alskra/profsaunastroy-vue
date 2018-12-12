@@ -27,17 +27,19 @@
 		methods: {
 			setData() {
 				this.$Progress.start();
-				this.page = {};
-				this.err = null;
 
 				fetchApiData(this.apiUrl)
 					.then(page => {
-						this.$Progress.finish();
 						this.page = page;
+						this.err = null;
+						this.$Progress.finish();
+						this.$Progress.loading = false;
 					})
 					.catch(err => {
-						this.$Progress.fail();
+						this.page = {};
 						this.err = err.toString();
+						this.$Progress.fail();
+						this.$Progress.loading = false;
 					});
 			},
 		},

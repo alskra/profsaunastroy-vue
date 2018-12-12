@@ -1,6 +1,6 @@
 <template lang="pug">
-	main.article-page(v-if="err || page.id")
-		.err(v-if="err") {{ err }}
+	main.article-page(v-if="err || Object.keys(page).length")
+		.err.container(v-if="err") {{ err }}
 
 		template(v-else)
 			.container

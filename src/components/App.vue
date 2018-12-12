@@ -2,9 +2,12 @@
 	#app
 		vue-progress-bar
 		page-header
-		transition(name="fade")
-			router-view
-		page-footer(data-page-header-theme="dark")
+		router-view
+
+		page-footer(
+			v-show="!$Progress.loading"
+			data-page-header-theme="dark"
+		)
 </template>
 
 <script>
@@ -18,9 +21,7 @@
 			PageFooter,
 		},
 		data() {
-			return {
-				showFooter: false,
-			};
+			return {};
 		},
 		metaInfo: {
 			title: null,
@@ -53,6 +54,7 @@
 		},
 		created() {
 			this.$Progress.start();
+			this.$Progress.loading = true;
 
 			this.$router.beforeEach((to, from, next) => {
 				if (to.meta.progress !== undefined) {
@@ -62,6 +64,7 @@
 				}
 
 				this.$Progress.start();
+				this.$Progress.loading = true;
 				next();
 			});
 
