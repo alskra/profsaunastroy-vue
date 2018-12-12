@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.articles-page(v-if="err || Object.keys(page).length")
+	main.articles-page
 		.err.container(v-if="err") {{ err }}
 
 		template(v-else)
@@ -11,10 +11,14 @@
 					:breadcrumb="breadcrumb"
 				)
 
-				template(slot="title") {{ page.title }}
+				template(
+					slot="title"
+					v-if="page.title"
+				) {{ page.title }}
 
 				div(
 					slot="body"
+					v-if="page.body"
 					v-html="page.body"
 				)
 

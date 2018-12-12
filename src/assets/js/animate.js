@@ -24,14 +24,16 @@ const animate = {
 				const targets = options.targets ? elem.querySelectorAll(options.targets) : [elem];
 				const animeInstance = animate[options.name](targets, options);
 
-				animeInstance.begin = () => {
-					elem.classList.add('animate--started');
-				};
+				if (animeInstance) {
+					animeInstance.begin = () => {
+						elem.classList.add('animate--started');
+					};
 
-				animeInstance.complete = () => {
-					elem.classList.remove('animate--started');
-					elem.classList.add('animate--completed');
-				};
+					animeInstance.complete = () => {
+						elem.classList.remove('animate--started');
+						elem.classList.add('animate--completed');
+					};
+				}
 			} else {
 				elem.classList.add('animate--completed');
 			}
@@ -43,7 +45,7 @@ const animate = {
 		const animateElList = document.querySelectorAll('.animate:not(.animate--completed)');
 
 		animateElList.forEach((elem) => {
-			if (elem.matches('.animate-text:not(.animate-text--split)')) {
+			if (elem.matches('.animate-text:not(.animate-text--split)') && elem.textContent.length) {
 				elem.innerHTML = elem.textContent.replace(/[\S\u00A0]+/g, (match) => {
 					match = match.replace(/\S/g, '<span class="animate__letter">$&</span>');
 

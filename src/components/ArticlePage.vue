@@ -1,5 +1,5 @@
 <template lang="pug">
-	main.article-page(v-if="err || Object.keys(page).length")
+	main.article-page
 		.err.container(v-if="err") {{ err }}
 
 		template(v-else)
@@ -9,6 +9,7 @@
 				article.article
 					header.__header
 						h1.__title.animate.animate-text(
+							v-if="page.title"
 							data-animate={
 								start: 'scroll',
 								name: 'lettersFadeInUp'
@@ -19,6 +20,7 @@
 						.__row.row
 							.__col.col-auto.mw-100
 								time.__datetime(
+									v-if="page.publish_date"
 									:datetime="new Date(page.publish_date).toISOString()"
 									:title="`${dateString} ${timeString}`"
 								)
@@ -28,7 +30,10 @@
 								.__share Поделиться PLUSO
 
 					.__body.mb-2.mb-md-3
-						.content(v-html="page.body")
+						.content(
+							v-if="page.body"
+							v-html="page.body"
+						)
 
 					.content.mb-2.mb-md-3
 						<h2>Встроенная сауна в доме под ключ цена</h2>
