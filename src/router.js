@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
-
 import NotFoundPage from './components/NotFoundPage';
 import HomePage from './components/HomePage';
 
@@ -61,11 +60,7 @@ const router = new VueRouter({
 
 export default router;
 
-router.beforeEach((to, from, next) => {
-	next();
+router.onError(err => {
+	alert(err);
+	throw err;
 });
-
-router.afterEach(() => {
-});
-
-router.onError(err => alert(err));

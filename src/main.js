@@ -1,8 +1,8 @@
 import './assets/js/base';
 import Vue from 'vue';
+import VueProgressBar from 'vue-progressbar';
 import router from './router';
 import store from './store';
-import VueProgressBar from 'vue-progressbar'
 import App from './components/App';
 
 Vue.use(VueProgressBar, {

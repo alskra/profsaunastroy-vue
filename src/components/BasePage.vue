@@ -2,13 +2,15 @@
 </template>
 
 <script>
+	import {fetchApiData} from '../api';
+
 	export default {
 		name: 'BasePage',
 		data() {
 			return {
-				pageSlug: 'home',
-				err: null,
+				apiUrl: '/home',
 				page: {},
+				err: null,
 			};
 		},
 		metaInfo() {
@@ -23,13 +25,12 @@
 			};
 		},
 		methods: {
-			fetchData() {
-				this.err = null;
-				this.page = {};
+			setData() {
 				this.$Progress.start();
+				this.page = {};
+				this.err = null;
 
-				fetch(`${process.env.VUE_APP_API_HOST}/${this.pageSlug}`)
-					.then(response => response.json())
+				fetchApiData(this.apiUrl)
 					.then(page => {
 						this.$Progress.finish();
 						this.page = page;
@@ -41,10 +42,10 @@
 			},
 		},
 		created() {
-			this.fetchData();
+			this.setData();
 		},
 		watch: {
-			'$route': 'fetchData',
+			'$route': 'setData',
 		},
 	}
 </script>
