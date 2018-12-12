@@ -18,18 +18,29 @@
 					v-html="page.body"
 				)
 
-			router-view(name="ArticlesList")
-			router-view(name="RequestSect")
+			articles-list
+			request-sect
 </template>
 
 <script>
 	import BasePage from './BasePage';
 	import PageBreadcrumbs from './PageBreadcrumbs';
+	import ArticlesList from './ArticlesList';
+	import RequestSect from './RequestSect';
 
 	export default {
 		name: 'ArticlesPage',
 		mixins: [BasePage],
-		components: {PageBreadcrumbs},
+		components: {
+			PageBreadcrumbs,
+			ArticlesList,
+			RequestSect,
+		},
+		data() {
+			return {
+				apiUrl: '/articles'
+			};
+		},
 		computed: {
 			breadcrumb() {
 				return {

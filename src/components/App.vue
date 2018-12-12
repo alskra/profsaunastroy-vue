@@ -2,7 +2,8 @@
 	#app
 		vue-progress-bar
 		page-header
-		router-view
+		transition(name="fade")
+			router-view
 		page-footer(data-page-header-theme="dark")
 </template>
 
@@ -74,7 +75,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	#app {
 		@include reset;
 
@@ -89,6 +90,17 @@
 			@media (--lt-md) {
 				transition: transform var(--page-header-transition) !important;
 			}
+		}
+	}
+
+	.fade {
+		&-enter-active {
+			transition: opacity 0.15s ease-in-out !important;
+		}
+
+		&-enter,
+		&-leave-to {
+			opacity: 0 !important;
 		}
 	}
 </style>

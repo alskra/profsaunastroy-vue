@@ -27,19 +27,17 @@
 					return this.breadcrumb.label;
 				}
 
-				const matchedRouteRecord = this.$route.matched.slice().pop();
-
-				return matchedRouteRecord.meta.breadcrumb || matchedRouteRecord.name;
+				return this.$route.meta.breadcrumb || this.$route.name;
 			}
 		},
 		methods: {
 			getParentLabel(parent) {
-				const matchedRouteRecord = this.$router.match({
+				const matchedRoute = this.$router.match({
 					name: parent,
 					params: this.$route.params,
-				}).matched.slice().pop();
+				});
 
-				return matchedRouteRecord.meta.breadcrumb || matchedRouteRecord.name;
+				return matchedRoute.meta.breadcrumb || matchedRoute.name;
 			},
 		},
 	}

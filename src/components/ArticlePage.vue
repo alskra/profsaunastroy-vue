@@ -59,11 +59,20 @@
 <script>
 	import BasePage from './BasePage';
 	import PageBreadcrumbs from './PageBreadcrumbs';
+	import RequestSect from './RequestSect';
 
 	export default {
 		name: 'ArticlePage',
-		mixins: [BasePage.createMixin('articles/posts?id=:postId')],
-		components: {PageBreadcrumbs},
+		mixins: [BasePage],
+		components: {
+			PageBreadcrumbs,
+			RequestSect,
+		},
+		data() {
+			return {
+				apiUrl: `/articles/${this.$route.params.postId}`
+			};
+		},
 		computed: {
 			breadcrumb() {
 				return {
