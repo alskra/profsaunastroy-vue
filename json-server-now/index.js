@@ -3,14 +3,17 @@ const jsonServer = require('json-server-relationship');
 const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
 const middlewares = jsonServer.defaults();
+const port = 3000;
 
 server.use(middlewares);
 
+// Add `singular` query
 server.use((req, res, next) => {
+	const _status = res.status;
 	const _send = res.send;
 
 	res.send = function (body) {
-		if (require('url').parse(req.url, true).query['singular']) {
+		if (req.query.id !== undefined) {
 			try {
 				const json = JSON.parse(body);
 
@@ -18,7 +21,7 @@ server.use((req, res, next) => {
 					if (json.length === 1) {
 						return _send.call(this, JSON.stringify(json[0], null, 2));
 					} else if (json.length === 0) {
-						return _send.call(this, '{}', 404);
+						return _status.call(this, 404).send('{}');
 					}
 				}
 			} catch (e) {}
@@ -30,14 +33,15 @@ server.use((req, res, next) => {
 	next();
 });
 
+// Add custom routes
 server.use(jsonServer.rewriter({
-	'/home': '/pages?slug=home&singular=1',
-	'/articles': '/pages?slug=articles&singular=1&_include=posts',
-	'/articles/:postId': '/posts?_expand=page&page.slug=articles&id=:postId&singular=1',
+	'/home': '/pages/1',
+	'/articles': '/pages/2',
+	'/articles/:postId': '/categories/1/posts?id=:postId',
 }));
 
 server.use(router);
 
-server.listen(3000, () => {
-	console.log('JSON Server is running');
+server.listen(port, () => {
+	console.log('JSON Server is running, port:', port);
 });

@@ -2,17 +2,14 @@
 </template>
 
 <script>
-	import {resolveUrl, getData} from '../api';
-
 	export default {
 		name: 'BasePage',
 		data() {
-			return {err: null};
-		},
-		computed: {
-			page() {
-				return this.$store.state.page;
-			},
+			return {
+				pageSlug: 'home',
+				err: null,
+				page: {},
+			};
 		},
 		metaInfo() {
 			const {
@@ -26,29 +23,28 @@
 			};
 		},
 		methods: {
-			resetData() {
+			fetchData() {
 				this.err = null;
-				this.$store.commit('setData', {page: {}});
-			},
-			setData(err, page) {
-				if (err) {
-					this.err = err.toString();
-				} else {
-					this.$store.commit('setData', {page});
-				}
-			},
-		},
-		beforeRouteEnter(to, from, next) {
-			getData(resolveUrl(to), {to, from, next})
-				.then(page => next(vm => vm.setData(null, page)))
-				.catch(err => next(vm => vm.setData(err, {})));
-		},
-		beforeRouteUpdate(to, from, next) {
-			this.resetData();
+				this.page = {};
+				this.$Progress.start();
 
-			getData(resolveUrl(to), {to, from, next})
-				.then(page => (this.setData(null, page), next()))
-				.catch(err => (this.setData(err, {}), next()));
+				fetch(`${process.env.VUE_APP_API_HOST}/${this.pageSlug}`)
+					.then(response => response.json())
+					.then(page => {
+						this.$Progress.finish();
+						this.page = page;
+					})
+					.catch(err => {
+						this.$Progress.fail();
+						this.err = err.toString();
+					});
+			},
+		},
+		created() {
+			this.fetchData();
+		},
+		watch: {
+			'$route': 'fetchData',
 		},
 	}
 </script>

@@ -2,11 +2,15 @@ import './assets/js/base';
 import Vue from 'vue';
 import router from './router';
 import store from './store';
+import VueProgressBar from 'vue-progressbar'
 import App from './components/App';
 
+Vue.use(VueProgressBar, {
+	color: 'var(--content-link-color)',
+});
 
-new Vue({
+export default new Vue({
+	...App,
 	router,
 	store,
-	render: h => h(App),
 }).$mount('#app');

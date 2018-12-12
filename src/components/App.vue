@@ -1,11 +1,9 @@
 <template lang="pug">
 	#app
+		vue-progress-bar
 		page-header
 		router-view
-		page-footer(
-			v-if="showFooter"
-			data-page-header-theme="dark"
-		)
+		page-footer(data-page-header-theme="dark")
 </template>
 
 <script>
@@ -52,10 +50,26 @@
 				{innerHTML: 'This website requires JavaScript.'},
 			],
 		},
-		beforeCreate() {
-			this.$router.afterEach(() => {
-				this.showFooter = true;
+		created() {
+			this.$Progress.start();
+
+			this.$router.beforeEach((to, from, next) => {
+				if (to.meta.progress !== undefined) {
+					let meta = to.meta.progress;
+
+					this.$Progress.parseMeta(meta);
+				}
+
+				this.$Progress.start();
+				next();
 			});
+
+			this.$router.afterEach(() => {
+				this.$Progress.finish();
+			});
+		},
+		mounted() {
+			this.$Progress.finish();
 		},
 	}
 </script>

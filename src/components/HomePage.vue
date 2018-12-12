@@ -31,6 +31,11 @@
 			ProjectSect,
 			RequestSect,
 		},
+		data() {
+			return {
+				pageSlug: 'home',
+			};
+		},
 	}
 </script>
 

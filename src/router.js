@@ -1,4 +1,3 @@
-import NProgress from './assets/js/nprogress';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
@@ -8,8 +7,6 @@ import HomePage from './components/HomePage';
 
 const ArticlesPage = () => import('./components/ArticlesPage');
 const ArticlePage = () => import('./components/ArticlePage');
-
-NProgress.configure({showSpinner: false});
 
 Vue.use(VueRouter);
 Vue.use(VueMeta);
@@ -65,12 +62,10 @@ const router = new VueRouter({
 export default router;
 
 router.beforeEach((to, from, next) => {
-	NProgress.start();
 	next();
 });
 
 router.afterEach(() => {
-	NProgress.done();
 });
 
 router.onError(err => alert(err));
