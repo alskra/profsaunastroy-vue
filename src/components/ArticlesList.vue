@@ -10,8 +10,6 @@
 </template>
 
 <script>
-	import {getData} from "../api";
-
 	export default {
 		name: 'ArticlesList',
 		data() {
@@ -29,19 +27,6 @@
 				}
 			},
 		},
-		beforeRouteEnter(to, from, next) {
-			getData(to, from, next, '/articles')
-				.then(articles => next(vm => vm.setData(null, articles)))
-				.catch(err => next(vm => vm.setData(err, [])));
-		},
-		beforeRouteUpdate(to, from, next) {
-			this.err = null;
-			this.articles = [];
-
-			getData(to, from, next, '/articles')
-				.then(articles => (this.setData(null, articles), next()))
-				.catch(err => (this.setData(err, []), next()));
-		}
 	}
 </script>
 
